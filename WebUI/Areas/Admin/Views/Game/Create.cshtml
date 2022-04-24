@@ -1,0 +1,145 @@
+﻿@model CreateGameViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section style{
+    <link href="~/Admin/assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" type="text/css" />
+    <link href="~/Admin/assets/plugins/boostrap-clockpicker/bootstrap-clockpicker.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="~/Admin/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.css" rel="stylesheet" type="text/css" />
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple form-grid">
+                <div class="grid-title no-border">
+                    <h3>Add <span class="semi-bold">Game</span></h3>
+                </div>
+                <div class="grid-body no-border">
+                    <form method="post" id="form_traditional_validation" name="form_traditional_validation" role="form" autocomplete="off" class="validate">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">League</label>
+                                    <div class=" right">
+                                        <i class=""></i>
+                                        <select class="form-control select2" asp-for="LeagueId" asp-items='new SelectList(Model.Leagues, "Id", "Name")' id="league" data-init-plugin="select2" required>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Season</label>
+                                    <div class=" right">
+                                        <i class=""></i>
+                                        <select class="form-control select2" asp-for="SeasonId" asp-items='new SelectList(Model.Seasons, "Id", "Name")' id="cardType" data-init-plugin="select2" required>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Home team</label>
+                                    <div class=" right">
+                                        <i class=""></i>
+                                        <select class="form-control select2" asp-for="HomeId" id="homeTeam" data-init-plugin="select2" required>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Away team</label>
+                                    <div class=" right">
+                                        <i class=""></i>
+                                        <select class="form-control select2" asp-for="AwayId" id="awayTeam" data-init-plugin="select2" required>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <p>Pick game`s date</p>
+                                    <br>
+                                    <div class="input-append success date col-md-10 col-lg-6 no-padding">
+                                        <input type="text" class="form-control" asp-for="Date" placeholder="Pick a date" value="">
+                                        <span class="add-on"><span class="arrow"></span><i class="fa fa-th"></i></span>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Pick game`s time</label>
+                                    <div class="controls">
+                                        <div class="input-group transparent clockpicker col-md-6">
+                                            <input type="text" class="form-control" asp-for="Time" placeholder="Pick a time" value="">
+                                            <span class="input-group-addon ">
+                                                <i class="fa fa-clock-o"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="pull-right">
+                                <button class="btn btn-success btn-cons" type="submit"><i class="icon-ok"></i> Save</button>
+                                <button class="btn btn-white btn-cons" type="button">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section script{
+    <script src="~/Admin/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="~/Admin/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+    <script src="~/Admin/assets/plugins/boostrap-clockpicker/bootstrap-clockpicker.min.js" type="text/javascript"></script>
+    <script src="~/Admin/assets/js/form_validations.js" type="text/javascript"></script>
+    <script>
+        $('.input-append.date').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+        $('#dp5').datepicker();
+
+        $('.clockpicker ').clockpicker({
+            autoclose: true
+        });
+        $('#league').on('change', function () {
+            $('#homeTeam').empty();
+
+            $.ajax({
+                type: "GET",
+                url: "/Admin/Game/GetTeam/" + this.value,
+                success: function (res) {
+                    console.log(res)
+                    $.each(res, function (index, item) {
+
+                        $('#homeTeam').append($(`<option value=${item.id}></option>`).text(item.name));
+
+                    });
+                }
+            })
+        });
+
+        $('#homeTeam').on('change', function () {
+            $('#awayTeam').empty();
+            $.ajax({
+                type: "GET",
+                url: "/Admin/Game/GetTeam/" + $('#league').val() ,
+                data: { skip : this.value },
+                success: function (res) {
+                   
+                    $.each(res, function (index, item) {
+
+                        $('#awayTeam').append($(`<option value=${item.id}></option>`).text(item.name));
+
+                    });
+                }
+            })
+        });
+    </script>
+}

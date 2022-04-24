@@ -1,0 +1,18 @@
+footer {
+    padding: 30px 0 5px;
+    background-color: rgba(0, 0, 0, 0.85);
+    background-blend-mode: multiply;
+    @include bacImage();
+
+    h1 {
+        color: white;
+    }
+
+    p {
+        color: white;
+        text-align: center;
+        font-size: 10px;
+    }
+
+
+}

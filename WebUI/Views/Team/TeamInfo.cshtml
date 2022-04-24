@@ -1,0 +1,25 @@
+﻿@model TeamInfoViewModel
+@{
+    ViewData["Title"] = "TeamInfo";
+}
+<div class=" actions-y" style="background-image: url('@Url.Content($"~/assets/img/teams/{Model.Team.Id}")');">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center">
+                <img src="/assets/img/teams/@Model.Team.Logo" alt="">
+                <h2 class="text-light ml-3">@Model.Team.Name</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="buttons p-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-12"><a asp-action="TeamInfo" asp-route-id="@Model.Team.Id" class="team-btn">Team</a></div>
+            <div class="col-lg-4 col-sm-12"><a asp-action="Index" asp-route-id="@Model.Team.Id" class="team-btn active">News</a></div>
+            <div class="col-lg-4 col-sm-12"><a asp-action="TeamMatches" asp-route-id="@Model.Team.Id" class="team-btn">Matches</a></div>
+
+        </div>
+    </div>
+</div>
+

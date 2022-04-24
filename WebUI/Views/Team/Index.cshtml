@@ -1,0 +1,56 @@
+﻿@model TeamNewsViewModel
+@{
+    ViewData["Title"] = "TeamNews";
+}
+
+<div class="actions-y" style="background-image: url(/assets/img/titleImages/@Model.Team.TitleImage);">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center">
+                <img src="/assets/img/teams/barcelona.png" alt="">
+                <h2 class="text-light ml-3">@Model.Team.Name</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="buttons p-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-12"><a asp-action="Index" asp-route-id="@Model.Team.Id" class="team-btn active">News</a></div>
+            <div class="col-lg-4 col-sm-12"><a asp-action="TeamMatches"  asp-route-id="@Model.Team.Id" class="team-btn">Matches</a></div>
+            <div class="col-lg-4 col-sm-12"><a asp-action="TeamStandings"  asp-route-id="@Model.Team.Id" class="team-btn">Standings</a></div>
+        </div>
+    </div>
+</div>
+<section class="team-news p-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row">
+                    @foreach (var item in Model.News)
+                    {
+                        <div class="col-lg-6 mb-3">
+                            <div class="news-card"
+                                 style=" background-image: url(/assets/img/@item.Image);">
+                                <a asp-action="Index" asp-controller="News" asp-route-id="@item.Id">
+                                    <h5 class="nc-title">
+                                    @item.Title
+                                    </h5>
+                                </a>
+
+                                <div class="actions">
+                                    <span class="view-count">12</span><i class="fas fa-eye"></i>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <img src="/assets/img/jawn300x500.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</section>

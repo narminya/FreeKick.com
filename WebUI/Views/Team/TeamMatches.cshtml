@@ -1,0 +1,74 @@
+﻿@model TeamsMatchesViewModel
+@{
+    ViewData["Title"] = "TeamMatches";
+}
+<div class=" actions-y">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center">
+                <img src="/assets/img/teams/barcelona.png" alt="">
+                <h2 class="text-light ml-3">Barcelona</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="buttons p-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-12"><a asp-action="Index" asp-route-id="@Model.Team.Id" class="team-btn active">News</a></div>
+            <div class="col-lg-4 col-sm-12"><a asp-action="TeamMatches" asp-route-id="@Model.Team.Id" class="team-btn">Matches</a></div>
+            <div class="col-lg-4 col-sm-12"><a asp-action="TeamStandings" asp-route-id="@Model.Team.Id" class="team-btn">Standings</a></div>
+        </div>
+    </div>
+</div>
+<section class="team-matches p-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="table-ms">
+                    <div class="title-head d-flex">
+                        <a href="">All</a>
+                        <a href="">UEFA Champions League</a>
+                        <a href="">Premier League</a>
+                    </div>
+                    <div class="match-list">
+                        @foreach (var item in Model.Matches)
+                        {
+                            <div class="match-t">
+
+                                @if (item.Date < DateTime.Now)
+                                {<div class="match-status">
+                                        FT
+                                    </div>
+                                }
+                                else
+                                { <div class="match-status">
+                                        @item.Date.ToShortTimeString();
+                                    </div>          }
+
+                                <div class="match-data">
+                                    <p class="team-home">@item.HomeName</p>
+                                    <div class="goals d-flex ">
+                                        <div class="match-result">
+                                            <div class="goals-home">@item.HomeTeamScore</div>
+                                            <span>-</span>
+                                            <div class="goals-away">@item.AwayTeamScore</div>
+                                        </div>
+
+                                    </div>
+                                    <p class="team-away">@item.AwayName</p>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <img src="/assets/img/jawn300x500.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+

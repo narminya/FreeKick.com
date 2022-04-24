@@ -1,0 +1,186 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Index";
+  
+}
+
+
+<section class="hero-news" style="padding-top:25px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="news-card main" style="background-image: url('@Url.Content($"~/assets/img/{@Model.Breaking.News.Image}")'); height:515px">
+                    <a asp-controller="News" asp-action="Index" asp-route-id="@Model.Breaking.News.Id">
+                        <h5 class="nc-title">
+                            @Model.Breaking.News.Title
+                        </h5>
+                    </a>
+                    <p class="nc-desc">
+                        @Model.Breaking.News.Description
+                    </p>
+                    <div class="tags">
+                        <ul class="tags-list">
+                            @foreach (var item in Model.Breaking.Tags)
+                            {
+                                <li><a class="tag" href="">@item.Name</a></li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="actions">
+                        <span class="view-count">12</span><i class="fas fa-eye"></i>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4">
+                @foreach (var item in Model.News)
+                {
+                    <div class="col-lg-12">
+                        <div class="news-card"
+                             style=" background-image: url(/assets/img/@item.News.Image);">
+                            <a asp-controller="News" asp-action="Index" asp-route-id="@item.News.Id">
+                                <h5 class="nc-title">
+                                    @item.News.Title
+                                </h5>
+                            </a>
+
+                            <div class="tags">
+                                <ul class="tags-list">
+                                    @foreach (var tag in item.Tags)
+                                    {
+                                        <li><a class="tag" href="">@tag.Name</a></li>
+                                    }
+
+                                </ul>
+                            </div>
+                            <div class="actions">
+                                <span class="view-count">12</span><i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<section class="latest-news section-padding-50-0">
+    <div class="container">
+        <div class="row">
+            <h1 class="title">Latest</h1>
+            <div class="col-lg-4">
+                <div class="list-of-latest p-3">
+                    <h5 class="text-light">Breaking</h5>
+                    <div class="list-breaking ">
+                        @foreach (var item in Model.Latest)
+                        {
+                            <div class="l-br">
+                                <a asp-controller="News" asp-action="Index" asp-route-id="@item.News.Id">
+
+
+                                    <span>@item.Time</span>
+                                    <h3>@item.News.Title</h3>
+                                </a>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/messi.jpg")');">
+                            <a href="">
+                                <h5 class="nc-title">
+                                    Messi uncertain on future: 'After the World Cup I'm going to rethink many things'
+                                </h5>
+                            </a>
+                            <div class="tags">
+                                <ul class="tags-list">
+                                    <li><a class="tag" href="">Argentina</a></li>
+                                    <li><a class="tag" href="">Messi</a></li>
+                                </ul>
+                            </div>
+                            <div class="actions">
+                                <span class="view-count">12</span><i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/messi.jpg")');">
+                            <a href="">
+                                <h5 class="nc-title">
+                                    Messi uncertain on future: 'After the World Cup I'm going to rethink many things'
+                                </h5>
+                            </a>
+                            <div class="tags">
+                                <ul class="tags-list">
+                                    <li><a class="tag" href="">Argentina</a></li>
+                                    <li><a class="tag" href="">Messi</a></li>
+                                </ul>
+                            </div>
+                            <div class="actions">
+                                <span class="view-count">12</span><i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/messi.jpg")');">
+                            <a href="">
+                                <h5 class="nc-title">
+                                    Messi uncertain on future: 'After the World Cup I'm going to rethink many things'
+                                </h5>
+                            </a>
+                            <div class="tags">
+                                <ul class="tags-list">
+                                    <li><a class="tag" href="">Argentina</a></li>
+                                    <li><a class="tag" href="">Messi</a></li>
+                                </ul>
+                            </div>
+                            <div class="actions">
+                                <span class="view-count">12</span><i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/messi.jpg")');">
+                            <a href="">
+                                <h5 class="nc-title">
+                                    Messi uncertain on future: 'After the World Cup I'm going to rethink many things'
+                                </h5>
+                            </a>
+                            <div class="tags">
+                                <ul class="tags-list">
+                                    <li><a class="tag" href="">Argentina</a></li>
+                                    <li><a class="tag" href="">Messi</a></li>
+                                </ul>
+                            </div>
+                            <div class="actions">
+                                <span class="view-count">12</span><i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@await Component.InvokeAsync("Standings")
+
+<section class="newsletter-section py-50">
+    <div class="newsletter" style="background-image: url('@Url.Content("~/assets/img/756471129641055.jpg")');">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <p class="site-title">FreeKick</p>
+                <h3 class="subscribe">Subscribe</h3>
+                <form>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                               placeholder="Enter your email here...">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

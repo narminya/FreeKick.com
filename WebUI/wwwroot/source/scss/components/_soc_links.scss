@@ -1,0 +1,12 @@
+.soc-links {
+    ul {
+        display: flex;
+
+        .nav-link {
+            padding: 0 10px;
+            font-size: 18px;
+            cursor: pointer;
+            color: $white;
+        }
+    }
+}

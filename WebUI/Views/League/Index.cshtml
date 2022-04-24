@@ -1,0 +1,53 @@
+﻿@model LeagueStandingViewModel
+@{ 
+    int i = 1;
+}
+<div class=" actions-y py-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center">
+                <img alt="">
+                <h2 class="text-light ml-3">@Model.League.LeagueName</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="buttons p-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-12"><a href="" class="team-btn active">News</a></div>
+            <div class="col-lg-4 col-sm-12"><a href="" class="team-btn">Matches</a></div>
+            <div class="col-lg-4 col-sm-12"><a href="" class="team-btn">Standings</a></div>
+        </div>
+    </div>
+</div>
+<div class="league-standing-table p-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <h6 class="text-gray bg-light p-2">LIVE TABLE</h6>
+                <div class="table-ms">
+                    <div class="title-head d-flex justify-content-between">
+                        <div class="pos-left">
+                            <span class="position">Pos</span> <span class="team">Team</span>
+                        </div><span class="points">PTS</span>
+                    </div>
+                    <ul class="list-t">
+                        @foreach (var item in Model.Teams)
+                        {
+                        <li>
+                            <div class="team-left">
+                                <span class="t-pos">@(i++)</span>
+                                <img src="/assets/img/teams/@item.Logo" alt="">
+                                <p class="t-name">@item.Name</p>
+                            </div>
+                            <p>@item.Points</p>
+                        </li>
+                        }
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

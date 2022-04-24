@@ -1,0 +1,45 @@
+﻿@model NewsViewModel
+@{
+    ViewData["Title"] = "FreeKick";
+}
+
+<div class=" actions-y" style="background-image: url(/assets/img/jan-piatkowski-pjhmfJnkNvo-unsplash.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center">
+                <h2 class="text-light ml-3"></h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class=" news-body p-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1 class="title">
+                    @Model.News.Title
+
+                </h1>
+                <div class="news-actions">
+
+                </div>
+                <img src="/assets/img/news/@Model.News.Image" alt="">
+                <div class="tags py-3">
+                    <ul class="tags-list">
+                        @foreach (var item in Model.Tags)
+                        {
+                            <li><a class="tag" href="">@item.Name</a></li>
+                        }
+                    </ul>
+                </div>
+
+                <p class="news-article">
+                    @Html.Raw(Model.News.Description)
+                </p>
+                
+            </div>
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,49 @@
+.newsletter {
+    @include bacImage();
+    height: 200px;
+    margin: 0 90px;
+    background-blend-mode: multiply;
+    background-color: #0000007a;
+    border-radius: 5px;
+    padding: 20px;
+
+    .site-title {
+        color: $main_color;
+        font-weight: 700;
+        font-size: 25px;
+        margin-bottom: 0;
+    }
+
+    .subscribe {
+        font-size: 40px;
+        color: white;
+        margin-bottom: 20px !important;
+    }
+
+    form {
+        input {
+            &.focus{
+            border-color: $main_color;
+            box-shadow: none;
+            }
+        }
+
+
+    }
+}
+
+@media screen and(max-width: 920px) {
+    .newsletter {
+        margin: 0 !important;
+        border-radius: 0;
+
+        form {
+            input {
+                width: 100%;
+            }
+    
+    
+        }
+    }
+
+}

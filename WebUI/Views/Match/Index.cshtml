@@ -1,0 +1,227 @@
+﻿@model MatchStatsViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section class="match-summary py-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-4 match-summary">
+                <div class="match-team">
+                    <img src="/assets/img/teams/@Model.Match.HomeImage" alt="">
+                    <h5>@Model.Match.HomeName</h5>
+                    <p class="text-light mb-0">4-2-4</p>
+                    <p class="text-light">Carlo Ancelotti</p>
+                </div>
+            </div>
+            <div class="col-4 match-summary match-team-state">
+                <div class="match-team-state">
+                    <div class="match-date"> <span>21.03.2022, 00:00</span></div>
+                    <div class="matchboard">
+                        <span class="matchboard__card">
+                            <span class="matchboard__card-game">
+                                @Model.Match.HomeTeamScore
+                            </span>
+                        </span><span class="matchboard__hyphen"></span><span class="matchboard__card matchboard__card--no_margin">
+                            <span class="matchboard__card-game matchboard__card-game--winner">  @Model.Match.AwayTeamScore</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 match-summary">
+                <div class="match-team">
+                    <img src="/assets/img/teams/@Model.Match.AwayImage" alt="">
+                    <h5>@Model.Match.AwayName</h5>
+                    <p class="text-light mb-0">4-3-3</p>
+                    <p class="text-light">Xavi Hernandes</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="match-broadcast py-50">
+    <div class="container">
+        <div class="row">
+            <h4 class="match-broadcast-title">Live broadcast of Real Madrid vs Barcelona</h4>
+            <div class="col-8">
+                <div class="live-broadvast">
+                    @foreach (var item in Model.Comments)
+                    {
+
+                        <div class="event">
+                            <div class="event-match-time">
+                                <div class="event-time">
+                                    <span class="event-time-text">@item.Minute'</span>
+                                </div>
+                            </div>
+                            <div class="event-picture">
+                            </div>
+                            <div class="event-description">
+                                @item.Message
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="mb-3">
+                    <form id="sendMess">
+                        <label for="comment" class="form-label text-light">Comment</label>
+                        <input type="text" name="comment" id="comment" class="form-control">
+                        <label for="minute" class="form-label text-light">Minute</label>
+                        <input type="text" name="minute" id="minute" class="form-control">
+                        <input type="hidden" name="game" id="gameId" value="@ViewData["Id"]" />
+                        <button class="btn btn-success" id="addComment" type="button">Send</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="newsletter-section py-50">
+    <div class="newsletter" style="background-image: url(/assets/img/jan-piatkowski-m61qUssdYSs-unsplash.jpg);">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <p class="site-title">FreeKick</p>
+                <h3 class="subscribe">Subscribe</h3>
+                <form>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                               placeholder="Enter your email here...">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="lineups py-50">
+    <div class="container">
+        <div class="row">
+            <h4 class="match-broadcast-title mb-5 text-light">Lineup</h4>
+
+            <div class="col-12 p-0 mb-5 d-flex justify-content-center">
+                <div class="field-border">
+                    <div class="field-main">
+                        @foreach (var item in Model.HomeLineups)
+                        {
+                            if (item.Start)
+                            {
+                                <div class="player @item.Position.ToLower() g-home">
+                                    <i class="fas fa-user"></i>
+                                    <p class="p-name">@item.Surname</p>
+                                </div>
+                            }
+
+                        }
+                        @foreach (var item in Model.AwayLineups.Where(c => c.Start))
+                        {
+
+                            <div class="player @item.Position.ToLower() g-away">
+                                <i class="fas fa-user"></i>
+                                <p class="p-name">@item.Surname</p>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <h4 class="match-broadcast-title mb-5 text-light">Bench</h4>
+            <div class="col-lg-5 col-sm-12">
+                <img class="club-bencher" src="./assets/img/teams/real_madrid.png" alt="">
+                <ul class="bench">
+                    @foreach (var item in Model.HomeLineups.Where(c => !c.Start))
+                    {
+                        <li>
+                            @item.Num <img class="player-img" src="/assets/img/teams/@item.Logo" alt=""> @item.Surname <span>MD</span>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+            <div class="col-lg-5 col-sm-12">
+                <img class="club-bencher" src="./assets/img/teams/barcelona.png" alt="">
+                <ul class="bench away">
+                    @foreach (var item in Model.AwayLineups.Where(c => !c.Start))
+                    {
+                        <li>
+                            @item.Num <img class="player-img" src="/assets/img/teams/@item.Logo" alt=""> @item.Surname <span>MD</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section script{
+    <script src="~/assets/plugins/microsoft-signalr/signalr.js"></script>
+    <script>
+
+
+        var connection = new signalR.HubConnectionBuilder()
+            .withUrl("/broHub")
+            .build();
+
+
+        connection.on("RecieveMessage", function (data) {
+            var message = `      <div class="event">
+                                    <div class="event-match-time">
+                                        <div class="event-time">
+                                            <span class="event-time-text">${data.minute}'</span>
+                                        </div>
+                                    </div>
+                                    <div class="event-picture">
+                                    </div>
+                                    <div class="event-description">
+                                        ${data.message}
+                                    </div>
+                                </div>`
+
+            $(".live-broadvast").append(message)
+        })
+
+        let id = $("#gameId").val();
+
+
+        connection.start()
+            .then(function () {
+                connection.invoke('joinGame', id);
+            })
+            .catch(function (err) {
+                console.log(err)
+            })
+
+        window.addEventListener('onunload', function () {
+            connection.invoke('leaveGame', id);
+        })
+
+    
+
+        $(document).on("click", "#addComment", function () {
+
+            let content = $("#comment").val();
+            let minute = $("#minute").val();
+            $.ajax({
+                type: "POST",
+                url: "/Match/SendMessage",
+                data: { "message": content, "minute": minute, "gameId": id },
+                success: function (res) {
+                    console.log("Message Sent!")
+                },
+                error: function (err) {
+                    console.log("Failed to send message!", err)
+                },
+            })
+        })
+
+
+    </script>
+}

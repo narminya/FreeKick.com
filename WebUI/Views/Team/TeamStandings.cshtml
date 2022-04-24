@@ -1,0 +1,15 @@
+﻿@model TeamNewsViewModel
+@{
+    ViewData["Title"] = "TeamStandings";
+}
+
+<div class="buttons p-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-12"><a asp-action="TeamNews" asp-route-id="@Model.Team.Id" class="team-btn ">News</a></div>
+            <div class="col-lg-4 col-sm-12"><a asp-action="TeamMatches" asp-route-id="@Model.Team.Id" class="team-btn ">Matches</a></div>
+            <div class="col-lg-4 col-sm-12"><a asp-action="TeamStandings" asp-route-id="@Model.Team.Id" class="team-btn active">Standings</a></div>
+        </div>
+    </div>
+</div>
+

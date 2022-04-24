@@ -1,0 +1,36 @@
+﻿@model List<LeagueStandingViewModel>
+@{ 
+    int i = 1;
+}
+<section class="standings p-50">
+    <div class="container">
+        <div class="title">
+            <h1 class="text-center">Standings in the main leaugues</h1>
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 p-0">
+                    <div class="liga-logo"> <img src="/assets/img/league/@item.League.LeagueIcon" class="liga-logo" alt=""></div>
+
+                    <ul class="team-list tournament">
+                        @foreach (var team in item.Teams)
+                        {
+                            <li class="team">
+                                <span> @(i++)</span> <div class="element"><img src="/assets/img/teams/@team.Logo" alt=""> <a href=""> @team.Name</a></div>
+                            </li>
+
+                            @if (i==item.Teams.Count+1)
+                            {
+                                i = 1;
+                            }
+                        }
+                       
+
+                    </ul>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>

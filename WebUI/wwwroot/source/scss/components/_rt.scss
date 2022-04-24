@@ -1,0 +1,54 @@
+.rt-post {
+    display: flex;
+
+    .post-img {
+        overflow: hidden;
+        flex: auto;
+        min-width: 350px;
+        max-width: 350px;
+        width: 100%;
+
+        a {
+            width: 100%;
+            height: 100%;
+            display: block;
+
+            img {}
+        }
+    }
+
+    .post-content {
+        padding-left: 24px;
+
+        .post-title a {
+            color: #ffffff;
+            font-size: 18px;
+            font-family: 'Anton', sans-serif !important;
+            
+        }
+
+        p {
+            color: $white;margin-bottom: 35px!important;
+        }
+
+        .post-meta {
+            ul {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+
+                li {
+                    margin-right: 20px;
+                }
+            }
+
+            .rt-meta {
+                font-size: 0.75rem;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 0.05rem;
+                color: gray;
+            }
+        }
+    }
+}

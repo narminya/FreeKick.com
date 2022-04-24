@@ -1,0 +1,10 @@
+.actions-y{
+    background-color: $black-o-1;
+    padding: 10px 0;
+    border: 1px solid #8080801a;
+    @include bacImage();
+    height: 250px;
+    background-image: url(/assets/img/ruec0dd3eaaf5.jpeg);
+    display: flex;
+    align-items: center;
+}

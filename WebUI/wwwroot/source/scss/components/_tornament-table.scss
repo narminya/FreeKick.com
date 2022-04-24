@@ -1,0 +1,40 @@
+.tournament {
+
+
+    img {
+        width: 20px;
+    }
+
+ 
+
+    .list-group-item {
+        background-color: transparent;
+        border: none;
+        padding: 5px 10px;
+        border-bottom: 1px solid #80808040;
+        border-left: 3px solid $main_color;
+        color: rgba(255, 255, 255, 0.514);
+        font-weight: 300;
+        font-size: 12px;
+        border-radius: 0;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        a {
+            color: $white;
+            font-weight: 300;
+            font-size: 12px;
+        }
+    }
+
+}
+
+@media screen and(max-width: 920px) {
+
+    .tournament {
+        padding: 0 10px !important;
+        margin-bottom: 10px !important;
+    }
+}

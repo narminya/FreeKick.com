@@ -1,0 +1,163 @@
+.field-border {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background-color: #006e1e;
+    width: 724px;
+
+    &::before {
+        position: absolute;
+        top: calc(50% - 62px);
+        left: calc(50% - 62px);
+        width: 120px;
+        height: 120px;
+        border: 2px solid #00aa32;
+        border-radius: 50%;
+        content: "";
+    }
+
+    &:after {
+        position: absolute;
+        left: calc(50% - 1px);
+        width: 0;
+        height: calc(100% - 20px);
+        border: 1px solid #00aa32;
+        content: "";
+        top: 10px;
+    }
+
+    .field-main {
+        width: 724px;
+        height: 432px;
+        border: 2px solid #00aa32;
+        margin: 8px;
+        background-color: #006e1e;
+        border-radius: 1%;
+
+        &::before,
+        &::after {
+            position: absolute;
+            top: calc(50% - 56px);
+            width: 48px;
+            height: 112px;
+            border: 2px solid #00aa32;
+            content: "";
+        }
+
+        &::before {
+            left: 8px;
+
+        }
+
+        &::after {
+            right: 8px;
+            left: auto;
+        }
+
+        .player {
+
+            position: absolute;
+            z-index: 99;
+            color: aliceblue;
+            font-size: 20px;
+            flex-direction: column;
+            text-align: center;
+
+            .p-name {
+                font-size: 10px;
+            }
+
+            &.goalkeeper {
+                display: inline-flex;
+                top: 53%;
+                transform: translateY(-50%);
+
+                &.g-home {
+                    left: 34px;
+                }
+
+                &.g-away {
+                    right: 34px;
+                }
+            }
+        }
+
+        .defence {
+            &.home{
+                left: 100px;
+            }
+            &.away{
+                right: 100px;
+            }
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            height: 100%;
+            justify-content: space-around;
+
+            .defender {
+                color: aliceblue;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .p-name {
+                font-size: 10px;
+            }
+        }
+
+        .midfield{
+            &.home{
+                left: 180px;
+            } 
+             &.away{
+                right: 180px;
+            }
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                height: 100%;
+                justify-content: space-around;
+    
+                .midfielder {
+                    color: aliceblue;
+                    flex-direction: column;
+                    text-align: center;
+                }
+    
+                .p-name {
+                    font-size: 10px;
+                }
+            
+    
+        }
+
+        .attack{
+            &.home{
+                left: 260px;
+            }
+            &.away{
+                right: 260px;
+            }
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+          
+            height: 100%;
+            justify-content: space-around;
+
+            .forward {
+                color: aliceblue;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .p-name {
+                font-size: 10px;
+            }
+        
+        }
+
+        
+    }
+}
