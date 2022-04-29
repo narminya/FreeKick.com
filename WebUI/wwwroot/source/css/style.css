@@ -1,6 +1,7 @@
 * {
     font-family: 'Work Sans', sans-serif;
 }
+
     *::-webkit-scrollbar-track {
         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
         border-radius: 10px;
@@ -17,6 +18,7 @@
         -webkit-box-shadow: inset 0 0 6px rgba(175, 175, 175, 0.3);
         background-color: #F5F5F5;
     }
+
 ul {
     margin: 0 !important;
     padding: 0 !important;
@@ -201,6 +203,7 @@ textarea {
     padding-top: 50px !important;
     padding-bottom: 50px !important;
 }
+
 .py-100 {
     padding-top: 100px !important;
     padding-bottom: 50px !important;
@@ -219,14 +222,17 @@ textarea {
     padding-top: 80px;
     padding-bottom: 0;
 }
+
 .section-padding-100-0 {
     padding-top: 100px;
     padding-bottom: 0;
 }
+
 .section-padding-50-0 {
     padding-top: 50px;
     padding-bottom: 0;
 }
+
 .section-padding-0-80 {
     padding-top: 0;
     padding-bottom: 80px;
@@ -565,6 +571,27 @@ textarea {
         font-size: 14px;
         color: #fff;
     }
+
+.timer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 200px;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+}
+
+    .timer li {
+        font-size: 35px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+
 .field-border {
     position: relative;
     display: -webkit-box;
@@ -634,6 +661,7 @@ textarea {
             -ms-flex-direction: column;
             flex-direction: column;
             text-align: center;
+            margin: 20px 0;
         }
 
             .field-border .field-main .player .p-name {
@@ -677,17 +705,38 @@ textarea {
             flex-direction: column;
             position: absolute;
             height: 100%;
-            -ms-flex-pack: distribute;
-            justify-content: space-around;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
         }
 
             .field-border .field-main .defence.home {
                 left: 100px;
             }
 
+                .field-border .field-main .defence.home .rightback {
+                    position: absolute;
+                    bottom: 0;
+                }
+
+                .field-border .field-main .defence.home .leftback {
+                    position: absolute;
+                    top: 0;
+                }
+
             .field-border .field-main .defence.away {
                 right: 100px;
             }
+
+                .field-border .field-main .defence.away .rightback {
+                    position: absolute;
+                    top: 0;
+                }
+
+                .field-border .field-main .defence.away .leftback {
+                    position: absolute;
+                    bottom: 0;
+                }
 
             .field-border .field-main .defence .p-name {
                 font-size: 10px;
@@ -705,17 +754,38 @@ textarea {
             position: absolute;
             top: 0;
             height: 100%;
-            -ms-flex-pack: distribute;
-            justify-content: space-around;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
         }
 
             .field-border .field-main .midfield.home {
                 left: 180px;
             }
 
+                .field-border .field-main .midfield.home .rightmid {
+                    position: absolute;
+                    bottom: 0;
+                }
+
+                .field-border .field-main .midfield.home .leftmid {
+                    position: absolute;
+                    top: 0;
+                }
+
             .field-border .field-main .midfield.away {
                 right: 180px;
             }
+
+                .field-border .field-main .midfield.away .rightmid {
+                    position: absolute;
+                    top: 0;
+                }
+
+                .field-border .field-main .midfield.away .leftmid {
+                    position: absolute;
+                    bottom: 0;
+                }
 
         .field-border .field-main .attack {
             z-index: 99;
@@ -729,17 +799,43 @@ textarea {
             position: absolute;
             top: 0;
             height: 100%;
-            -ms-flex-pack: distribute;
-            justify-content: space-around;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
         }
 
             .field-border .field-main .attack.home {
                 left: 260px;
             }
 
+                .field-border .field-main .attack.home .leftwinger {
+                    position: absolute;
+                    top: 0;
+                }
+
+                .field-border .field-main .attack.home .rightwinger {
+                    position: absolute;
+                    bottom: 0;
+                }
+
+                .field-border .field-main .attack.home .striker {
+                    position: absolute;
+                    left: 60px;
+                }
+
             .field-border .field-main .attack.away {
                 right: 260px;
             }
+
+                .field-border .field-main .attack.away .leftwinger {
+                    position: absolute;
+                    top: 0;
+                }
+
+                .field-border .field-main .attack.away .rightwinger {
+                    position: absolute;
+                    bottom: 0;
+                }
 
 @media screen and (max-width: 920px) {
     .field-border {
@@ -777,14 +873,19 @@ textarea {
             }
 
                 .field-border .field-main .keeper.home {
-                    top: 40px;
+                    top: 20px;
                     height: auto;
                 }
 
                 .field-border .field-main .keeper.away {
                     bottom: 15px;
+                    height: auto;
                     top: auto;
                 }
+
+            .field-border .field-main .player {
+                margin: 0;
+            }
 
             .field-border .field-main .defence {
                 width: 100%;
@@ -793,12 +894,32 @@ textarea {
                 -webkit-box-direction: normal;
                 -ms-flex-direction: row;
                 flex-direction: row;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
             }
 
+                .field-border .field-main .defence .leftcentreback,
+                .field-border .field-main .defence .rightcentreback {
+                    margin: 0 40px;
+                }
+
                 .field-border .field-main .defence.home {
-                    top: 120px;
+                    top: 80px;
                     left: 0;
                 }
+
+                    .field-border .field-main .defence.home .rightback {
+                        position: absolute;
+                        bottom: 0;
+                        left: 40px;
+                    }
+
+                    .field-border .field-main .defence.home .leftback {
+                        position: absolute;
+                        top: 0;
+                        right: 40px;
+                    }
 
                 .field-border .field-main .defence.away {
                     right: 100px;
@@ -806,6 +927,18 @@ textarea {
                     top: auto;
                     left: 0;
                 }
+
+                    .field-border .field-main .defence.away .rightback {
+                        position: absolute;
+                        bottom: 0;
+                        right: 40px;
+                    }
+
+                    .field-border .field-main .defence.away .leftback {
+                        position: absolute;
+                        top: 0;
+                        left: 40px;
+                    }
 
             .field-border .field-main .midfield {
                 left: 0 !important;
@@ -818,13 +951,33 @@ textarea {
             }
 
                 .field-border .field-main .midfield.home {
-                    top: 200px;
+                    top: 160px;
                 }
+
+                    .field-border .field-main .midfield.home .rightmid {
+                        left: 40px;
+                    }
+
+                    .field-border .field-main .midfield.home .leftmid {
+                        right: 40px;
+                    }
+
+                    .field-border .field-main .midfield.home .defensivemid {
+                        margin: 0 40px;
+                    }
 
                 .field-border .field-main .midfield.away {
                     top: auto;
                     bottom: 200px;
                 }
+
+                    .field-border .field-main .midfield.away .leftmid {
+                        left: 40px;
+                    }
+
+                    .field-border .field-main .midfield.away .rightmid {
+                        right: 40px;
+                    }
 
             .field-border .field-main .attack {
                 -webkit-box-orient: horizontal;
@@ -836,15 +989,43 @@ textarea {
             }
 
                 .field-border .field-main .attack.home {
-                    top: 280px;
+                    top: 240px;
                     left: 0px;
                 }
+
+                    .field-border .field-main .attack.home .leftwinger {
+                        right: 40px;
+                    }
+
+                    .field-border .field-main .attack.home .rightwinger {
+                        left: 40px;
+                        top: 0;
+                    }
+
+                    .field-border .field-main .attack.home .striker {
+                        left: auto;
+                        top: 60px;
+                    }
 
                 .field-border .field-main .attack.away {
                     bottom: 280px;
                     top: auto;
                     right: 0px;
                 }
+
+                    .field-border .field-main .attack.away .leftwinger {
+                        left: 40px;
+                    }
+
+                    .field-border .field-main .attack.away .rightwinger {
+                        right: 40px;
+                        top: 0;
+                    }
+
+                    .field-border .field-main .attack.away .striker {
+                        left: auto;
+                        top: 60px;
+                    }
 
         .field-border::after {
             width: calc(100% - 20px);
@@ -853,6 +1034,8 @@ textarea {
             top: 50%;
         }
 }
+
+
 .team-btn {
     padding: 20px;
     width: 100%;
@@ -937,9 +1120,19 @@ textarea {
             text-align: center;
         }
 
-        .nav-link li:hover a {
-            background-color: #233166;
-        }
+.league-standing-table .table-ms .group {
+    color: white;
+    font-weight: 200;
+    font-size: 24px;
+}
+
+    .league-standing-table .table-ms .group span {
+        font-weight: 700;
+    }
+
+.nav-link li:hover a {
+    background-color: #233166;
+}
 
 .league-standing-table .table-ms .title-head {
     background-color: #233166;
@@ -1007,6 +1200,14 @@ textarea {
             width: 200px;
             color: aliceblue;
         }
+
+            .league-standing-table .table-ms .list-t li .team-left.outer img {
+                width: 20px;
+            }
+
+            .league-standing-table .table-ms .list-t li .team-left.outer p {
+                font-weight: 200;
+            }
 
             .league-standing-table .table-ms .list-t li .team-left img {
                 width: 40px;
@@ -1202,7 +1403,7 @@ textarea {
 
             .match-summary .match-summary .match-team img {
                 margin-bottom: 10px;
-                width:66px;
+                width: 66px;
             }
 
             .match-summary .match-summary .match-team h5 {
@@ -1328,7 +1529,8 @@ header {
     width: 100%;
     background-color: #212529;
     position: fixed;
-    top:0;
+    top: 0;
+    z-index: 99999999999999999;
 }
 
     header nav {

@@ -1,7 +1,46 @@
-﻿
+﻿@model List<LiveMatchesViewModel>
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<div class="col-md-12">
+    <div class="grid simple ">
+        <div class="grid-title no-border">
+        </div>
+        <div class="grid-body no-border">
+            <h3>Basic  <span class="semi-bold">Table</span></h3>
+            <table class="table no-more-tables">
+                <thead>
+                    <tr>
+                        <th style="width:9%">Game</th>
+                        <th style="width:22%">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        foreach (var match in item.Matches)
+                        {
+                            <tr>
+                                <td class="v-align-middle">
+                                    <div class="checkbox check-default">
+                                        <input id="checkbox11" type="checkbox" value="1">
+                                        <label for="checkbox11"></label>
+                                    </div>
+                                </td>
+                                <td class="v-align-middle">@match.HomeName</td>
+                                <td class="v-align-middle">
+                                    <span class="muted">Redesign project template</span>
+                                </td>
+                                <td class="v-align-middle">
+                                    <a class="btn btn-"></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 

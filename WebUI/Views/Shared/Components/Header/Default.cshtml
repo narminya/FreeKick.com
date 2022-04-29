@@ -1,0 +1,190 @@
+﻿@model HeaderViewModel
+@{
+    Layout = null;
+}
+
+<header>
+    <nav class="navigation">
+        <div class="logo">
+            <a href=""><img src="~/assets/img/Untitled-2.png" alt=""></a>
+        </div>
+        <ul class="nav-links">
+            @foreach (var item in Model.Parents)
+            {
+            <li>
+                @if (item.Controller != null)
+                {
+
+                    <a class="dropmenu" asp-controller="@{@item.Controller}" asp-action="@{@item.Action}">@item.Name</a>
+                }
+                else
+                {
+
+                    <a class="dropmenu">@item.Name</a>
+                }
+
+                @if (item.Children != null)
+                {<ul class=" dropdown mega">
+                        <div class="container">
+                            <div class="row justify-content-center dropdown-row">
+                                @foreach (var child in item.Children)
+                                {
+                                    <div class="col-lg-4 col-sm-12">
+                                        <div class="sub-menu-heading bold">@child.Name</div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </ul>
+                }
+
+
+            </li>
+            }
+
+        </ul>
+        <div class="burger-s">
+            <a class="burger burger-unclick">
+                <span class="unclick"></span>
+            </a>
+        </div>
+
+    </nav>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<header>
+        <nav class="navigation">
+            <div class="logo">
+                <a href=""><img src="~/assets/img/Untitled-2.png" alt=""></a>
+            </div>
+            <ul class="nav-links">
+                <li><a class="dropmenu" href="#home">Dashboard</a></li>
+                <li><a class="dropmenu" href="#about">Teams</a></li>
+                <li><a class="dropmenu" href="#home">Live scores</a></li>
+                <li><a class="dropmenu" href="#about">Champions League</a></li>
+                <li><a class="dropmenu" href="#home">Premiere League</a> </li>
+                <li>
+                    <a class="dropmenu" href="#home">European football <span>+</span></a>
+                    <ul class=" dropdown mega">
+                        <div class="container">
+                            <div class="row justify-content-center dropdown-row">
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="sub-menu-heading bold">LaLiga</div>
+                                    <ul class="sub-menu">
+                                        <li> <a href="typography.html"> Typography </a> </li>
+                                        <li> <a href="messages_notifications.html"> Messages &amp; Notifications </a> </li>
+                                        <li> <a href="notifications.html"> Notifications </a> </li>
+                                        <li> <a href="icons.html">Icons</a> </li>
+                                        <li> <a href="buttons.html">Buttons</a> </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="sub-menu-heading bold">Bundesliga</div>
+                                    <ul class="sub-menu">
+                                        <li> <a href="layout_options.html"> Layout Options </a> </li>
+                                        <li> <a href="boxed_layout.html">Boxed Layout </a> </li>
+                                        <li> <a href="boxed_layout_v2.html">Inner Boxed Layout </a> </li>
+                                        <li> <a href="extended_layout.html">Extended Layout</a> </li>
+                                        <li> <a href="RTL.html">RTL Layout</a> </li>
+                                    </ul>
+
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="sub-menu-heading bold">Seria A</div>
+                                    <ul class="sub-menu">
+                                        <li> <a href="layout_options.html"> Layout Options </a> </li>
+                                        <li> <a href="boxed_layout.html">Boxed Layout </a> </li>
+                                        <li> <a href="boxed_layout_v2.html">Inner Boxed Layout </a> </li>
+                                        <li> <a href="extended_layout.html">Extended Layout</a> </li>
+                                        <li> <a href="RTL.html">RTL Layout</a> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                </li>
+                <li>
+                    <a class="dropmenu" href="#home">European football <span>+</span></a>
+                    <ul class=" dropdown mega">
+                        <div class="container">
+                            <div class="row justify-content-center dropdown-row">
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="sub-menu-heading bold">Info</div>
+                                    <ul class="sub-menu">
+                                        <li> <a href="typography.html"> Typography </a> </li>
+                                        <li> <a href="messages_notifications.html"> Messages &amp; Notifications </a> </li>
+                                        <li> <a href="notifications.html"> Notifications </a> </li>
+                                        <li> <a href="icons.html">Icons</a> </li>
+                                        <li> <a href="buttons.html">Buttons</a> </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="sub-menu-heading bold">Teams</div>
+                                    <ul class="sub-menu">
+                                        <li> <a href="layout_options.html"> Layout Options </a> </li>
+                                        <li> <a href="boxed_layout.html">Boxed Layout </a> </li>
+                                        <li> <a href="boxed_layout_v2.html">Inner Boxed Layout </a> </li>
+                                        <li> <a href="extended_layout.html">Extended Layout</a> </li>
+                                        <li> <a href="RTL.html">RTL Layout</a> </li>
+                                    </ul>
+
+                                </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <div class="sub-menu-heading bold">Extra</div>
+                                    <ul class="sub-menu">
+                                        <li> <a href="layout_options.html"> Layout Options </a> </li>
+                                        <li> <a href="boxed_layout.html">Boxed Layout </a> </li>
+                                        <li> <a href="boxed_layout_v2.html">Inner Boxed Layout </a> </li>
+                                        <li> <a href="extended_layout.html">Extended Layout</a> </li>
+                                        <li> <a href="RTL.html">RTL Layout</a> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                </li>
+            </ul>
+            <div class="burger-s">
+                <a class="burger burger-unclick">
+                    <span class="unclick"></span>
+                </a>
+            </div>
+
+        </nav>
+    </header>*@

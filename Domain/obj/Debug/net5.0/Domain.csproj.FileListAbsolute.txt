@@ -9,3 +9,15 @@ C:\Users\afsana.mammadova\source\repos\FreeKick\Domain\obj\Debug\net5.0\Domain.c
 C:\Users\afsana.mammadova\source\repos\FreeKick\Domain\obj\Debug\net5.0\Domain.dll
 C:\Users\afsana.mammadova\source\repos\FreeKick\Domain\obj\Debug\net5.0\ref\Domain.dll
 C:\Users\afsana.mammadova\source\repos\FreeKick\Domain\obj\Debug\net5.0\Domain.pdb
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\bin\Debug\net5.0\Domain.deps.json
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\bin\Debug\net5.0\Domain.dll
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\bin\Debug\net5.0\ref\Domain.dll
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\bin\Debug\net5.0\Domain.pdb
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\obj\Debug\net5.0\Domain.csproj.AssemblyReference.cache
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\obj\Debug\net5.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\obj\Debug\net5.0\Domain.AssemblyInfoInputs.cache
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\obj\Debug\net5.0\Domain.AssemblyInfo.cs
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\obj\Debug\net5.0\Domain.csproj.CoreCompileInputs.cache
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\obj\Debug\net5.0\Domain.dll
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\obj\Debug\net5.0\ref\Domain.dll
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\obj\Debug\net5.0\Domain.pdb

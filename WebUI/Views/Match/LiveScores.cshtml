@@ -11,7 +11,7 @@
                     <div class="match-list">
                         @foreach (var item in Model)
                         {
-                            <div class="liga-logo text-light"> @item.League.LeagueName </div>
+                            <div class="liga-logo text-light" style="background-color: #233166; padding: 10px "> @item.League.LeagueName </div>
                             @foreach (var match in item.Matches)
                             {
                                 <div class="match-t">

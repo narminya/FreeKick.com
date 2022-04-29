@@ -1,0 +1,16 @@
+﻿@model PlayerViewModel   
+ <tr>
+    <td>
+        <div class="checkbox check-default">
+            <input id="checkbox2" type="checkbox" value="1">
+            <label for="checkbox2"></label>
+        </div>
+    </td>
+     <td>@Model.Surname</td>
+    <td>@Model.Position</td>
+    
+    <td>
+        <a class="btn"  asp-controller="Game" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-trash-o"></i></a>
+        <a class="btn" asp-controller="Game" asp-action="Update" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i></a>
+    </td>
+</tr>

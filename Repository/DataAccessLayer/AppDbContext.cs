@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Repository.DataAccessLayer
 {
-    public class AppDbContext : IdentityDbContext
+    public class AppDbContext : IdentityDbContext<User>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
          : base(options)
@@ -23,7 +23,6 @@ namespace Repository.DataAccessLayer
         public DbSet<Country> Country { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<GameTeam> GamesTeam { get; set; }
-
         public DbSet<GameScore> GameScores { get; set; }
         public DbSet<GameLineup> GameLineup { get; set; }
         public DbSet<Player> Player { get; set; }
@@ -35,8 +34,10 @@ namespace Repository.DataAccessLayer
         public DbSet<TeamPlayer> TeamPlayer { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<GameComment> GameComments { get; set; }
-
-
+        public DbSet<OuterLeague> OuterLeagues { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<GroupTeam> GroupTeams { get; set; }
+        public DbSet<Navigation> Navigation { get; set; }
 
 
 

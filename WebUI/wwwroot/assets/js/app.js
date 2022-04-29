@@ -13,9 +13,9 @@
         });
 
 
+
         $("a.dropmenu").click(function (e) {
             e.stopPropagation();
-            e.preventDefault();
             $(this).next(".dropdown").toggleClass('selected')
 
             if ($(this).next(".dropdown").hasClass('selected')) {
@@ -41,6 +41,16 @@
                 $(this).next(".sub-menu").fadeOut();
             }
         });
+      //  timer('#timer1');
+
+        players()
+
+
+
+
+    });
+
+    function players() {
 
         let players = $('.player');
         let field = $(".field-main");
@@ -77,12 +87,70 @@
                 $(keeperAway).append(players[i])
             }
         }
+    }
+
+    function timer(id) {
 
 
+        let hourEl = $(id).children('li')[0]
+        let minuteEl = $(id).children('li')[2]
+        let secondEl = $(id).children('li')[4]
 
-    });
+
+        // let time = $(id).attr('data-time');
+        // let timeParts = time.split(':');
+        let hours = format($(hourEl).text());
+        console.log(hours)
+        let minutes = (format($(minuteEl).text()) / 60) - hours
+        let seconds = (format($(secondEl).text()) / 60) - minutes
+        // let seconds = timeParts[2];
+        $(id).addClass('running');
+
+        $(secondEl).text(Math.floor(seconds));
+        $(minuteEl).text(minutes);
+        $(hourEl).text(hours);
+
+        let pid = setInterval(function () {
+
+            if (seconds > 0) {
+                seconds--;
+            } else if (minutes > 0) {
+                seconds = 59;
+                minutes--;
+            } else if (hours > 0) {
+                minutes = 59;
+                seconds = 59;
+                hours--;
+            } else {
+                // sound.play();
+
+                $(id).removeClass('running');
+                clearInterval(pid);
+            }
+
+
+            $(secondEl).text(seconds);
+            $(minuteEl).text(minutes);
+            $(hourEl).text(minutes);
+        }, 1000);
+
+    }
+
+    function format(val) {
+
+
+        if (val < 10)
+            return `0${parseInt(val)}`;
+
+        return val;
+    }
+
+    function format(val) {
+
+        if (val < 10)
+            return `0${parseInt(val)}`;
+
+        return val;
+    }
 
 })(jQuery);
-
-
-

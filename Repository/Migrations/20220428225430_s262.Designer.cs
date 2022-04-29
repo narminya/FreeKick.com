@@ -10,8 +10,8 @@ using Repository.DataAccessLayer;
 namespace Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220410132554_gametime")]
-    partial class gametime
+    [Migration("20220428225430_s262")]
+    partial class s262
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,24 @@ namespace Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Domain.Entity.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Minute")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Comments");
+                });
 
             modelBuilder.Entity("Domain.Entity.Country", b =>
                 {
@@ -58,13 +76,16 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("GroupId")
+                        .HasColumnType("int");
+
                     b.Property<int>("HomeScore")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsFinished")
                         .HasColumnType("bit");
 
-                    b.Property<int>("LeagueId")
+                    b.Property<int?>("LeagueId")
                         .HasColumnType("int");
 
                     b.Property<int>("SeasonId")
@@ -75,6 +96,8 @@ namespace Repository.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GroupId");
+
                     b.HasIndex("LeagueId");
 
                     b.HasIndex("SeasonId");
@@ -84,15 +107,34 @@ namespace Repository.Migrations
                     b.ToTable("Games");
                 });
 
-            modelBuilder.Entity("Domain.Entity.GameLineup", b =>
+            modelBuilder.Entity("Domain.Entity.GameComment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Change")
-                        .HasColumnType("bit");
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentId");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("GameComments");
+                });
+
+            modelBuilder.Entity("Domain.Entity.GameLineup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("GameId")
                         .HasColumnType("int");
@@ -123,6 +165,9 @@ namespace Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CommonName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -192,11 +237,58 @@ namespace Repository.Migrations
 
                     b.HasIndex("AwayTeamId");
 
-                    b.HasIndex("GameId");
+                    b.HasIndex("GameId")
+                        .IsUnique();
 
                     b.HasIndex("HomeTeamId");
 
                     b.ToTable("GamesTeam");
+                });
+
+            modelBuilder.Entity("Domain.Entity.Group", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Letter")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<int>("OuterLeagueId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OuterLeagueId");
+
+                    b.ToTable("Groups");
+                });
+
+            modelBuilder.Entity("Domain.Entity.GroupTeam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("Points")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("GroupTeams");
                 });
 
             modelBuilder.Entity("Domain.Entity.League", b =>
@@ -224,6 +316,41 @@ namespace Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("League");
+                });
+
+            modelBuilder.Entity("Domain.Entity.Navigation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Action")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Controller")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("Navigation");
                 });
 
             modelBuilder.Entity("Domain.Entity.News", b =>
@@ -273,6 +400,27 @@ namespace Repository.Migrations
                     b.HasIndex("TagId");
 
                     b.ToTable("NewsTag");
+                });
+
+            modelBuilder.Entity("Domain.Entity.OuterLeague", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Logo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OuterLeagues");
                 });
 
             modelBuilder.Entity("Domain.Entity.Player", b =>
@@ -453,7 +601,7 @@ namespace Repository.Migrations
                     b.Property<int>("Num")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PlayerId")
+                    b.Property<int>("PlayerId")
                         .HasColumnType("int");
 
                     b.Property<int?>("TeamId")
@@ -466,6 +614,74 @@ namespace Repository.Migrations
                     b.HasIndex("TeamId");
 
                     b.ToTable("TeamPlayer");
+                });
+
+            modelBuilder.Entity("Domain.Entity.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -517,71 +733,6 @@ namespace Repository.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -666,11 +817,13 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Domain.Entity.Game", b =>
                 {
+                    b.HasOne("Domain.Entity.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId");
+
                     b.HasOne("Domain.Entity.League", "League")
                         .WithMany("Games")
-                        .HasForeignKey("LeagueId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LeagueId");
 
                     b.HasOne("Domain.Entity.Season", "Season")
                         .WithMany()
@@ -682,9 +835,30 @@ namespace Repository.Migrations
                         .WithMany("Games")
                         .HasForeignKey("TeamId");
 
+                    b.Navigation("Group");
+
                     b.Navigation("League");
 
                     b.Navigation("Season");
+                });
+
+            modelBuilder.Entity("Domain.Entity.GameComment", b =>
+                {
+                    b.HasOne("Domain.Entity.Comment", "Comment")
+                        .WithMany("GameComments")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entity.Game", "Game")
+                        .WithMany("Comments")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
+
+                    b.Navigation("Game");
                 });
 
             modelBuilder.Entity("Domain.Entity.GameLineup", b =>
@@ -740,8 +914,8 @@ namespace Repository.Migrations
                         .HasForeignKey("AwayTeamId");
 
                     b.HasOne("Domain.Entity.Game", "Game")
-                        .WithMany("Teams")
-                        .HasForeignKey("GameId")
+                        .WithOne("Teams")
+                        .HasForeignKey("Domain.Entity.GameTeam", "GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -754,6 +928,45 @@ namespace Repository.Migrations
                     b.Navigation("Game");
 
                     b.Navigation("HomeTeam");
+                });
+
+            modelBuilder.Entity("Domain.Entity.Group", b =>
+                {
+                    b.HasOne("Domain.Entity.OuterLeague", "OuterLeague")
+                        .WithMany("Groups")
+                        .HasForeignKey("OuterLeagueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OuterLeague");
+                });
+
+            modelBuilder.Entity("Domain.Entity.GroupTeam", b =>
+                {
+                    b.HasOne("Domain.Entity.Group", "Group")
+                        .WithMany("Teams")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entity.Team", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("Domain.Entity.Navigation", b =>
+                {
+                    b.HasOne("Domain.Entity.Navigation", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("Domain.Entity.NewsTag", b =>
@@ -834,7 +1047,9 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Domain.Entity.Player", "Player")
                         .WithMany("Teams")
-                        .HasForeignKey("PlayerId");
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.Entity.Team", "Team")
                         .WithMany()
@@ -856,7 +1071,7 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Domain.Entity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -865,7 +1080,7 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Domain.Entity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -880,7 +1095,7 @@ namespace Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Domain.Entity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -889,19 +1104,31 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("Domain.Entity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.Entity.Comment", b =>
+                {
+                    b.Navigation("GameComments");
+                });
+
             modelBuilder.Entity("Domain.Entity.Game", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Goals");
 
                     b.Navigation("Lineups");
 
+                    b.Navigation("Teams");
+                });
+
+            modelBuilder.Entity("Domain.Entity.Group", b =>
+                {
                     b.Navigation("Teams");
                 });
 
@@ -912,9 +1139,19 @@ namespace Repository.Migrations
                     b.Navigation("Teams");
                 });
 
+            modelBuilder.Entity("Domain.Entity.Navigation", b =>
+                {
+                    b.Navigation("Children");
+                });
+
             modelBuilder.Entity("Domain.Entity.News", b =>
                 {
                     b.Navigation("Tags");
+                });
+
+            modelBuilder.Entity("Domain.Entity.OuterLeague", b =>
+                {
+                    b.Navigation("Groups");
                 });
 
             modelBuilder.Entity("Domain.Entity.Player", b =>

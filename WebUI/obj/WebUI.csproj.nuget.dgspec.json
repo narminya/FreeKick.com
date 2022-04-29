@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\WebUI\\WebUI.csproj": {}
+    "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\WebUI\\WebUI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\Domain\\Domain.csproj": {
+    "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\Domain\\Domain.csproj",
+        "projectPath": "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\afsana.mammadova\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\Domain\\obj\\",
+        "outputPath": "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\afsana.mammadova\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -43,6 +43,14 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.15, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[5.0.16, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             }
           },
           "imports": [
@@ -64,14 +72,14 @@
         }
       }
     },
-    "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\Repository\\Repository.csproj": {
+    "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\Repository\\Repository.csproj",
+        "projectUniqueName": "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\Repository\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\Repository\\Repository.csproj",
+        "projectPath": "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\Repository\\Repository.csproj",
         "packagesPath": "C:\\Users\\afsana.mammadova\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\Repository\\obj\\",
+        "outputPath": "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\afsana.mammadova\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -88,8 +96,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\Domain\\Domain.csproj"
+              "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\Domain\\Domain.csproj"
               }
             }
           }
@@ -120,9 +128,17 @@
               "target": "Package",
               "version": "[5.0.15, )"
             },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[5.0.16, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[5.0.15, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             }
           },
           "imports": [
@@ -144,14 +160,14 @@
         }
       }
     },
-    "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\WebUI\\WebUI.csproj": {
+    "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\WebUI\\WebUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\WebUI\\WebUI.csproj",
+        "projectUniqueName": "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\WebUI\\WebUI.csproj",
         "projectName": "WebUI",
-        "projectPath": "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\WebUI\\WebUI.csproj",
+        "projectPath": "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\WebUI\\WebUI.csproj",
         "packagesPath": "C:\\Users\\afsana.mammadova\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\WebUI\\obj\\",
+        "outputPath": "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\WebUI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\afsana.mammadova\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -168,8 +184,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\Repository\\Repository.csproj": {
-                "projectPath": "C:\\Users\\afsana.mammadova\\source\\repos\\FreeKick\\Repository\\Repository.csproj"
+              "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\Repository\\Repository.csproj": {
+                "projectPath": "C:\\Users\\afsana.mammadova\\Downloads\\FreeKick.com\\Repository\\Repository.csproj"
               }
             }
           }
@@ -194,7 +210,7 @@
             },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
-              "version": "[5.0.15, )"
+              "version": "[5.0.16, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -213,6 +229,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             }
           },
           "imports": [

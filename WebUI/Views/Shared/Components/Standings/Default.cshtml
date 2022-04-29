@@ -17,7 +17,8 @@
                         @foreach (var team in item.Teams)
                         {
                             <li class="team">
-                                <span> @(i++)</span> <div class="element"><img src="/assets/img/teams/@team.Logo" alt=""> <a href=""> @team.Name</a></div>
+                                <span> @(i++)</span> <div class="element"><img src="/assets/img/teams/@team.Logo" alt="">
+                                <a href=""> @team.Name</a></div>
                             </li>
 
                             @if (i==item.Teams.Count+1)

@@ -36,11 +36,11 @@ namespace WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddIdentity<User, IdentityRole>(options =>
-            //{
-            //    options.Password.RequiredLength = 10;
-            //    options.User.RequireUniqueEmail = true;
-            //}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 10;
+                options.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
             services.AddControllersWithViews()
            .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling
@@ -55,17 +55,35 @@ namespace WebUI
                         });
             });
 
-            
-            services.AddAutoMapper(typeof(Mapper));
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin/Author", policyBuilder => policyBuilder.RequireAssertion(
+                     context => context.User.IsInRole(RoleConstants.Admin) ||
+                                context.User.IsInRole(RoleConstants.Admin) || context.User.IsInRole(RoleConstants.Author)));
+
+                options.AddPolicy("AreaAdmin", policyBuilder => policyBuilder.RequireAssertion(
+                    context => context.User.IsInRole(RoleConstants.Admin)));
+
+                options.AddPolicy("Moderator", policyBuilder => policyBuilder.RequireAssertion(
+                  context => context.User.IsInRole(RoleConstants.Moderator)));
+                
+                options.AddPolicy("Author", policyBuilder => policyBuilder.RequireAssertion(
+                  context => context.User.IsInRole(RoleConstants.Author)));
+            });
+
+
+
             services.AddScoped(typeof(IRepository<>), typeof(EfCoreRepository<>));
+
             services.AddTransient(typeof(IBroadcastRepository), typeof(BroadcastRepository));
-            FileConstant.ImagePath = Path.Combine(_env.WebRootPath,"assets" ,"img");
+
+            FileConstant.ImagePath = Path.Combine(_env.WebRootPath, "assets", "img");
 
             services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -74,11 +92,11 @@ namespace WebUI
 
             app.UseRouting();
             app.UseStaticFiles();
-            app.Seed();
+            await app.Seed();
             app.UseAuthentication();
             app.UseAuthorization();
 
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

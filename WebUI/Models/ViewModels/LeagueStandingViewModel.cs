@@ -11,6 +11,7 @@ namespace WebUI.Models.ViewModels
     public class LeagueStandingViewModel
     {
         public LeagueDto League { get; set; }
+        public Group Group { get; set; }
         public List<TeamStandingsViewModel> Teams { get; set; }
     }
 }

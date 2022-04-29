@@ -1,4 +1,5 @@
-﻿using Domain.Entity;
+﻿using Domain.Constants;
+using Domain.Entity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +14,13 @@ namespace Repository.DataAccessLayer
 {
     public static class AppSeed
     {
-        public static IApplicationBuilder Seed(this IApplicationBuilder app)
+        public async static Task<IApplicationBuilder> Seed(this IApplicationBuilder app)
         {
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+                var role = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
                 db.Database.Migrate();
                 InitPosition(db);
@@ -25,31 +28,134 @@ namespace Repository.DataAccessLayer
                 InitLeague(db);
                 InitCountry(db);
                 InitSeason(db);
-                 InitTeams(db);
-                  InitTeamLeague(db);
-                  InitNews(db);
+                InitTeams(db);
+                InitTeamLeague(db);
+                InitNews(db);
                 InitTags(db);
                 InitPlayer(db);
-                  InitNewsTag(db);
+                InitNewsTag(db);
                 InitGame(db);
                 InitGameTeams(db);
-                   InitGameLineup(db);
+                //  InitGameLineup(db);
                 InitTeamPlayer(db);
+                InitOuter(db);
+                InitGroups(db);
+                InitGroupTeam(db);
+                await InitRoles(db, role);
+                InitHeader(db);
             }
             return app;
         }
 
 
 
+        private static void InitHeader(AppDbContext db)
+        {
+            if (!db.Navigation.Any())
+            {
+
+                db.Navigation.AddRange(
+                    new Navigation { Name = "Breaking", Order = 1, Controller="Home", Action="Index" },
+                    new Navigation { Name = "Live Scores", Order = 2, Controller = "Match", Action = "LiveScores" },
+                    new Navigation { Name = "European Football", Order = 3 },
+                    new Navigation { Name = "Champions League", Order = 4 },
+                    new Navigation { Name = "Premier League", Order = 5 });
+
+            }
+            db.SaveChanges();
+        }
+
+        private static async Task InitRoles(AppDbContext db, RoleManager<IdentityRole> role)
+        {
+            if (!db.Roles.Any())
+            {
+                await role.CreateAsync(new IdentityRole { Name = RoleConstants.Admin });
+                await role.CreateAsync(new IdentityRole { Name = RoleConstants.User });
+                await role.CreateAsync(new IdentityRole { Name = RoleConstants.Moderator });
+                await role.CreateAsync(new IdentityRole { Name = RoleConstants.User });
+            }
+            await db.SaveChangesAsync();
+        }
+
+        private static void InitGroupTeam(AppDbContext db)
+        {
+            if (!db.GroupTeams.Any())
+            {
+                db.GroupTeams.AddRange(
+                    new GroupTeam { GroupId = 1, TeamId = 1, Points = 12 },
+                    new GroupTeam { GroupId = 1, TeamId = 2, Points = 11 },
+                    new GroupTeam { GroupId = 1, TeamId = 3, Points = 7 },
+                    new GroupTeam { GroupId = 1, TeamId = 4, Points = 4 });
+            }
+            db.SaveChanges();
+        }
+
+        private static void InitGroups(AppDbContext db)
+        {
+            if (!db.Groups.Any())
+            {
+                db.Groups.AddRange(
+                    new Group { OuterLeagueId = 1, Letter = 'A' },
+                    new Group { OuterLeagueId = 1, Letter = 'B' },
+                    new Group { OuterLeagueId = 1, Letter = 'C' },
+                    new Group { OuterLeagueId = 1, Letter = 'D' },
+                    new Group { OuterLeagueId = 1, Letter = 'E' },
+                    new Group { OuterLeagueId = 1, Letter = 'F' },
+                    new Group { OuterLeagueId = 1, Letter = 'G' },
+                    new Group { OuterLeagueId = 1, Letter = 'H' },
+                    new Group { OuterLeagueId = 2, Letter = 'A' },
+                    new Group { OuterLeagueId = 2, Letter = 'B' },
+                    new Group { OuterLeagueId = 2, Letter = 'C' },
+                    new Group { OuterLeagueId = 2, Letter = 'D' },
+                    new Group { OuterLeagueId = 2, Letter = 'E' },
+                    new Group { OuterLeagueId = 2, Letter = 'F' },
+                    new Group { OuterLeagueId = 2, Letter = 'G' },
+                    new Group { OuterLeagueId = 2, Letter = 'H' },
+                    new Group { OuterLeagueId = 3, Letter = 'A' },
+                    new Group { OuterLeagueId = 3, Letter = 'B' },
+                    new Group { OuterLeagueId = 3, Letter = 'C' },
+                    new Group { OuterLeagueId = 3, Letter = 'D' },
+                    new Group { OuterLeagueId = 3, Letter = 'E' },
+                    new Group { OuterLeagueId = 3, Letter = 'F' },
+                    new Group { OuterLeagueId = 3, Letter = 'G' },
+                    new Group { OuterLeagueId = 3, Letter = 'H' }
+
+                    );
+            }
+
+            db.SaveChanges();
+        }
+
+        private static void InitOuter(AppDbContext db)
+        {
+            if (!db.OuterLeagues.Any())
+            {
+                db.OuterLeagues.AddRange(
+                    new OuterLeague { Name = "UEFA Champions League", Title = "lctitle.jpeg", Logo = "lclogo.png" },
+                    new OuterLeague { Name = "UEFA Europe League", Title = "letitle.jpeg", Logo = "lelogo.png" },
+                    new OuterLeague { Name = "UEFA Conference League", Logo = "conferencelogo.png" }
+                    );
+            }
+
+            db.SaveChanges();
+        }
+
         private static void InitGamePosition(AppDbContext db)
         {
             if (!db.GamePositions.Any())
             {
                 db.GamePositions.AddRange(
-                     new GamePosition { Name = "GoalKeeper" },
-                     new GamePosition { Name = "Defender" },
-                     new GamePosition { Name = "Midfielder" },
-                     new GamePosition { Name = "Forward" }
+                     new GamePosition { Name = "GoalKeeper", CommonName = "Keeper" },
+                     new GamePosition { Name = "RightBack", CommonName = "Defender" },
+                     new GamePosition { Name = "LeftBack", CommonName = "Defender" },
+                     new GamePosition { Name = "LeftCentreBack", CommonName = "Defender" },
+                     new GamePosition { Name = "RightCentreBack", CommonName = "Defender" },
+                     new GamePosition { Name = "DefensiveMid", CommonName = "Midfielder" },
+                     new GamePosition { Name = "RightMid", CommonName = "Midfielder" },
+                     new GamePosition { Name = "LeftMid", CommonName = "Midfielder" },
+                     new GamePosition { Name = "LeftWinger", CommonName = "Forward" },
+                     new GamePosition { Name = "RightWinger", CommonName = "Forward" },
+                     new GamePosition { Name = "CenterForward", CommonName = "Forward" }
                     );
             }
 

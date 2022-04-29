@@ -12,6 +12,7 @@ namespace Domain.Entity
         public char Letter { get; set; }
         public int OuterLeagueId { get; set; }
         public OuterLeague OuterLeague { get; set; }
+        public ICollection<GroupTeam> Teams { get; set; }
 
     }
 }

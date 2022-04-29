@@ -1,39 +1,48 @@
 ﻿@model MatchStatsViewModel
 @{
     ViewData["Title"] = "Index";
+    // TimeSpan span = DateTime.Parse(Model.Match.Date.ToString("MM/dd/yyyy HH:mm:ss")).Subtract(DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")));
 }
 
 <section class="match-summary py-50">
     <div class="container">
         <div class="row">
-            <div class="col-4 match-summary">
+            <div class="col-lg-4 col-sm-12 match-summary">
                 <div class="match-team">
                     <img src="/assets/img/teams/@Model.Match.HomeImage" alt="">
                     <h5>@Model.Match.HomeName</h5>
                     <p class="text-light mb-0">4-2-4</p>
-                    <p class="text-light">Carlo Ancelotti</p>
+                    <p class="text-light">@Model.Match.HomeCoach</p>
                 </div>
             </div>
-            <div class="col-4 match-summary match-team-state">
+            <div class="col-lg-4 col-sm-12 match-summary match-team-state">
                 <div class="match-team-state">
-                    <div class="match-date"> <span>21.03.2022, 00:00</span></div>
+                    <div class="match-date"> <span>@Model.Match.Date.ToString("d MMMM HH:mm")</span></div>
                     <div class="matchboard">
+
                         <span class="matchboard__card">
                             <span class="matchboard__card-game">
+                                @if(Model.Match.Date>DateTime.Now)
+                                {
+
+                                }
                                 @Model.Match.HomeTeamScore
                             </span>
-                        </span><span class="matchboard__hyphen"></span><span class="matchboard__card matchboard__card--no_margin">
-                            <span class="matchboard__card-game matchboard__card-game--winner">  @Model.Match.AwayTeamScore</span>
+                        </span>
+                        <span class="matchboard__hyphen">
+                            </span><span class="matchboard__card matchboard__card--no_margin">
+                            <span class="matchboard__card-game">@Model.Match.AwayTeamScore</span>
                         </span>
                     </div>
                 </div>
             </div>
-            <div class="col-4 match-summary">
+            <div class="col-lg-4 col-sm-12 match-summary">
                 <div class="match-team">
                     <img src="/assets/img/teams/@Model.Match.AwayImage" alt="">
                     <h5>@Model.Match.AwayName</h5>
                     <p class="text-light mb-0">4-3-3</p>
-                    <p class="text-light">Xavi Hernandes</p>
+                    <p class="text-light">@Model.Match.AwayCoach</p>
+
 
                 </div>
             </div>
@@ -44,7 +53,7 @@
     <div class="container">
         <div class="row">
             <h4 class="match-broadcast-title">Live broadcast of Real Madrid vs Barcelona</h4>
-            <div class="col-8">
+            <div class="col-lg-8 col-sm-12">
                 <div class="live-broadvast">
                     @foreach (var item in Model.Comments)
                     {
@@ -64,7 +73,7 @@
                     }
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-sm-12">
                 <div class="mb-3">
                     <form id="sendMess">
                         <label for="comment" class="form-label text-light">Comment</label>
@@ -109,7 +118,7 @@
                         {
                             if (item.Start)
                             {
-                                <div class="player @item.Position.ToLower() g-home">
+                                <div class="player @item.Position.ToLower()  @item.MainPosition.ToLower() g-home">
                                     <i class="fas fa-user"></i>
                                     <p class="p-name">@item.Surname</p>
                                 </div>
@@ -119,7 +128,7 @@
                         @foreach (var item in Model.AwayLineups.Where(c => c.Start))
                         {
 
-                            <div class="player @item.Position.ToLower() g-away">
+                            <div class="player @item.Position.ToLower() @item.MainPosition.ToLower() g-away">
                                 <i class="fas fa-user"></i>
                                 <p class="p-name">@item.Surname</p>
                             </div>
@@ -173,17 +182,17 @@
 
         connection.on("RecieveMessage", function (data) {
             var message = `      <div class="event">
-                                    <div class="event-match-time">
-                                        <div class="event-time">
-                                            <span class="event-time-text">${data.minute}'</span>
-                                        </div>
-                                    </div>
-                                    <div class="event-picture">
-                                    </div>
-                                    <div class="event-description">
-                                        ${data.message}
-                                    </div>
-                                </div>`
+                                                        <div class="event-match-time">
+                                                            <div class="event-time">
+                                                                <span class="event-time-text">${data.minute}'</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="event-picture">
+                                                        </div>
+                                                        <div class="event-description">
+                                                            ${data.message}
+                                                        </div>
+                                                    </div>`
 
             $(".live-broadvast").append(message)
         })
@@ -203,7 +212,7 @@
             connection.invoke('leaveGame', id);
         })
 
-    
+
 
         $(document).on("click", "#addComment", function () {
 

@@ -35,12 +35,16 @@ namespace WebUI.Controllers
             {
                 Match = game
                 .Select(f => new MatchViewModel
-                { AwayImage=f.AwayTeam.Logo,
+                {
+                    AwayImage = f.AwayTeam.Logo,
                     AwayName = f.AwayTeam.Name,
                     AwayTeamScore = f.Game.AwayScore,
+                    Date = f.Game.Date,
                     HomeImage = f.HomeTeam.Logo,
                     HomeName = f.HomeTeam.Name,
-                    HomeTeamScore = f.Game.HomeScore
+                    HomeTeamScore = f.Game.HomeScore,
+                    AwayCoach = f.AwayTeam.Coach,
+                    HomeCoach = f.HomeTeam.Coach
                 }).FirstOrDefault(),
 
                 HomeLineups = _context.GameLineup.Where(c => c.GameId == id && c.TeamPlayer.TeamId == game.FirstOrDefault().HomeTeamId)
@@ -49,7 +53,8 @@ namespace WebUI.Controllers
                     Surname = n.TeamPlayer.Player.Surname,
                     Num = n.TeamPlayer.Num,
                     Start = n.Start,
-                    Position = n.GamePosition.Name
+                    Position = n.GamePosition.Name,
+                    MainPosition = n.GamePosition.CommonName
                 })
                 .ToList(),
 
@@ -59,11 +64,12 @@ namespace WebUI.Controllers
                     Surname = n.TeamPlayer.Player.Surname,
                     Num = n.TeamPlayer.Num,
                     Start = n.Start,
-                    Position = n.GamePosition.Name
+                    Position = n.GamePosition.Name,
+                    MainPosition = n.GamePosition.CommonName
                 })
                 .ToList(),
-                 Comments = _context.GameComments.Where(C=>C.GameId == id)
-                 .Select(c=> new Comment { Message = c.Comment.Message, Minute= c.Comment.Minute})
+                Comments = _context.GameComments.Where(C => C.GameId == id)
+                 .Select(c => new Comment { Message = c.Comment.Message, Minute = c.Comment.Minute })
                  .ToList()
             };
             return View(match);
@@ -81,11 +87,11 @@ namespace WebUI.Controllers
                         AwayTeamScore = n.Teams.Game.AwayScore,
                         HomeName = n.Teams.HomeTeam.Name,
                         HomeTeamScore = n.Teams.Game.HomeScore,
-                        Date =  n.Teams.Game.Date
+                        Date = n.Teams.Game.Date
                     }).ToList()
                 }).ToList();
 
-            
+
 
             return View(result);
         }
@@ -97,7 +103,7 @@ namespace WebUI.Controllers
            string message,
            [FromServices] IHubContext<BroadcastHub> chat)
         {
-            var comment = await _repo.CreateMessage( message,minute,gameId);
+            var comment = await _repo.CreateMessage(message, minute, gameId);
 
             await chat.Clients.Group(gameId.ToString())
                 .SendAsync("RecieveMessage", new

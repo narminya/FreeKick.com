@@ -8,6 +8,7 @@ namespace Domain.Dto
 {
     public class PlayerDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public int Num { get; set; }

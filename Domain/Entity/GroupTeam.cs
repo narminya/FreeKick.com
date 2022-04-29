@@ -13,5 +13,6 @@ namespace Domain.Entity
         public Group Group { get; set; }
         public int TeamId { get; set; }
         public Team Team { get; set; }
+        public byte Points { get; set; }
     }
 }

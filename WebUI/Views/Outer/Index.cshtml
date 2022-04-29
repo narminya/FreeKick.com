@@ -1,0 +1,68 @@
+﻿@model List<LeagueStandingViewModel>
+@{
+    ViewData["Title"] = "Index";
+    var i = 1;
+}
+
+<div class=" actions-y">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center">
+                <img alt="" src="~/assets/img/titleImages/@Model." >
+                <h2 class="text-light ml-3">Premier</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="buttons p-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-12"><a href="" class="team-btn active">News</a></div>
+            <div class="col-lg-4 col-sm-12"><a href="" class="team-btn">Matches</a></div>
+            <div class="col-lg-4 col-sm-12"><a href="" class="team-btn">Standings</a></div>
+        </div>
+    </div>
+</div>
+<div class="league-standing-table p-50">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-8">
+
+                    <div class="table-ms">
+                        <p class="group">Group <span>@item.Group.Letter</span></p>
+                        <div class="title-head d-flex justify-content-between">
+                            <div class="pos-left">
+                                <span class="position">Pos</span> <span class="team">Team</span>
+                            </div><span class="points">PTS</span>
+                        </div>
+                        <ul class="list-t">
+                            @foreach (var team in item.Teams)
+                            {
+                                <li>
+                                    <a asp-route-id="@team.Id" asp-action="Index" asp-controller="Team">
+                                        <div class="team-left outer">
+                                            <span class="t-pos">@(i++)</span>
+                                            <img src="/assets/img/teams/@team.Logo" alt="">
+                                            <p class="t-name">@team.Name</p>
+                                        </div>
+                                        <p>@team.Points</p>
+                                    </a>
+                                
+                                </li>
+                                @if (i == item.Teams.Count + 1)
+                                {
+                                    i = 1;
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
