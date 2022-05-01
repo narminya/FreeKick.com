@@ -17,6 +17,7 @@ namespace Domain.Entity
         public GamePosition GamePosition { get; set; }
         public int GameId { get; set; }
         public Game Game { get; set; }
-        public bool Start { get; set; }
+        public int StatusId { get; set; }
+        public Status Status { get; set; }
     }
 }

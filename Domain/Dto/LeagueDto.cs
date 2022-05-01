@@ -11,5 +11,7 @@ namespace Domain.Dto
         public int LeagueId { get; set; }
         public string LeagueName { get; set; }
         public string LeagueIcon { get; set; }
+        public string LeagueTitle { get; set; }
+
     }
 }

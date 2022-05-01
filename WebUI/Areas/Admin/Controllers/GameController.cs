@@ -27,14 +27,19 @@ namespace WebUI.Areas.Admin.Controllers
                  .Select(r => new LiveMatchesViewModel
                  {
                      League = new LeagueDto() { LeagueId = r.Id, LeagueIcon = r.TitleImage, LeagueName = r.Name },
-                     Matches = r.Games.Select(n => new MatchViewModel
+                     Matches = r.Games.Select(c => new MatchViewModel
                      {
-                         MatchId = n.Id,
-                         AwayName = n.Teams.AwayTeam.Name,
-                         AwayTeamScore = n.Teams.Game.AwayScore,
-                         HomeName = n.Teams.HomeTeam.Name,
-                         HomeTeamScore = n.Teams.Game.HomeScore,
-                         Date = n.Teams.Game.Date
+                         Away = new GameTeamDto
+                         {
+                             TeamName = c.Teams.AwayTeam.Name,
+                             TeamScore = c.AwayScore,
+                         },
+                         Home = new GameTeamDto
+                         {
+                             TeamName = c.Teams.HomeTeam.Name,
+                             TeamScore = c.HomeScore,
+                         },
+                         Date = c.Teams.Game.Date
                      }).OrderByDescending(c => c.Date).ToList()
                  }).ToList();
 

@@ -2,24 +2,51 @@
 @{
     ViewData["Title"] = "TeamInfo";
 }
-<div class=" actions-y" style="background-image: url('@Url.Content($"~/assets/img/teams/{Model.Team.Id}")');">
+
+<partial name="_TeamPartial" model="@Model.Team" />
+<section class="squad p-50">
     <div class="container">
+        <div class="title">
+            <h1>Squad</h1>
+        </div>
         <div class="row">
-            <div class="col-12 d-flex align-items-center">
-                <img src="/assets/img/teams/@Model.Team.Logo" alt="">
-                <h2 class="text-light ml-3">@Model.Team.Name</h2>
+            <div class="col-lg-8">
+                <div class="sq-type">
+                    @foreach (var item in Model.Squad)
+                    {
+                        <div class="title-head d-flex">
+                            <a href="">@item.Position.Name</a>
+                        </div>
+
+                        <div class="row">
+                            @foreach (var player in item.Players)
+                            {
+                                <div class="col-lg-12">
+                                    <div class="sq-pl">
+                                        <div class="pl-info">
+                                            <img src="~/assets/img/" alt="">
+                                            <div class="right">
+                                                <p class="p-name">@player.Surname</p>
+                                                <p class="p-age">Age: </p>
+                                            </div>
+                                        </div>
+                                        <div class="pl-num">
+                                            @player.Num
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <img src="/assets/img/jawn300x500.jpg" alt="">
             </div>
         </div>
     </div>
-</div>
-<div class="buttons p-30">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-sm-12"><a asp-action="TeamInfo" asp-route-id="@Model.Team.Id" class="team-btn">Team</a></div>
-            <div class="col-lg-4 col-sm-12"><a asp-action="Index" asp-route-id="@Model.Team.Id" class="team-btn active">News</a></div>
-            <div class="col-lg-4 col-sm-12"><a asp-action="TeamMatches" asp-route-id="@Model.Team.Id" class="team-btn">Matches</a></div>
-
-        </div>
-    </div>
-</div>
+</section>
 

@@ -3,25 +3,7 @@
     ViewData["Title"] = "TeamNews";
 }
 
-<div class="actions-y" style="background-image: url(/assets/img/titleImages/@Model.Team.TitleImage);">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 d-flex align-items-center">
-                <img src="/assets/img/teams/barcelona.png" alt="">
-                <h2 class="text-light ml-3">@Model.Team.Name</h2>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="buttons p-30">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-sm-12"><a asp-action="Index" asp-route-id="@Model.Team.Id" class="team-btn active">News</a></div>
-            <div class="col-lg-4 col-sm-12"><a asp-action="TeamMatches"  asp-route-id="@Model.Team.Id" class="team-btn">Matches</a></div>
-            <div class="col-lg-4 col-sm-12"><a asp-action="TeamStandings"  asp-route-id="@Model.Team.Id" class="team-btn">Standings</a></div>
-        </div>
-    </div>
-</div>
+<partial name="_TeamPartial" model="@Model.Team" />
 <section class="team-news p-50">
     <div class="container">
         <div class="row">

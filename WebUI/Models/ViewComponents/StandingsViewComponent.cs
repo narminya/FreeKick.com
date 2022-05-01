@@ -25,7 +25,7 @@ namespace WebUI.Models.ViewComponents
                   {
                       League = new LeagueDto() { LeagueId = r.Id, LeagueIcon=r.Logo, LeagueName = r.Name},
                       Teams = r.Teams
-                          .Select(m => new TeamStandingsViewModel { Standings = r.Teams.Count ,Name = m.Team.Name, Points = m.Points, Logo = m.Team.Logo }).OrderByDescending(b => b.Points)
+                          .Select(m => new TeamStandingsViewModel {  Id = m.Team.Id,Name = m.Team.Name, Points = m.Points, Logo = m.Team.Logo }).OrderByDescending(b => b.Points)
                           .ToList()
                   }).ToList();
 

@@ -364,7 +364,6 @@ C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Vi
 C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Views\News\Index.cshtml.g.cs
 C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Views\Shared\Components\Actions\Default.cshtml.g.cs
 C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Views\Shared\Components\Standings\Default.cshtml.g.cs
-C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Views\Shared\_ActionsPartial.cshtml.g.cs
 C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Views\Team\Index.cshtml.g.cs
 C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Views\Team\TeamInfo.cshtml.g.cs
@@ -385,3 +384,5 @@ C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Ar
 C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Areas\Admin\Views\Shared\_LineupPartial.cshtml.g.cs
 C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Views\Account\Authorize.cshtml.g.cs
 C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Views\Shared\Components\Header\Default.cshtml.g.cs
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Views\Shared\_TeamPartial.cshtml.g.cs
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Views\Shared\_LeaguePartial.cshtml.g.cs

@@ -12,7 +12,7 @@
                 <div class="news-card main" style="background-image: url('@Url.Content($"~/assets/img/{@Model.Breaking.News.Image}")'); height:515px">
                     <a asp-controller="News" asp-action="Index" asp-route-id="@Model.Breaking.News.Id">
                         <h5 class="nc-title">
-                            @Model.Breaking.News.Title
+                            @Model.Breaking.News.Title 
                         </h5>
                     </a>
                     <p class="nc-desc">
@@ -22,7 +22,7 @@
                         <ul class="tags-list">
                             @foreach (var item in Model.Breaking.Tags)
                             {
-                                <li><a class="tag" href="">@item.Name</a></li>
+                                <li><a class="tag">@item.Name</a></li>
                             }
                         </ul>
                     </div>
@@ -91,7 +91,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/messi.jpg")');">
-                            <a href="">
+                            <a asp-controller="News" asp-action="Index" >
                                 <h5 class="nc-title">
                                     Messi uncertain on future: 'After the World Cup I'm going to rethink many things'
                                 </h5>
@@ -109,7 +109,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/messi.jpg")');">
-                            <a href="">
+                            <a asp-controller="News" asp-action="Index">
                                 <h5 class="nc-title">
                                     Messi uncertain on future: 'After the World Cup I'm going to rethink many things'
                                 </h5>
@@ -127,7 +127,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/messi.jpg")');">
-                            <a href="">
+                            <a asp-controller="News" asp-action="Index" >
                                 <h5 class="nc-title">
                                     Messi uncertain on future: 'After the World Cup I'm going to rethink many things'
                                 </h5>
@@ -175,9 +175,9 @@
                 <p class="site-title">FreeKick</p>
                 <h3 class="subscribe">Subscribe</h3>
                 <form>
-                    <div class="mb-3">
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                               placeholder="Enter your email here...">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Recipient's username" >
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
                     </div>
                 </form>
             </div>

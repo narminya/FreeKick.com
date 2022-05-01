@@ -13,9 +13,9 @@ namespace Domain.Entity
         public int Id { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
-        public bool IsMain { get; set; }
         public string Controller { get; set; }
         public string Action { get; set; }
+        public int? RouteId { get; set; }
         public int? ParentId { get; set; }
         public virtual Navigation Parent { get; set; }
         public ICollection<Navigation> Children { get; set; }

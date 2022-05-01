@@ -15,11 +15,9 @@ namespace WebUI.Controllers
     public class TeamController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly IMapper _mapper;
-        public TeamController(AppDbContext context, IMapper mapper)
+        public TeamController(AppDbContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
         public async Task<IActionResult> Index(int? id)
         {
@@ -35,11 +33,12 @@ namespace WebUI.Controllers
 
             var news = await _context.NewsTag.Where(c => c.TagId == team.TagId)
                 .Select(n => new NewsDto { Id = n.Id, Title = n.News.Title, Description = n.News.Description }).ToListAsync();
-            var result = new TeamNewsViewModel() {
-               Team = new TeamDto { Id = team.Id, Logo = team.Logo, Name = team.Name },
+            var result = new TeamNewsViewModel()
+            {
+                Team = new TeamDto { Id = team.Id, Logo = team.Logo, Name = team.Name, TitleImage=team.TitleImage },
                 News = news
             };
-          
+
             return View(result);
         }
 
@@ -51,20 +50,27 @@ namespace WebUI.Controllers
             }
 
             var team = await _context.Teams.FindAsync(id);
-            if (team==null)
+            if (team == null)
             {
                 return NotFound();
             }
             var res = new TeamsMatchesViewModel()
             {
-                Team = new TeamDto() {  Id = team.Id, Name = team.Name, Logo=team.Logo},
+                Team = new TeamDto() { Id = team.Id, Name = team.Name, Logo = team.Logo, TitleImage = team.TitleImage },
                 Matches = await _context.GamesTeam.Where(h => h.HomeTeamId == id || h.AwayTeamId == id)
                  .Select(c => new MatchViewModel
                  {
-                     HomeName = c.HomeTeam.Name,
-                     AwayName = c.AwayTeam.Name,
-                     AwayTeamScore = c.Game.AwayScore,
-                     HomeTeamScore = c.Game.HomeScore
+                     Away = new GameTeamDto
+                     {
+                         TeamName = c.AwayTeam.Name,
+                         TeamScore=  c.Game.AwayScore,
+
+                     },
+                     Home = new GameTeamDto
+                     {
+                         TeamName = c.HomeTeam.Name,
+                         TeamScore = c.Game.HomeScore,
+                     }
                  }).ToListAsync()
             };
             return View(res);
@@ -82,10 +88,24 @@ namespace WebUI.Controllers
                 return NotFound();
             }
 
+            var result = new TeamInfoViewModel()
+            {
+                Team = new TeamDto { Id = team.Id, Logo = team.Logo, Name = team.Name, TitleImage = team.TitleImage },
+                Squad = _context.Positions.Select(c => new SquadViewModel
+                {
+                    Position = new Position { Id = c.Id, Name = c.Name },
+                    Players = c.Players.Where(c=>c.TeamId==team.Id).Select(n => new PlayerDto { Id = n.Id, Name = n.Player.Name, Num = n.Num, Surname = n.Player.Surname }).ToList()
+                }).ToList()
+            };
 
-            return View(new TeamInfoViewModel {  Team = new TeamDto { } } );
+
+            return View(result);
         }
 
-      
+        public PartialViewResult TeamActions(TeamDto team)
+        {
+
+            return PartialView("_TeamPartial", team);
+        }
     }
 }

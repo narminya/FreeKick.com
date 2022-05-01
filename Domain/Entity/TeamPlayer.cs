@@ -14,5 +14,8 @@ namespace Domain.Entity
         public int PlayerId { get; set; }
         public Player Player { get; set; }
         public int Num { get; set; }
+        public int PositionId { get; set; }
+        public Position Position { get; set; }
+
     }
 }

@@ -11,7 +11,7 @@
                     <div class="match-list">
                         @foreach (var item in Model)
                         {
-                            <div class="liga-logo text-light" style="background-color: #233166; padding: 10px "> @item.League.LeagueName </div>
+                            <div class="liga-logo text-light" style="background-color: #233166; padding: 10px; margin:0 "> @item.League.LeagueName </div>
                             @foreach (var match in item.Matches)
                             {
                                 <div class="match-t">
@@ -26,18 +26,25 @@
                                             @match.Date.ToString("HH:mm")
                                         </div>}
 
-                                    <div class="match-data">
-                                        <p class="team-home">@match.HomeName</p>
-                                        <div class="goals d-flex ">
-                                            <div class="match-result">
-                                                <div class="goals-home">@match.HomeTeamScore</div>
-                                                <span>-</span>
-                                                <div class="goals-away">@match.AwayTeamScore</div>
+                                <div class="match-data">
+                                    <img src="~/assets/img/teams/@match.Home.TeamImage" />
+                                    <p class="team-home">@match.Home.TeamName</p>
+                                    <div class="goals d-flex ">
+                                        <div class="match-result">
+                                            <div class="goals-home">
+                                                <a>@match.Home.TeamScore</a>
+                                            </div>
+                                            <span>-</span>
+                                            <div class="goals-away">
+                                                <a> @match.Away.TeamScore</a>
                                             </div>
 
                                         </div>
-                                        <p class="team-away">@match.AwayName</p>
+
                                     </div>
+                                    <p class="team-away">@match.Away.TeamName</p>
+                                    <img src="~/assets/img/teams/@match.Away.TeamImage" />
+                                </div>
                                 </div>
                             }
 

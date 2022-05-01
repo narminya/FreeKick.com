@@ -10,7 +10,7 @@
 
 <div class="col-md-12">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="grid simple form-grid">
                 <input type="hidden" name="gameId" value="@ViewBag.Id" />
                 <div class="grid-body no-border">
@@ -38,7 +38,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="start" />
+                            <label for="start" class="form-label">
+                                From start
+                            </label>
+                            <input type="checkbox" name="hstart" />
                         </div>
                         <button class="btn btn-success btn-cons" type="button" id="addHomePlayer"><i class="icon-ok"></i> Save</button>
 
@@ -46,19 +49,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="grid simple form-grid">
 
                 <div class="grid-body no-border">
                     <table class="table table-striped table-flip-scroll cf">
                         <thead class="cf">
                             <tr>
-                                <th>
-                                    <div class="checkbox check-default ">
-                                        <input id="checkbox1" type="checkbox" value="1" class="checkall">
-                                        <label for="checkbox1"></label>
-                                    </div>
-                                </th>
                                 <th>Surname</th>
                                 <th>Positions</th>
                             </tr>
@@ -70,125 +67,123 @@
             </div>
         </div>
     </div>
-    </div>
-    
+</div>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="grid simple form-grid">
 
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="grid simple form-grid">
+                <div class="grid-body no-border">
+                    <form>
+                        <input type="hidden" name="gameId" value="" />
+                        <div class="form-group">
+                            <label class="form-label">
+                                Add player
+                            </label>
+                            <div class=" right">
+                                <i class=""></i>
+                                <select class="form-control select2" name="aplayer" asp-items='new SelectList(Model.AwayPlayers, "Id", "Surname")' id="cardType" data-init-plugin="select2" required>
+                                </select>
+                                <span class="text-danger" id="awayP"> </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                Add position
+                            </label>
+                            <div class=" right">
+                                <i class=""></i>
+                                <select class="form-control select2" name="aposition" asp-items='new SelectList(Model.Positions, "Id", "Name")' id="cardType" data-init-plugin="select2" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="start" class="form-label">
+                                From start
+                            </label>
+                            <input type="checkbox" name="astart" />
+                        </div>
+                        <button class="btn btn-success btn-cons" type="button" id="addAwayPlayer"><i class="icon-ok"></i> Save</button>
 
-                    <div class="grid-body no-border">
-                        <form >
-                            <input type="hidden" name="gameId" value="" />
-                            <div class="form-group">
-                                <label class="form-label">
-                                    Add player
-                                </label>
-                                <div class=" right">
-                                    <i class=""></i>
-                                    <select class="form-control select2" name="aplayer" asp-items='new SelectList(Model.AwayPlayers, "Id", "Surname")' id="cardType" data-init-plugin="select2" required>
-                                    </select>
-                                    <span class="text-danger" id="awayP"> </span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">
-                                    Add position
-                                </label>
-                                <div class=" right">
-                                    <i class=""></i>
-                                    <select class="form-control select2" name="aposition" asp-items='new SelectList(Model.Positions, "Id", "Name")' id="cardType" data-init-plugin="select2" required>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="checkbox" />
-                            </div>
-                            <button class="btn btn-success btn-cons" type="button" id="addAwayPlayer"><i class="icon-ok"></i> Save</button>
-
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="grid simple form-grid">
+        </div>
+        <div class="col-md-8">
+            <div class="grid simple form-grid">
 
-                    <div class="grid-body no-border">
-                        <table class="table table-striped table-flip-scroll cf">
-                            <thead class="cf">
-                                <tr>
-                                    <th>
-                                        <div class="checkbox check-default ">
-                                            <input id="checkbox1" type="checkbox" value="1" class="checkall">
-                                            <label for="checkbox1"></label>
-                                        </div>
-                                    </th>
-                                    <th>Surname</th>
-                                    <th>Positions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="awayList">
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="grid-body no-border">
+                    <table class="table table-striped table-flip-scroll cf">
+                        <thead class="cf">
+                            <tr>
+                                <th>Surname</th>
+                                <th>Positions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="awayList">
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
- 
-    @section script{
-        <script src="~/Admin/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
-        <script src="~/Admin/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
-        <script src="~/Admin/assets/plugins/boostrap-clockpicker/bootstrap-clockpicker.min.js" type="text/javascript"></script>
-        <script src="~/Admin/assets/js/form_validations.js" type="text/javascript"></script>
-        <script>
+</div>
 
-            $('#addHomePlayer').on('click', function () {
-                $('#current').empty();
-                var playerid = $("[name='hplayer']").val();
-                var posId = $("[name='hposition']").val();
-                var gameId = $("[name='gameId']").val();
-                $.ajax({
-                    type: "Get",
-                    url: "/Admin/Game/PlayerPosition/",
-                    data: { TeamPlayerId: playerid, GamePositionId: posId, GameId: gameId, Start: true },
-                    success: function (res) {
-                        if (res.message == null) {
-                            $('.homeList').append(res);
-                        }
-                        else {
-                            console.log(res)
-                            $('#current').append(res.message)
+@section script{
+    <script src="~/Admin/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="~/Admin/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+    <script src="~/Admin/assets/plugins/boostrap-clockpicker/bootstrap-clockpicker.min.js" type="text/javascript"></script>
+    <script src="~/Admin/assets/js/form_validations.js" type="text/javascript"></script>
+    <script>
+        $('#addHomePlayer').on('click', function () {
+            $('#current').empty();
+            var playerid = $("[name='hplayer']").val();
+            var posId = $("[name='hposition']").val();
+            var gameId = $("[name='gameId']").val();
+            var start = $("[name='hstart']").val();
 
-                        }
+            $.ajax({
+                type: "Get",
+                url: "/Admin/Game/PlayerPosition/",
+                data: { TeamPlayerId: playerid, GamePositionId: posId, GameId: gameId, Start: start },
+                success: function (res) {
+                    if (res.message == null) {
+                        $('.homeList').append(res);
+                    }
+                    else {
+                        console.log(res)
+                        $('#current').append(res.message)
 
                     }
-                })
-            });
 
-            $('#addAwayPlayer').on('click', function () {
-                $('#awayP').empty();
-                var playerid = $("[name='aplayer']").val();
-                var posId = $("[name='aposition']").val();
-                var gameId = $("[name='gameId']").val();
-                $.ajax({
-                    type: "Get",
-                    url: "/Admin/Game/PlayerPosition/",
-                    data: { TeamPlayerId: playerid, GamePositionId: posId, GameId: gameId, Start: true },
-                    success: function (res) {
-                        if (res.message == null) {
-                            $('.awayList').append(res);
-                        }
-                        else {
-                            console.log(res)
-                            $('#awayP').append(res.message)
+                }
+            })
+        });
 
-                        }
+        $('#addAwayPlayer').on('click', function () {
+            $('#awayP').empty();
+            var playerid = $("[name='aplayer']").val();
+            var posId = $("[name='aposition']").val();
+            var gameId = $("[name='gameId']").val();
+            var start = $("[name='astart']").val();
+
+            $.ajax({
+                type: "Get",
+                url: "/Admin/Game/PlayerPosition/",
+                data: { TeamPlayerId: playerid, GamePositionId: posId, GameId: gameId, Start: start },
+                success: function (res) {
+                    if (res.message == null) {
+                        $('.awayList').append(res);
+                    }
+                    else {
+                        console.log(res)
+                        $('#awayP').append(res.message)
 
                     }
-                })
-            });
-        </script>
 
-    }
+                }
+            })
+        });
+    </script>
+
+}

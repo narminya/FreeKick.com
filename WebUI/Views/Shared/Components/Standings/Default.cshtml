@@ -1,5 +1,5 @@
 ﻿@model List<LeagueStandingViewModel>
-@{ 
+@{
     int i = 1;
 }
 <section class="standings p-50">
@@ -17,16 +17,20 @@
                         @foreach (var team in item.Teams)
                         {
                             <li class="team">
-                                <span> @(i++)</span> <div class="element"><img src="/assets/img/teams/@team.Logo" alt="">
-                                <a href=""> @team.Name</a></div>
+                                <a asp-action="Index" asp-controller="Team" asp-route-id="@team.Id">
+                                    <span> @(i++)</span> <div class="element">
+                                        <img src="/assets/img/teams/@team.Logo" alt="">
+                                        @team.Name
+                                    </div>
+                                </a>
                             </li>
 
-                            @if (i==item.Teams.Count+1)
+                            @if (i == item.Teams.Count + 1)
                             {
                                 i = 1;
                             }
                         }
-                       
+
 
                     </ul>
                 </div>

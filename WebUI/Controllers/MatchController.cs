@@ -36,15 +36,24 @@ namespace WebUI.Controllers
                 Match = game
                 .Select(f => new MatchViewModel
                 {
-                    AwayImage = f.AwayTeam.Logo,
-                    AwayName = f.AwayTeam.Name,
-                    AwayTeamScore = f.Game.AwayScore,
+                    Away = new GameTeamDto
+                    {
+                        TeamId = f.AwayTeam.Id,
+                        TeamName = f.AwayTeam.Name,
+                        TeamImage = f.AwayTeam.Logo,
+                        TeamScore = f.Game.AwayScore,
+                        TeamCoach = f.AwayTeam.Coach
+                    },
+                    Home = new GameTeamDto
+                    {
+                        TeamId = f.HomeTeam.Id,
+                        TeamName = f.HomeTeam.Name,
+                        TeamImage = f.HomeTeam.Logo,
+                        TeamScore = f.Game.HomeScore,
+                        TeamCoach = f.HomeTeam.Coach
+                    },
                     Date = f.Game.Date,
-                    HomeImage = f.HomeTeam.Logo,
-                    HomeName = f.HomeTeam.Name,
-                    HomeTeamScore = f.Game.HomeScore,
-                    AwayCoach = f.AwayTeam.Coach,
-                    HomeCoach = f.HomeTeam.Coach
+                    MatchId = f.Game.Id
                 }).FirstOrDefault(),
 
                 HomeLineups = _context.GameLineup.Where(c => c.GameId == id && c.TeamPlayer.TeamId == game.FirstOrDefault().HomeTeamId)
@@ -52,8 +61,7 @@ namespace WebUI.Controllers
                 {
                     Surname = n.TeamPlayer.Player.Surname,
                     Num = n.TeamPlayer.Num,
-                    Start = n.Start,
-                    Position = n.GamePosition.Name,
+                    Position = n.GamePosition.ShortName,
                     MainPosition = n.GamePosition.CommonName
                 })
                 .ToList(),
@@ -63,8 +71,7 @@ namespace WebUI.Controllers
                 {
                     Surname = n.TeamPlayer.Player.Surname,
                     Num = n.TeamPlayer.Num,
-                    Start = n.Start,
-                    Position = n.GamePosition.Name,
+                    Position = n.GamePosition.ShortName,
                     MainPosition = n.GamePosition.CommonName
                 })
                 .ToList(),
@@ -83,16 +90,11 @@ namespace WebUI.Controllers
                     League = new LeagueDto() { LeagueId = r.Id, LeagueIcon = r.TitleImage, LeagueName = r.Name },
                     Matches = r.Games.Where(c => c.Date.Day == DateTime.Now.Day).Select(n => new MatchViewModel
                     {
-                        AwayName = n.Teams.AwayTeam.Name,
-                        AwayTeamScore = n.Teams.Game.AwayScore,
-                        HomeName = n.Teams.HomeTeam.Name,
-                        HomeTeamScore = n.Teams.Game.HomeScore,
+                        Away = new GameTeamDto { TeamName = n.Teams.AwayTeam.Name,  TeamImage = n.Teams.AwayTeam.Logo, TeamScore = n.Teams.Game.AwayScore },
+                        Home = new GameTeamDto { TeamName = n.Teams.HomeTeam.Name, TeamImage = n.Teams.HomeTeam.Logo, TeamScore = n.Teams.Game.HomeScore },
                         Date = n.Teams.Game.Date
-                    }).ToList()
+                    }).OrderBy(c => c.Date).ToList()
                 }).ToList();
-
-
-
             return View(result);
         }
 

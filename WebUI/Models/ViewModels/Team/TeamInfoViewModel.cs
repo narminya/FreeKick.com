@@ -1,4 +1,5 @@
 ﻿using Domain.Dto;
+using Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace WebUI.Models.ViewModels
 {
-    public class TeamInfoViewModel
+    public class SquadViewModel
     {
-        public TeamDto Team { get; set; }
+        public List<PlayerDto> Players { get; set; }
+        public Position Position { get; set; }
     }
 }

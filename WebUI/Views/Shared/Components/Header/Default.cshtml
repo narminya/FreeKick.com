@@ -11,44 +11,45 @@
         <ul class="nav-links">
             @foreach (var item in Model.Parents)
             {
-            <li>
-                @if (item.Controller != null)
-                {
-
-                    <a class="dropmenu" asp-controller="@{@item.Controller}" asp-action="@{@item.Action}">@item.Name</a>
-                }
-                else
-                {
-
-                    <a class="dropmenu">@item.Name</a>
-                }
-
-                @if (item.Children != null)
-                {<ul class=" dropdown mega">
-                        <div class="container">
-                            <div class="row justify-content-center dropdown-row">
-                                @foreach (var child in item.Children)
-                                {
-                                    <div class="col-lg-4 col-sm-12">
-                                        <div class="sub-menu-heading bold">@child.Name</div>
-                                    </div>
-                                }
+                <li>
+                    @if (item.Controller != null)
+                    {
+                        <a class="dropmenu" asp-controller="@{@item.Controller}" asp-action="@{@item.Action}">@item.Name</a>
+                    }
+                    else
+                    {
+                        <a class="dropmenu">@item.Name</a>
+                    }
+                    @if (item.Children != null)
+                    {<ul class=" dropdown mega">
+                            <div class="container">
+                                <div class="row justify-content-center dropdown-row">
+                                    @foreach (var child in item.Children)
+                                    {
+                                        <div class="col-lg-4 col-sm-12">
+                                            <div class="sub-menu-heading bold">@child.Name</div>
+                                            @if (child.Children != null)
+                                            {<ul class="sub-menu">
+                                                    @foreach (var gran in child.Children)
+                                                    {
+                                                        <li><a>@gran.Name</a></li>
+                                                    }
+                                                </ul>
+                                            }
+                                        </div>
+                                    }
+                                </div>
                             </div>
-                        </div>
-                    </ul>
-                }
-
-
-            </li>
+                        </ul>
+                    }
+                </li>
             }
-
         </ul>
         <div class="burger-s">
             <a class="burger burger-unclick">
                 <span class="unclick"></span>
             </a>
         </div>
-
     </nav>
 </header>
 

@@ -1,7 +1,7 @@
 ﻿@model MatchStatsViewModel
 @{
     ViewData["Title"] = "Index";
-    // TimeSpan span = DateTime.Parse(Model.Match.Date.ToString("MM/dd/yyyy HH:mm:ss")).Subtract(DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")));
+   
 }
 
 <section class="match-summary py-50">
@@ -9,10 +9,10 @@
         <div class="row">
             <div class="col-lg-4 col-sm-12 match-summary">
                 <div class="match-team">
-                    <img src="/assets/img/teams/@Model.Match.HomeImage" alt="">
-                    <h5>@Model.Match.HomeName</h5>
+                    <img src="/assets/img/teams/@Model.Match.Home.TeamImage" alt="">
+                    <h5>@Model.Match.Home.TeamName</h5>
                     <p class="text-light mb-0">4-2-4</p>
-                    <p class="text-light">@Model.Match.HomeCoach</p>
+                    <p class="text-light">@Model.Match.Home.TeamCoach</p>
                 </div>
             </div>
             <div class="col-lg-4 col-sm-12 match-summary match-team-state">
@@ -22,26 +22,23 @@
 
                         <span class="matchboard__card">
                             <span class="matchboard__card-game">
-                                @if(Model.Match.Date>DateTime.Now)
-                                {
-
-                                }
-                                @Model.Match.HomeTeamScore
+                              
+                                @Model.Match.Home.TeamScore
                             </span>
                         </span>
                         <span class="matchboard__hyphen">
                             </span><span class="matchboard__card matchboard__card--no_margin">
-                            <span class="matchboard__card-game">@Model.Match.AwayTeamScore</span>
+                            <span class="matchboard__card-game">@Model.Match.Away.TeamScore</span>
                         </span>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-sm-12 match-summary">
                 <div class="match-team">
-                    <img src="/assets/img/teams/@Model.Match.AwayImage" alt="">
-                    <h5>@Model.Match.AwayName</h5>
+                    <img src="/assets/img/teams/@Model.Match.Away.TeamImage" alt="">
+                    <h5>@Model.Match.Away.TeamName</h5>
                     <p class="text-light mb-0">4-3-3</p>
-                    <p class="text-light">@Model.Match.AwayCoach</p>
+                    <p class="text-light">@Model.Match.Away.TeamCoach</p>
 
 
                 </div>
@@ -111,7 +108,7 @@
         <div class="row">
             <h4 class="match-broadcast-title mb-5 text-light">Lineup</h4>
 
-            <div class="col-12 p-0 mb-5 d-flex justify-content-center">
+            <div class="col-12 p-0 mb-5 d-flex">
                 <div class="field-border">
                     <div class="field-main">
                         @foreach (var item in Model.HomeLineups)

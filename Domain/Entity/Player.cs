@@ -15,8 +15,6 @@ namespace Domain.Entity
         public string DateOfBirth { get; set; }
         public string PlaceOfBirth { get; set; }
         public string Picture { get; set; }
-        public int PositionId { get; set; }
-        public Position Position { get; set; }
         public int? CreatedUserId { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public ICollection<TeamPlayer> Teams { get; set; }

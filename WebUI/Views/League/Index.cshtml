@@ -37,9 +37,13 @@
                         {
                         <li>
                             <div class="team-left">
-                                <span class="t-pos">@(i++)</span>
-                                <img src="/assets/img/teams/@item.Logo" alt="">
-                                <p class="t-name">@item.Name</p>
+                                <a asp-controller="Team" asp-action="Index" asp-route-id="@item.Id" class="team-link">
+                                    <span class="t-pos">@(i++)</span>
+                                    <img src="~/assets/img/teams/@item.Logo" style="padding: 0 25px" alt="">
+                                    <p class="t-name">
+                                        @item.Name
+                                </p>
+                                </a>
                             </div>
                             <p>@item.Points</p>
                         </li>
