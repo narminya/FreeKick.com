@@ -13,5 +13,6 @@ namespace Domain.Entity
         public string Logo { get; set; }
         public int CreatedUserId { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
+      
     }
 }

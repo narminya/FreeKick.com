@@ -21,14 +21,14 @@ namespace WebUI.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var breaking = await _context.News.Include(t => t.Tags).OrderBy(c => c.CreatedDate).FirstOrDefaultAsync();
+            var breaking = await _context.News.Include(t => t.Tags).OrderByDescending(c => c.CreatedDate).FirstOrDefaultAsync();
             var tags = await _context.NewsTag.Where(t => t.NewsId == breaking.Id).Select(x =>
             new Tag
             {
                 Name = x.Tag.Name
             }).ToListAsync();
             var nesw = new List<NewsViewModel>();
-            var news = await _context.News.Where(c => c.Id != breaking.Id).OrderBy(c => c.CreatedDate).Take(2).ToListAsync();
+            var news = await _context.News.Where(c => c.Id != breaking.Id).OrderByDescending(c => c.CreatedDate).Take(2).ToListAsync();
             foreach (var item in news)
             {
                 nesw.Add(new NewsViewModel
@@ -37,12 +37,13 @@ namespace WebUI.Controllers
                     Tags = await _context.NewsTag.Where(t => t.NewsId == item.Id).Select(x =>
                     new Tag
                     {
+                        Id = x.TagId,
                         Name = x.Tag.Name
                     }).ToListAsync()
                 });
             }
             var latest = await _context.News.OrderByDescending(c => c.CreatedDate)
-                .Take(4).Select(s=>new NewsViewModel {  News = s, Time = s.CreatedDate.ToRelativeDate()} ).ToListAsync();
+                .Take(4).Select(s => new NewsViewModel { News = s, Time = s.CreatedDate.ToRelativeDate() }).ToListAsync();
             return View(new HomeViewModel
             {
                 News = nesw,

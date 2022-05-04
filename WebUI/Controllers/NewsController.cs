@@ -1,4 +1,5 @@
-﻿using Domain.Entity;
+﻿using Domain.Dto;
+using Domain.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repository.DataAccessLayer;
@@ -24,7 +25,7 @@ namespace WebUI.Controllers
             {
                 return BadRequest();
             }
-          
+
             var news = await _context.News.FindAsync(id);
             if (news == null)
             {
@@ -44,6 +45,24 @@ namespace WebUI.Controllers
             return View(model);
         }
 
+        public IActionResult ByTag(int? id)
+        {
+            ViewBag.Id = _context.Tags.Find(id);
+            var news = _context.NewsTag.Where(c => c.TagId == id).Select(c => new NewsViewModel
+            {
+                News = new News { Id = c.NewsId, Description =c.News.Description, Image = c.News.Image, Title = c.News.Title},
+                 Tags =  _context.Tags.Where(v=>v.Id==c.Id).ToList(),
+                Time = c.News.CreatedDate.ToRelativeDate()
+
+            }).ToList();
+
+
+
+
+
+
+            return View(news);
+        }
 
     }
 }

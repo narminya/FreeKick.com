@@ -1,0 +1,51 @@
+﻿@model List<NewsViewModel>
+@{
+    ViewData["Title"] = "ByTag";
+}
+
+<div class=" actions-y py-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center">
+                <h2 class="text-light ml-3">@ViewBag.Id</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="hero-news" style="padding-top:25px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="news-card"
+                                 style=" background-image: url(/assets/img/@item.News.Image);">
+                                <a asp-controller="News" asp-action="Index" asp-route-id="@item.News.Id">
+                                    <h5 class="nc-title">
+                                        @item.News.Title
+                                    </h5>
+                                </a>
+
+                                <div class="tags">
+                                    <ul class="tags-list">
+                                        @foreach (var tag in item.Tags)
+                                        {
+                                            <li><a class="tag" href="">@tag.Name</a></li>
+                                        }
+
+                                    </ul>
+                                </div>
+                                <div class="actions">
+                                    <span class="view-count">12</span><i class="fas fa-eye"></i>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

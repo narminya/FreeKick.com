@@ -14,6 +14,8 @@ namespace Domain.Entity
         public string Logo { get; set; }
         public string TitleImage { get; set; }
         public int? CreatedUserId { get; set; }
+        public int? TagId { get; set; }
+        public Tag Tag { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public virtual ICollection<TeamLeague> Teams { get; set; }
         public virtual ICollection<Game> Games { get; set; }

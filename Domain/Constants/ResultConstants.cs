@@ -8,8 +8,8 @@ namespace Domain.Constants
 {
     public static class ResultConstants
     {
-        public static int Win { get; set; } = 3;
-        public static int Loss { get; set; } = 0;
-        public static int Draw { get; set; } = 1;
+        public static string Win { get; set; } = "Win";
+        public static string Loss { get; set; } ="Loss" ;
+        public static string Draw { get; set; } = "Draw";
     }
 }

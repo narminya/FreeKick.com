@@ -16,6 +16,7 @@ namespace Domain.Entity
         public int Num { get; set; }
         public int PositionId { get; set; }
         public Position Position { get; set; }
+        public ICollection<GameLineup> Lineup { get; set; }
 
     }
 }

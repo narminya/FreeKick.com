@@ -9,15 +9,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <div class="news-card main" style="background-image: url('@Url.Content($"~/assets/img/{@Model.Breaking.News.Image}")'); height:515px">
+                <div class="news-card main" style="background-image: url('@Url.Content($"~/assets/img/news/{@Model.Breaking.News.Image}")'); height:515px">
                     <a asp-controller="News" asp-action="Index" asp-route-id="@Model.Breaking.News.Id">
                         <h5 class="nc-title">
                             @Model.Breaking.News.Title 
                         </h5>
                     </a>
-                    <p class="nc-desc">
-                        @Model.Breaking.News.Description
-                    </p>
                     <div class="tags">
                         <ul class="tags-list">
                             @foreach (var item in Model.Breaking.Tags)
@@ -38,7 +35,7 @@
                 {
                     <div class="col-lg-12">
                         <div class="news-card"
-                             style=" background-image: url(/assets/img/@item.News.Image);">
+                             style=" background-image: url(/assets/img/news/@item.News.Image);">
                             <a asp-controller="News" asp-action="Index" asp-route-id="@item.News.Id">
                                 <h5 class="nc-title">
                                     @item.News.Title
@@ -90,7 +87,7 @@
             <div class="col-lg-8">
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/messi.jpg")');">
+                        <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/news/messi.jpg")');">
                             <a asp-controller="News" asp-action="Index" >
                                 <h5 class="nc-title">
                                     Messi uncertain on future: 'After the World Cup I'm going to rethink many things'
@@ -108,7 +105,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/messi.jpg")');">
+                        <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/news/messi.jpg")');">
                             <a asp-controller="News" asp-action="Index">
                                 <h5 class="nc-title">
                                     Messi uncertain on future: 'After the World Cup I'm going to rethink many things'
@@ -126,7 +123,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/messi.jpg")');">
+                        <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/news/messi.jpg")');">
                             <a asp-controller="News" asp-action="Index" >
                                 <h5 class="nc-title">
                                     Messi uncertain on future: 'After the World Cup I'm going to rethink many things'
@@ -144,7 +141,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/messi.jpg")');">
+                        <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/news/messi.jpg")');">
                             <a href="">
                                 <h5 class="nc-title">
                                     Messi uncertain on future: 'After the World Cup I'm going to rethink many things'

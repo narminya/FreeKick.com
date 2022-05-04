@@ -41,6 +41,11 @@ namespace WebUI.Controllers
 
             return View(result);
         }
+        public async Task<IActionResult> Teams()
+        {
+            var teams = await _context.Teams.ToListAsync();
+            return View(teams);
+        }
 
         public async Task<IActionResult> TeamMatches(int? id)
         {

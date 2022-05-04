@@ -13,5 +13,6 @@ namespace Domain.Entity
         public Event Event { get; set; }
         public int GamePlayerId { get; set; }
         public GameLineup GamePlayer { get; set; }
+        public string Minute { get; set; }
     }
 }

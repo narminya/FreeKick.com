@@ -11,13 +11,20 @@
 }
 
 <div class="content">
+    <ul class="breadcrumb">
+        <li>
+            <p>YOU ARE HERE</p>
+        </li>
+        <li><a href="#" class="active">Game</a> </li>
+    </ul>
+    <div class="page-title">
+        <i class="icon-custom-left"></i>
+        <h3>Create <span class="semi-bold">new game</span></h3>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="grid simple form-grid">
-                <div class="grid-title no-border">
-                    <h3>Add <span class="semi-bold">Game</span></h3>
-                </div>
-                <div class="grid-body no-border">
+                <div>
                     <form method="post" id="form_traditional_validation" name="form_traditional_validation" role="form" autocomplete="off" class="validate">
                         <div class="row">
                             <div class="col-md-6">
@@ -56,8 +63,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <p>Pick game`s date</p>
-                                    <br>
+                                    <p style="margin: 3px 0px;">Pick game`s date</p>
                                     <div class="input-append success date col-md-10 col-lg-6 no-padding">
                                         <input type="text" class="form-control" asp-for="Date" placeholder="Pick a date" value="">
                                         <span class="add-on"><span class="arrow"></span><i class="fa fa-th"></i></span>

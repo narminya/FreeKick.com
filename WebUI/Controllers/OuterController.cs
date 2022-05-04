@@ -36,5 +36,15 @@ namespace WebUI.Controllers
 
             return View(league);
         }
+
+        public IActionResult News(int? id)
+        {
+            return View();
+        }
+
+        public IActionResult Matches(int? id)
+        {
+            return View();
+        }
     }
 }

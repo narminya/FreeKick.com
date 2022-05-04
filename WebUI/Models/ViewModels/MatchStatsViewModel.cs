@@ -10,6 +10,7 @@ namespace WebUI.Models.ViewModels
     {
         public MatchViewModel Match { get; set; }
         public List<PlayerViewModel> HomeLineups { get; set; }
+
         public List<PlayerViewModel> AwayLineups { get; set; }
         public List<Comment> Comments { get; set; }
     }

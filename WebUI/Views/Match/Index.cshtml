@@ -1,9 +1,30 @@
 ﻿@model MatchStatsViewModel
 @{
     ViewData["Title"] = "Index";
-   
-}
 
+}
+@section style{
+    <style>
+        label > img {
+            width: 20px;
+        }
+
+        .goals {
+            max-height: 150px
+        }
+
+            .goals li {
+                font-size: 12px;
+                color: #ffffff;
+            }
+
+                .goals li span {
+                    color: #808080;
+                }
+    </style>
+
+
+}
 <section class="match-summary py-50">
     <div class="container">
         <div class="row">
@@ -11,23 +32,29 @@
                 <div class="match-team">
                     <img src="/assets/img/teams/@Model.Match.Home.TeamImage" alt="">
                     <h5>@Model.Match.Home.TeamName</h5>
-                    <p class="text-light mb-0">4-2-4</p>
                     <p class="text-light">@Model.Match.Home.TeamCoach</p>
+                    <ul class="goals">
+                        @foreach (var item in Model.Match.HomeGoals)
+                        {
+
+                            <li> @item.Minute' <span>@item.Player</span></li>
+
+                        }
+                    </ul>
                 </div>
             </div>
             <div class="col-lg-4 col-sm-12 match-summary match-team-state">
                 <div class="match-team-state">
                     <div class="match-date"> <span>@Model.Match.Date.ToString("d MMMM HH:mm")</span></div>
                     <div class="matchboard">
-
                         <span class="matchboard__card">
                             <span class="matchboard__card-game">
-                              
+
                                 @Model.Match.Home.TeamScore
                             </span>
                         </span>
                         <span class="matchboard__hyphen">
-                            </span><span class="matchboard__card matchboard__card--no_margin">
+                        </span><span class="matchboard__card matchboard__card--no_margin">
                             <span class="matchboard__card-game">@Model.Match.Away.TeamScore</span>
                         </span>
                     </div>
@@ -37,10 +64,15 @@
                 <div class="match-team">
                     <img src="/assets/img/teams/@Model.Match.Away.TeamImage" alt="">
                     <h5>@Model.Match.Away.TeamName</h5>
-                    <p class="text-light mb-0">4-3-3</p>
                     <p class="text-light">@Model.Match.Away.TeamCoach</p>
+                    <ul class="goals">
+                        @foreach (var item in Model.Match.AwayGoals)
+                        {
 
+                            <li> @item.Minute' <span>@item.Player</span></li>
 
+                        }
+                    </ul>
                 </div>
             </div>
         </div>
@@ -49,7 +81,7 @@
 <section class="match-broadcast py-50">
     <div class="container">
         <div class="row">
-            <h4 class="match-broadcast-title">Live broadcast of Real Madrid vs Barcelona</h4>
+            <h4 class="match-broadcast-title">Live broadcast of @Model.Match.Home.TeamName vs @Model.Match.Away.TeamName</h4>
             <div class="col-lg-8 col-sm-12">
                 <div class="live-broadvast">
                     @foreach (var item in Model.Comments)
@@ -73,11 +105,14 @@
             <div class="col-lg-4 col-sm-12">
                 <div class="mb-3">
                     <form id="sendMess">
+
                         <label for="comment" class="form-label text-light">Comment</label>
                         <input type="text" name="comment" id="comment" class="form-control">
                         <label for="minute" class="form-label text-light">Minute</label>
                         <input type="text" name="minute" id="minute" class="form-control">
                         <input type="hidden" name="game" id="gameId" value="@ViewData["Id"]" />
+
+
                         <button class="btn btn-success" id="addComment" type="button">Send</button>
                     </form>
 
@@ -106,44 +141,65 @@
 <section class="lineups py-50">
     <div class="container">
         <div class="row">
-            <h4 class="match-broadcast-title mb-5 text-light">Lineup</h4>
+            @if (Model.Match.Date < DateTime.Now || User.IsInRole(RoleConstants.Moderator) || User.IsInRole(RoleConstants.Admin))
+            {
+                <h4 class="match-broadcast-title mb-5 text-light">Lineup</h4>
 
-            <div class="col-12 p-0 mb-5 d-flex">
-                <div class="field-border">
-                    <div class="field-main">
-                        @foreach (var item in Model.HomeLineups)
-                        {
-                            if (item.Start)
+                <div class="col-lg-12 col-sm-8 p-0 mb-5 d-flex">
+                    <div class="field-border">
+                        <div class="field-main">
+                            @foreach (var item in Model.HomeLineups.Where(c => !c.IsChanged && c.Start != StatusConstant.Bench))
                             {
-                                <div class="player @item.Position.ToLower()  @item.MainPosition.ToLower() g-home">
+
+                                <div class="player @item.Position  @item.MainPosition.ToLower() g-home">
+                                    @if (item.Start == StatusConstant.Change)
+                                    {
+                                        <i class="fa fa-rotate-right"></i>
+                                    }
+                                    <div class="events d-flex">
+                                        @foreach (var events in item.Event)
+                                        {
+                                            <img class="event" src="~/assets/img/events/@events.Logo" />
+                                        }
+                                    </div>
+
+
                                     <i class="fas fa-user"></i>
                                     <p class="p-name">@item.Surname</p>
                                 </div>
+
+
                             }
+                            @foreach (var item in Model.AwayLineups.Where(c => !c.IsChanged && c.Start != StatusConstant.Bench))
+                            {
 
-                        }
-                        @foreach (var item in Model.AwayLineups.Where(c => c.Start))
-                        {
+                                <div class="player @item.Position @item.MainPosition.ToLower() g-away">
+                                    @if (item.Start == StatusConstant.Change)
+                                    {
+                                        <i class="fa fa-rotate-right"></i>
+                                    }
+                                    <i class="fas fa-user"></i>
+                                    <p class="p-name">@item.Surname</p>
+                                </div>
 
-                            <div class="player @item.Position.ToLower() @item.MainPosition.ToLower() g-away">
-                                <i class="fas fa-user"></i>
-                                <p class="p-name">@item.Surname</p>
-                            </div>
-
-                        }
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
+
 
 
         </div>
+        <div class="row">
 
+        </div>
         <div class="row">
             <h4 class="match-broadcast-title mb-5 text-light">Bench</h4>
             <div class="col-lg-5 col-sm-12">
                 <img class="club-bencher" src="./assets/img/teams/real_madrid.png" alt="">
                 <ul class="bench">
-                    @foreach (var item in Model.HomeLineups.Where(c => !c.Start))
+                    @foreach (var item in Model.HomeLineups.Where(c => c.Start == StatusConstant.Bench))
                     {
                         <li>
                             @item.Num <img class="player-img" src="/assets/img/teams/@item.Logo" alt=""> @item.Surname <span>MD</span>
@@ -155,7 +211,7 @@
             <div class="col-lg-5 col-sm-12">
                 <img class="club-bencher" src="./assets/img/teams/barcelona.png" alt="">
                 <ul class="bench away">
-                    @foreach (var item in Model.AwayLineups.Where(c => !c.Start))
+                    @foreach (var item in Model.AwayLineups.Where(c => c.Start == StatusConstant.Bench))
                     {
                         <li>
                             @item.Num <img class="player-img" src="/assets/img/teams/@item.Logo" alt=""> @item.Surname <span>MD</span>
@@ -171,6 +227,7 @@
     <script src="~/assets/plugins/microsoft-signalr/signalr.js"></script>
     <script>
 
+        $('#comment').emojioneArea();
 
         var connection = new signalR.HubConnectionBuilder()
             .withUrl("/broHub")
@@ -179,17 +236,17 @@
 
         connection.on("RecieveMessage", function (data) {
             var message = `      <div class="event">
-                                                        <div class="event-match-time">
-                                                            <div class="event-time">
-                                                                <span class="event-time-text">${data.minute}'</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="event-picture">
-                                                        </div>
-                                                        <div class="event-description">
-                                                            ${data.message}
-                                                        </div>
-                                                    </div>`
+                                                                <div class="event-match-time">
+                                                                    <div class="event-time">
+                                                                        <span class="event-time-text">${data.minute}'</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="event-picture">
+                                                                </div>
+                                                                <div class="event-description">
+                                                                    ${data.message}
+                                                                </div>
+                                                            </div>`
 
             $(".live-broadvast").append(message)
         })
@@ -227,7 +284,6 @@
                 },
             })
         })
-
 
     </script>
 }

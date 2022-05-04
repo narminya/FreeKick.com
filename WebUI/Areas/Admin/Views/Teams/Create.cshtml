@@ -1,0 +1,64 @@
+﻿@model TeamCreateViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="content">
+    <ul class="breadcrumb">
+        <li>
+            <p>YOU ARE HERE</p>
+        </li>
+        <li><a href="#" class="active">Form Elements</a> </li>
+    </ul>
+    <div class="page-title">
+        <i class="icon-custom-left"></i>
+        <h3>Form - <span class="semi-bold">Elements</span></h3>
+    </div>
+    <!-- BEGIN BASIC FORM ELEMENTS-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-body no-border" style="padding-top:0px">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 col-xs-8">
+                            <form>
+                                <div class="form-group">
+                                    <label class="form-label">Club name</label>
+                                    <div class="controls">
+                                        <input asp-for="Name" class="form-control">
+                                    </div>
+                                    <span class="help text-danger" asp-validation-for="Name"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Stadium name</label>
+                                    <div class="controls">
+                                        <input asp-for="Stadium" class="form-control">
+                                    </div>
+                                    <span class="help text-danger" asp-validation-for="Stadium"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Coach name</label>
+                                    <div class="controls">
+                                        <input asp-for="Coach" class="form-control">
+                                    </div>
+                                    <span class="help text-danger" asp-validation-for="Coach"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" value="" style="width:300px" id="e12" tabindex="-1" class="select2-offscreen">
+                                    <select id="remote" asp-for="CountryId" asp-items='new SelectList(Model.Countries, "Id", "Name")' style="width:100%">
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" value="" style="width:300px" id="e12" tabindex="-1" class="select2-offscreen">
+                                    <select id="remote" asp-for="TagId" asp-items='new SelectList(Model.Tags, "Id", "Name")' style="width:100%">
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

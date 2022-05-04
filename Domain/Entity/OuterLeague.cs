@@ -12,6 +12,8 @@ namespace Domain.Entity
         public string Name { get; set; }
         public string Logo { get; set; }
         public string Title { get; set; }
+        public int? TagId { get; set; }
+        public Tag Tag { get; set; }
         public ICollection<Group> Groups { get; set; }
     }
 }

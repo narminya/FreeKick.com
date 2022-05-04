@@ -46,7 +46,7 @@ namespace WebUI.Controllers
                 League = new LeagueDto() { LeagueId = league.Id, LeagueIcon = league.Logo, LeagueName = league.Name, LeagueTitle = league.TitleImage },
                 Matches = _context.Games.Include(v => v.Teams).Where(c => c.LeagueId == id)
                   .Select(c => new MatchViewModel
-                  {
+                  { MatchId=c.Id,
                       Away = new GameTeamDto
                       {
                           TeamName = c.Teams.AwayTeam.Name,
@@ -63,14 +63,7 @@ namespace WebUI.Controllers
             return View(result);
         }
 
-        public IActionResult LeagueStanding(int? id)
-        {
-            if (!id.HasValue || id.Value == 0)
-            {
-                return BadRequest();
-            }
-            return View();
-        }
+        
 
         public PartialViewResult LeaguePartial(LeagueDto league)
         {

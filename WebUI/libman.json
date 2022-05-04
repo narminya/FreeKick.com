@@ -5,6 +5,10 @@
     {
       "library": "microsoft-signalr@6.0.4",
       "destination": "wwwroot/assets/plugins/microsoft-signalr/"
+    },
+    {
+      "library": "emojionearea@3.4.2",
+      "destination": "wwwroot/assets/plugins/emojionearea/"
     }
   ]
 }

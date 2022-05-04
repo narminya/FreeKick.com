@@ -264,7 +264,7 @@ textarea {
     padding: 20px;
 }
 
-    .news-card.main .nc-title a{
+    .news-card.main .nc-title a {
         font-size: 25px;
         font-family: 'Anton', sans-serif !important;
     }
@@ -380,11 +380,11 @@ textarea {
     padding-left: 5px;
 }
 
-    .tournament .team a {
-        color: #ffffff;
-        font-weight: 200;
-        font-size: 11px;
-    }
+.tournament .team a {
+    color: #ffffff;
+    font-weight: 200;
+    font-size: 11px;
+}
 
 @media screen and (max-width: 920px) {
     .tournament {
@@ -487,7 +487,12 @@ textarea {
     }
 }
 
+.live-broadvast {
+    transform: rotate(180deg);
+}
+
 .event {
+    transform: rotate(180deg);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -539,7 +544,7 @@ textarea {
 
             .event .event-match-time .event-time span {
                 color: #fff;
-                font-size: 12px;
+                font-size: 10px;
             }
 
             .event .event-match-time .event-time::before {
@@ -662,8 +667,24 @@ textarea {
             -ms-flex-direction: column;
             flex-direction: column;
             text-align: center;
-            margin: 20px 0;
+            margin: 25px 0;
         }
+
+
+            .field-border .field-main .player .events {
+                justify-content: space-evenly;
+                align-items: self-start;
+            }
+
+            .field-border .field-main .player img.event {
+                width: 11px;
+            }
+
+            .field-border .field-main .player > .fa.fa-rotate-right {
+                font-size: 7px;
+                position: absolute;
+                left: 1px;
+            }
 
             .field-border .field-main .player .p-name {
                 font-size: 10px;
@@ -715,28 +736,28 @@ textarea {
                 left: 100px;
             }
 
-                .field-border .field-main .defence.home .RB {
-                    position: absolute;
-                    bottom: 0;
-                }
-
                 .field-border .field-main .defence.home .LB {
                     position: absolute;
                     top: 0;
+                }
+
+                .field-border .field-main .defence.home .RB {
+                    position: absolute;
+                    bottom: 0;
                 }
 
             .field-border .field-main .defence.away {
                 right: 100px;
             }
 
-                .field-border .field-main .defence.away .RB {
-                    position: absolute;
-                    top: 0;
-                }
-
                 .field-border .field-main .defence.away .LB {
                     position: absolute;
                     bottom: 0;
+                }
+
+                .field-border .field-main .defence.away .RB {
+                    position: absolute;
+                    top: 0;
                 }
 
             .field-border .field-main .defence .p-name {
@@ -764,28 +785,38 @@ textarea {
                 left: 180px;
             }
 
-                .field-border .field-main .midfield.home .RM {
+                .field-border .field-main .midfield.home .LM {
+                    top: 0;
                     position: absolute;
-                    bottom: 0;
                 }
 
-                .field-border .field-main .midfield.home .LM {
+                .field-border .field-main .midfield.home .RM {
+                    bottom: 0;
                     position: absolute;
-                    top: 0;
+                }
+
+                .field-border .field-main .midfield.home .AM {
+                    position: absolute;
+                    left: 40px;
                 }
 
             .field-border .field-main .midfield.away {
                 right: 180px;
             }
 
-                .field-border .field-main .midfield.away .RM {
+                .field-border .field-main .midfield.away .LM {
+                    bottom: 0;
                     position: absolute;
-                    top: 0;
                 }
 
-                .field-border .field-main .midfield.away .LM {
+                .field-border .field-main .midfield.away .RM {
+                    top: 0;
                     position: absolute;
-                    bottom: 0;
+                }
+
+                .field-border .field-main .midfield.away .AM {
+                    position: absolute;
+                    right: 40px;
                 }
 
         .field-border .field-main .attack {
@@ -810,18 +841,18 @@ textarea {
             }
 
                 .field-border .field-main .attack.home .LW {
-                    position: absolute;
                     top: 0;
+                    position: absolute;
                 }
 
                 .field-border .field-main .attack.home .RW {
-                    position: absolute;
                     bottom: 0;
+                    position: absolute;
                 }
 
-                .field-border .field-main .attack.home .CF {
+                .field-border .field-main .attack.home .S {
                     position: absolute;
-                    left: 60px;
+                    left: 40px;
                 }
 
             .field-border .field-main .attack.away {
@@ -829,18 +860,18 @@ textarea {
             }
 
                 .field-border .field-main .attack.away .LW {
+                    bottom: 0;
                     position: absolute;
-                    top: 0;
                 }
 
                 .field-border .field-main .attack.away .RW {
+                    top: 0;
                     position: absolute;
-                    bottom: 0;
                 }
 
-                .field-border .field-main .attack.away .CF {
+                .field-border .field-main .attack.away .S {
                     position: absolute;
-                    right: 60px;
+                    right: 40px;
                 }
 
 @media screen and (max-width: 920px) {
@@ -881,6 +912,7 @@ textarea {
                 .field-border .field-main .keeper.home {
                     top: 20px;
                     height: auto;
+                    bottom: auto;
                 }
 
                 .field-border .field-main .keeper.away {
@@ -890,7 +922,7 @@ textarea {
                 }
 
             .field-border .field-main .player {
-                margin: 0;
+                margin: 0 20px;
             }
 
             .field-border .field-main .defence {
@@ -905,45 +937,44 @@ textarea {
                 justify-content: center;
             }
 
-                .field-border .field-main .defence .LCB,
-                .field-border .field-main .defence .RCB {
-                    margin: 0 40px;
-                }
-
                 .field-border .field-main .defence.home {
                     top: 80px;
                     left: 0;
                 }
 
-                    .field-border .field-main .defence.home .RB {
-                        position: absolute;
-                        bottom: 0;
-                        left: 40px;
+                    .field-border .field-main .defence.home .player {
+                        margin: 0 30px;
                     }
 
                     .field-border .field-main .defence.home .LB {
-                        position: absolute;
-                        top: 0;
-                        right: 40px;
+                        top: auto;
+                        right: 25px;
+                    }
+
+                    .field-border .field-main .defence.home .RB {
+                        bottom: auto;
+                        left: 25px;
                     }
 
                 .field-border .field-main .defence.away {
                     right: 100px;
-                    bottom: 120px;
+                    bottom: 80px;
                     top: auto;
                     left: 0;
                 }
 
+                    .field-border .field-main .defence.away .player {
+                        margin: 0 30px;
+                    }
+
                     .field-border .field-main .defence.away .RB {
-                        position: absolute;
-                        bottom: 0;
-                        right: 40px;
+                        top: auto;
+                        right: 25px;
                     }
 
                     .field-border .field-main .defence.away .LB {
-                        position: absolute;
-                        top: 0;
-                        left: 40px;
+                        bottom: auto;
+                        left: 25px;
                     }
 
             .field-border .field-main .midfield {
@@ -960,29 +991,43 @@ textarea {
                     top: 160px;
                 }
 
-                    .field-border .field-main .midfield.home .RM {
-                        left: 40px;
+                    .field-border .field-main .midfield.home .player {
+                        margin: 0 25px;
                     }
 
                     .field-border .field-main .midfield.home .LM {
-                        right: 40px;
+                        right: 25px;
                     }
 
-                    .field-border .field-main .midfield.home .DM {
-                        margin: 0 40px;
+                    .field-border .field-main .midfield.home .RM {
+                        left: 25px;
+                    }
+
+                    .field-border .field-main .midfield.home .AM {
+                        left: auto;
+                        top: 40px;
                     }
 
                 .field-border .field-main .midfield.away {
                     top: auto;
-                    bottom: 200px;
+                    bottom: 160px;
                 }
 
-                    .field-border .field-main .midfield.away .LM {
-                        left: 40px;
+                    .field-border .field-main .midfield.away .player {
+                        margin: 0 25px;
                     }
 
                     .field-border .field-main .midfield.away .RM {
-                        right: 40px;
+                        right: 25px;
+                    }
+
+                    .field-border .field-main .midfield.away .LM {
+                        left: 25px;
+                    }
+
+                    .field-border .field-main .midfield.away .AM {
+                        right: auto;
+                        bottom: 40px;
                     }
 
             .field-border .field-main .attack {
@@ -999,38 +1044,50 @@ textarea {
                     left: 0px;
                 }
 
-                    .field-border .field-main .attack.home .LW {
-                        right: 40px;
+                    .field-border .field-main .attack.home .player {
+                        margin: 0 30px;
+                    }
+
+                    .field-border .field-main .attack.home .S {
+                        position: absolute;
+                        top: 40px;
+                        left: auto;
                     }
 
                     .field-border .field-main .attack.home .RW {
-                        left: 40px;
-                        top: 0;
+                        position: absolute;
+                        left: 25px;
                     }
 
-                    .field-border .field-main .attack.home .CM {
-                        left: auto;
-                        top: 60px;
+                    .field-border .field-main .attack.home .LW {
+                        position: absolute;
+                        right: 25px;
                     }
 
                 .field-border .field-main .attack.away {
-                    bottom: 280px;
+                    bottom: 240px;
                     top: auto;
                     right: 0px;
                 }
 
+                    .field-border .field-main .attack.away .player {
+                        margin: 0 30px;
+                    }
+
+                    .field-border .field-main .attack.away .S {
+                        position: absolute;
+                        bottom: 40px;
+                        right: auto;
+                    }
+
                     .field-border .field-main .attack.away .LW {
-                        left: 40px;
+                        position: absolute;
+                        left: 25px;
                     }
 
                     .field-border .field-main .attack.away .RW {
-                        right: 40px;
-                        top: 0;
-                    }
-
-                    .field-border .field-main .attack.away .CM {
-                        left: auto;
-                        top: 60px;
+                        position: absolute;
+                        right: 25px;
                     }
 
         .field-border::after {
@@ -1040,7 +1097,6 @@ textarea {
             top: 50%;
         }
 }
-
 
 .team-btn {
     padding: 20px;
@@ -1443,10 +1499,14 @@ textarea {
             flex-direction: column;
         }
 
-            .match-summary .match-summary .match-team img {
-                margin-bottom: 10px;
-                width: 66px;
-            }
+.match-team-state{
+    padding: 20px 0;
+}
+
+.match-summary .match-summary .match-team img {
+    margin-bottom: 10px;
+    width: 66px;
+}
 
             .match-summary .match-summary .match-team h5 {
                 color: #ffffff;

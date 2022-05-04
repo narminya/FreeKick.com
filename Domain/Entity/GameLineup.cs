@@ -19,5 +19,7 @@ namespace Domain.Entity
         public Game Game { get; set; }
         public int StatusId { get; set; }
         public Status Status { get; set; }
+        public bool IsChanged { get; set; }
+        public ICollection<GamePlayerEvent> Events { get; set; }
     }
 }

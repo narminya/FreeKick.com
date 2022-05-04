@@ -12,8 +12,8 @@ namespace Domain.Entity
         public int GameId { get; set; }
         public Game Game { get; set; }
         public int PlayerId { get; set; }
-        public Player Player { get; set; }
-        public byte Minute { get; set; }
+        public TeamPlayer Player { get; set; }
+        public string Minute { get; set; }
         public bool OwnGoal { get; set; }
 
     }

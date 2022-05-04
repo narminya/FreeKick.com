@@ -14,6 +14,8 @@ namespace Repository.Repository.Implementation
         private AppDbContext _context;
 
         public BroadcastRepository(AppDbContext context) => _context = context;
+
+       
         public async Task<Comment> CreateMessage(string message, string minute, int gameId)
         {
             var comment = new Comment { Message = message, Minute = minute };

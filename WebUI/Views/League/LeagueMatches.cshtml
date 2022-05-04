@@ -27,11 +27,14 @@
                                 <div class="match-data">
                                     <p class="team-home">@item.Home.TeamName</p>
                                     <div class="goals d-flex ">
-                                        <div class="match-result">
-                                            <div class="goals-home">@item.Home.TeamScore</div>
-                                            <span>-</span>
-                                            <div class="goals-away">@item.Home.TeamScore</div>
-                                        </div>
+                                        <a asp-controller="Match" asp-action="Index" asp-route-id="@item.MatchId">
+                                            <div class="match-result">
+                                                <div class="goals-home">@item.Home.TeamScore</div>
+                                                <span>-</span>
+                                                <div class="goals-away">@item.Home.TeamScore</div>
+                                            </div>
+                                        </a>
+                                     
 
                                     </div>
                                     <p class="team-away">@item.Away.TeamName</p>

@@ -34,7 +34,7 @@ namespace Repository.DataAccessLayer
                 InitNewsTag(db);
                 InitGame(db);
                 InitGameTeams(db);
-              //  InitGameLineup(db);
+               // InitGameLineup(db);
                 InitTeamPlayer(db);
                 InitOuter(db);
                 InitGroups(db);
@@ -63,22 +63,25 @@ namespace Repository.DataAccessLayer
 
         private static void InitGameEvent(AppDbContext db)
         {
-            if (!db.GamePlayerEvents.Any())
-            {
-                db.GamePlayerEvents.AddRange(new GamePlayerEvent { },
-                    new GamePlayerEvent {},
-                    new GamePlayerEvent {});
-            }
-            db.SaveChanges();
+            //if (!db.GamePlayerEvents.Any())
+            //{
+            //    db.GamePlayerEvents.AddRange(new GamePlayerEvent { },
+            //        new GamePlayerEvent {},
+            //        new GamePlayerEvent {});
+            //}
+            //db.SaveChanges();
         }
 
         private static void InitEvent(AppDbContext db)
         {
             if (!db.Events.Any())
             {
-                db.Events.AddRange(new Event { Name = "Yellow Card" },
-                    new Event { Name = "Red Card" },
-                    new Event { Name="Goal" });
+                db.Events.AddRange(
+                    new Event { Name = EventConstant.Goal, Logo="ball.png"  },
+                    new Event { Name = EventConstant.Substitution, Logo = "change.png" },
+                    new Event { Name= EventConstant.Yellow, Logo = "yc.png" },
+                    new Event { Name=EventConstant.YellowRed, Logo = "ywc.png"},
+                    new Event { Name =EventConstant.Red, Logo = "rc.png" });
             }
             db.SaveChanges();
         }
@@ -87,13 +90,13 @@ namespace Repository.DataAccessLayer
         {
             if (!db.Status.Any())
             {
-                db.Status.AddRange(new Status {  Name = "Start"},
-                    new Status { Name = "Change" });
+                db.Status.AddRange(
+                    new Status {  Name = StatusConstant.Start},
+                    new Status { Name = StatusConstant.Bench },
+                    new Status { Name = StatusConstant.Change });
             }
             db.SaveChanges();
-        }
-
-      
+        }     
         private static void InitHeader(AppDbContext db)
         {
             if (!db.Navigation.Any())
@@ -104,12 +107,17 @@ namespace Repository.DataAccessLayer
                     new Navigation { Name = "Live Scores", Order = 2, Controller = "Match", Action = "LiveScores" },
                     new Navigation { Name = "European Football", Order = 3 },
                     new Navigation { Name = "Champions League", Order = 4 },
-                    new Navigation { Name = "Premier League", Order = 5 });
+                    new Navigation { Name = "Premier League", Order = 5 },
+                    new Navigation { Name = "Table", Order = 1 },
+                    new Navigation { Name = "Matches", Order = 2 },
+                    new Navigation { Name = "Groups", Order = 1 }
+
+
+                    );
 
             }
             db.SaveChanges();
         }
-
         private static async Task InitRoles(AppDbContext db, RoleManager<IdentityRole> role)
         {
             if (!db.Roles.Any())
@@ -121,7 +129,6 @@ namespace Repository.DataAccessLayer
             }
             await db.SaveChangesAsync();
         }
-
         private static void InitGroupTeam(AppDbContext db)
         {
             if (!db.GroupTeams.Any())
@@ -134,7 +141,6 @@ namespace Repository.DataAccessLayer
             }
             db.SaveChanges();
         }
-
         private static void InitGroups(AppDbContext db)
         {
             if (!db.Groups.Any())
@@ -188,11 +194,13 @@ namespace Repository.DataAccessLayer
             if (!db.GamePositions.Any())
             {
                 db.GamePositions.AddRange(
-                     new GamePosition { Name = "GoalKeeper", CommonName = "Keeper", ShortName = "GK" },
-                     new GamePosition { Name = "RightBack", CommonName = "Defender", ShortName = "RB" },
-                     new GamePosition { Name = "LeftBack", CommonName = "Defender", ShortName = "LB" },
-                     new GamePosition { Name = "LeftCentreBack", CommonName = "Defender", ShortName = "LCB" },
-                     new GamePosition { Name = "RightCentreBack", CommonName = "Defender", ShortName = "RCB" },
+                     new GamePosition { Name = "GoalKeeper", CommonName = "Keeper", ShortName = "GK"  },
+                     new GamePosition { Name = "Striker", CommonName = "Forward", ShortName = "S" },
+                     new GamePosition { Name = "Center Defender", CommonName = "Defender", ShortName = "CD" },
+                     new GamePosition { Name = "Right Back", CommonName = "Defender", ShortName = "RB" },
+                     new GamePosition { Name = "Left Back", CommonName = "Defender", ShortName = "LB" },
+                     new GamePosition { Name = "Left CentreBack", CommonName = "Defender", ShortName = "LCB" },
+                     new GamePosition { Name = "Right CentreBack", CommonName = "Defender", ShortName = "RCB" },
                      new GamePosition { Name = "Defensive MidFielder", CommonName = "Midfielder", ShortName = "DM" },
                      new GamePosition { Name = "Right MidFielder", CommonName = "Midfielder", ShortName = "RM" },
                      new GamePosition { Name = "Left MidFielder", CommonName = "Midfielder", ShortName = "LM" },
@@ -274,28 +282,28 @@ namespace Repository.DataAccessLayer
             if (!db.GameLineup.Any())
             {
                 db.GameLineup.AddRange(
-                    new GameLineup { GameId = 1, TeamPlayerId = 1, GamePositionId = 4 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 2, GamePositionId = 2 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 3, GamePositionId = 1 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 4, GamePositionId = 2 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 5, GamePositionId = 2 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 6, GamePositionId = 3 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 7, GamePositionId = 3 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 8, GamePositionId = 3 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 9, GamePositionId = 3 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 10, GamePositionId = 4 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 11, GamePositionId = 1 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 12, GamePositionId = 1 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 13, GamePositionId = 1 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 14, GamePositionId = 2 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 15, GamePositionId = 2 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 16, GamePositionId = 2 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 17, GamePositionId = 3 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 18, GamePositionId = 3 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 19, GamePositionId = 3 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 20, GamePositionId = 3 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 21, GamePositionId = 2 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 21, GamePositionId = 1 }
+                    new GameLineup { GameId = 1, TeamPlayerId = 1, GamePositionId = 4 , StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 2, GamePositionId = 2 , StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 3, GamePositionId = 1 , StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 4, GamePositionId = 2 , StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 5, GamePositionId = 2 , StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 6, GamePositionId = 3 , StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 7, GamePositionId = 3 , StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 8, GamePositionId = 3 , StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 9, GamePositionId = 3 , StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 10, GamePositionId = 4, StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 11, GamePositionId = 1, StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 12, GamePositionId = 1, StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 13, GamePositionId = 1, StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 14, GamePositionId = 2, StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 15, GamePositionId = 2, StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 16, GamePositionId = 2, StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 17, GamePositionId = 3, StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 18, GamePositionId = 3, StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 19, GamePositionId = 3, StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 20, GamePositionId = 3, StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 21, GamePositionId = 2, StatusId = 2  },
+                    new GameLineup { GameId = 1, TeamPlayerId = 21, GamePositionId = 1, StatusId = 2  }
                     );
             }
 

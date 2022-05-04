@@ -111,5 +111,12 @@ namespace WebUI.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account", new { Area = "" });
+        }
     }
 }

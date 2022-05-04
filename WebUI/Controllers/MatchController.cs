@@ -30,12 +30,20 @@ namespace WebUI.Controllers
                 return BadRequest();
             }
             ViewData["Id"] = id;
+
             var game = _context.GamesTeam.Where(c => c.GameId == id);
+
+            var away = _context.GameScores.Where(c => c.GameId == id).Where(c => c.Player.TeamId == game.First().AwayTeamId)
+                .Select(c => new GoalDto { Player = c.Player.Player.Surname, Minute = c.Minute, OwnGoal = c.OwnGoal }).ToList();
+            var home = _context.GameScores.Where(c => c.GameId == id).Where(c => c.Player.TeamId == game.First().HomeTeamId)
+                .Select(c => new GoalDto { Player = c.Player.Player.Surname, Minute = c.Minute, OwnGoal = c.OwnGoal }).ToList();
             var match = new MatchStatsViewModel()
             {
                 Match = game
                 .Select(f => new MatchViewModel
                 {
+                    AwayGoals = away,
+                    HomeGoals = home,
                     Away = new GameTeamDto
                     {
                         TeamId = f.AwayTeam.Id,
@@ -62,7 +70,10 @@ namespace WebUI.Controllers
                     Surname = n.TeamPlayer.Player.Surname,
                     Num = n.TeamPlayer.Num,
                     Position = n.GamePosition.ShortName,
-                    MainPosition = n.GamePosition.CommonName
+                    MainPosition = n.GamePosition.CommonName,
+                    Start = n.Status.Name,
+                     IsChanged = n.IsChanged,
+                      Event = n.Events.Select(a=> new Event { Logo = a.Event.Logo}).ToList()
                 })
                 .ToList(),
 
@@ -72,7 +83,11 @@ namespace WebUI.Controllers
                     Surname = n.TeamPlayer.Player.Surname,
                     Num = n.TeamPlayer.Num,
                     Position = n.GamePosition.ShortName,
-                    MainPosition = n.GamePosition.CommonName
+                    MainPosition = n.GamePosition.CommonName,
+                    Start = n.Status.Name,
+                     IsChanged = n.IsChanged,
+                    Event = n.Events.Select(a => new Event { Logo = a.Event.Logo }).ToList()
+
                 })
                 .ToList(),
                 Comments = _context.GameComments.Where(C => C.GameId == id)
@@ -90,7 +105,7 @@ namespace WebUI.Controllers
                     League = new LeagueDto() { LeagueId = r.Id, LeagueIcon = r.TitleImage, LeagueName = r.Name },
                     Matches = r.Games.Where(c => c.Date.Day == DateTime.Now.Day).Select(n => new MatchViewModel
                     {
-                        Away = new GameTeamDto { TeamName = n.Teams.AwayTeam.Name,  TeamImage = n.Teams.AwayTeam.Logo, TeamScore = n.Teams.Game.AwayScore },
+                        Away = new GameTeamDto { TeamName = n.Teams.AwayTeam.Name, TeamImage = n.Teams.AwayTeam.Logo, TeamScore = n.Teams.Game.AwayScore },
                         Home = new GameTeamDto { TeamName = n.Teams.HomeTeam.Name, TeamImage = n.Teams.HomeTeam.Logo, TeamScore = n.Teams.Game.HomeScore },
                         Date = n.Teams.Game.Date
                     }).OrderBy(c => c.Date).ToList()
@@ -98,6 +113,12 @@ namespace WebUI.Controllers
             return View(result);
         }
 
+        public IActionResult GetPlayers(int? id)
+        {
+            var gameplayers = _context.GameLineup.Where(c => c.GameId == id)
+                .Select(c => new PlayerDto { Id = c.Id, Surname = c.TeamPlayer.Player.Surname }).ToList();
+            return Json(gameplayers);
+        }
 
         public async Task<IActionResult> SendMessage(
            int gameId,

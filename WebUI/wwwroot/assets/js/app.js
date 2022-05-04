@@ -69,7 +69,7 @@
 
 
         for (let i = 0; i < players.length; i++) {
-            if ($(players[i]).hasClass("goalkeeper g-home")) {
+            if ($(players[i]).hasClass("keeper g-home")) {
                 $(keeperHome).append(players[i])
             } else if ($(players[i]).hasClass("defender g-home")) {
                 $(defenceHome).append(players[i])
@@ -83,7 +83,7 @@
                 $(midfieldAway).append(players[i])
             } else if ($(players[i]).hasClass("defender g-away")) {
                 $(defenceAway).append(players[i])
-            } else if ($(players[i]).hasClass("goalkeeper g-away")) {
+            } else if ($(players[i]).hasClass("keeper g-away")) {
                 $(keeperAway).append(players[i])
             }
         }

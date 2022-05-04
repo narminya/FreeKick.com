@@ -20,3 +20,4 @@ C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\obj\Debug\net5.0\Domain.
 C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\obj\Debug\net5.0\Domain.dll
 C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\obj\Debug\net5.0\ref\Domain.dll
 C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\obj\Debug\net5.0\Domain.pdb
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\Domain\obj\Debug\net5.0\Domain.csproj.AssemblyReference.cache

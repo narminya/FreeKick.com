@@ -21,20 +21,27 @@ using WebUI.Areas.Admin.Models.ViewModels;
 #nullable disable
 #nullable restore
 #line 2 "C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\Areas\Admin\Views\_ViewImports.cshtml"
-using WebUI.Models.ViewModels;
+using WebUI.Areas.Admin.Models.ViewModels.Teams;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 3 "C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\Areas\Admin\Views\_ViewImports.cshtml"
+using WebUI.Models.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\Areas\Admin\Views\_ViewImports.cshtml"
 using Domain.Entity;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7091c65830b0329e613be026ede8a57552863778", @"/Areas/Admin/Views/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a176a8235be2023a1e8c17f8e1ba69791faffdb7", @"/Areas/Admin/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b2040db0585aaee2133c44237c47de31fa657713", @"/Areas/Admin/Views/_ViewImports.cshtml")]
     public class Areas_Admin_Views__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

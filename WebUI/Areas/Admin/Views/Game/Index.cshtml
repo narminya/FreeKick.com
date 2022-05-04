@@ -12,8 +12,8 @@
             <table class="table no-more-tables">
                 <thead>
                     <tr>
-                        <th style="width:9%">Game</th>
-                        <th style="width:22%">Date</th>
+                        <th style="width:22%">Game</th>
+                        <th style="width:9%">Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,18 +22,17 @@
                         foreach (var match in item.Matches)
                         {
                             <tr>
-                                <td class="v-align-middle">
-                                    <div class="checkbox check-default">
-                                        <input id="checkbox11" type="checkbox" value="1">
-                                        <label for="checkbox11"></label>
-                                    </div>
+                                <td class="v-align-middle d-flex">
+                                    <p>@match.Home.TeamName</p>
+                                    <span>&</span>
+                                    <p>@match.Away.TeamName</p>
                                 </td>
                                 <td class="v-align-middle"></td>
                                 <td class="v-align-middle">
                                     <span class="muted">Redesign project template</span>
                                 </td>
                                 <td class="v-align-middle">
-                                    <a class="btn btn-"></a>
+                                    <a class="btn btn-success" asp-controller="Game" asp-action="Detail" asp-route-id="@match.MatchId"></a>
                                 </td>
                             </tr>
                         }
