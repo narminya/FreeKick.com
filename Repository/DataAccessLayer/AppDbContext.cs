@@ -38,6 +38,8 @@ namespace Repository.DataAccessLayer
         public DbSet<Position> Positions { get; set; }
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Status> Status { get; set; }
+        public DbSet<Subscriber> Subscribers { get; set; }
+
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamLeague> TeamLeague { get; set; }

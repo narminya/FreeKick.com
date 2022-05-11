@@ -158,6 +158,8 @@ namespace Repository.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InstaPost = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ViewCount = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -207,6 +209,19 @@ namespace Repository.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Status", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Subscribers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Subscribers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -522,7 +537,8 @@ namespace Repository.Migrations
                     TeamId = table.Column<int>(type: "int", nullable: true),
                     PlayerId = table.Column<int>(type: "int", nullable: false),
                     Num = table.Column<int>(type: "int", nullable: false),
-                    PositionId = table.Column<int>(type: "int", nullable: false)
+                    PositionId = table.Column<int>(type: "int", nullable: false),
+                    Current = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -560,11 +576,18 @@ namespace Repository.Migrations
                     HomeScore = table.Column<int>(type: "int", nullable: false),
                     AwayScore = table.Column<int>(type: "int", nullable: false),
                     IsFinished = table.Column<bool>(type: "bit", nullable: false),
+                    GameResultId = table.Column<int>(type: "int", nullable: true),
                     TeamId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Games", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Games_GameResults_GameResultId",
+                        column: x => x.GameResultId,
+                        principalTable: "GameResults",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Games_Groups_GroupId",
                         column: x => x.GroupId,
@@ -855,6 +878,11 @@ namespace Repository.Migrations
                 column: "GamePlayerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Games_GameResultId",
+                table: "Games",
+                column: "GameResultId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Games_GroupId",
                 table: "Games",
                 column: "GroupId");
@@ -1010,9 +1038,6 @@ namespace Repository.Migrations
                 name: "GamePlayerEvents");
 
             migrationBuilder.DropTable(
-                name: "GameResults");
-
-            migrationBuilder.DropTable(
                 name: "GameScores");
 
             migrationBuilder.DropTable(
@@ -1026,6 +1051,9 @@ namespace Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "NewsTag");
+
+            migrationBuilder.DropTable(
+                name: "Subscribers");
 
             migrationBuilder.DropTable(
                 name: "TeamLeague");
@@ -1059,6 +1087,9 @@ namespace Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "TeamPlayer");
+
+            migrationBuilder.DropTable(
+                name: "GameResults");
 
             migrationBuilder.DropTable(
                 name: "Groups");

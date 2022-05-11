@@ -13,6 +13,39 @@
         });
 
 
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+   
+        $(document).on("click", "#button-addon2", function () {
+     let email = $("#email").val();
+            $.ajax({
+                type: "Get",
+                url: "/Home/Subscribe?email=" + email,
+                success: function (res) {
+                    Command: toastr[res.result]("", res.message)
+                    $("#email").val = "";
+                },
+                error: function (err) {
+                    Command: toastr[err.result]("", err.message)
+                },
+            })
+        })
 
         $("a.dropmenu").click(function (e) {
             e.stopPropagation();
@@ -69,7 +102,7 @@
 
 
         for (let i = 0; i < players.length; i++) {
-            if ($(players[i]).hasClass("keeper g-home")) {
+            if ($(players[i]).hasClass("goalkeeper g-home")) {
                 $(keeperHome).append(players[i])
             } else if ($(players[i]).hasClass("defender g-home")) {
                 $(defenceHome).append(players[i])
@@ -83,7 +116,7 @@
                 $(midfieldAway).append(players[i])
             } else if ($(players[i]).hasClass("defender g-away")) {
                 $(defenceAway).append(players[i])
-            } else if ($(players[i]).hasClass("keeper g-away")) {
+            } else if ($(players[i]).hasClass("goalkeeper g-away")) {
                 $(keeperAway).append(players[i])
             }
         }

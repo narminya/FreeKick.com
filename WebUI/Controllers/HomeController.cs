@@ -28,7 +28,7 @@ namespace WebUI.Controllers
                 Name = x.Tag.Name
             }).ToListAsync();
             var nesw = new List<NewsViewModel>();
-            var news = await _context.News.Where(c => c.Id != breaking.Id).OrderByDescending(c => c.CreatedDate).Take(2).ToListAsync();
+            var news = await _context.News.Include(c=>c.Tags).Where(c => c.Id != breaking.Id).OrderByDescending(c => c.CreatedDate).Take(2).ToListAsync();
             foreach (var item in news)
             {
                 nesw.Add(new NewsViewModel
@@ -42,8 +42,8 @@ namespace WebUI.Controllers
                     }).ToListAsync()
                 });
             }
-            var latest = await _context.News.OrderByDescending(c => c.CreatedDate)
-                .Take(4).Select(s => new NewsViewModel { News = s, Time = s.CreatedDate.ToRelativeDate() }).ToListAsync();
+            var latest = await _context.News.Include(c=>c.Tags).OrderByDescending(c => c.CreatedDate).Skip(3)
+                .Take(10).Select(s => new NewsViewModel { News = s, Time = s.CreatedDate.ToRelativeDate(),  Tags=s.Tags.Select(c=>new Tag { Name = c.Tag.Name, Id = c.TagId }).ToList() }).ToListAsync();
             return View(new HomeViewModel
             {
                 News = nesw,
@@ -54,6 +54,29 @@ namespace WebUI.Controllers
                 },
                 Latest = latest
             });
+        }
+
+        public async Task<IActionResult> Subscribe(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                return Json(new { result = "error", message = "Can not be empty" });
+            }
+            if (_context.Subscribers.Any(s => s.Email == email))
+            {
+                return Json(new { result = "error", message = "You have already subscribed" });
+
+            }
+
+            Subscriber subscriber = new Subscriber()
+            {
+                Email = email
+            };
+            await _context.Subscribers.AddAsync(subscriber);
+            await _context.SaveChangesAsync();
+
+            return Json(new { result = "success", message = "You have subscribed for news" });
+
         }
     }
 }

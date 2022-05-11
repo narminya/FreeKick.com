@@ -1,7 +1,7 @@
 ﻿@model HomeViewModel
 @{
     ViewData["Title"] = "Index";
-  
+    var baccol = "~/assets/img/756471129641055.jpg";
 }
 
 
@@ -12,14 +12,14 @@
                 <div class="news-card main" style="background-image: url('@Url.Content($"~/assets/img/news/{@Model.Breaking.News.Image}")'); height:515px">
                     <a asp-controller="News" asp-action="Index" asp-route-id="@Model.Breaking.News.Id">
                         <h5 class="nc-title">
-                            @Model.Breaking.News.Title 
+                            @Model.Breaking.News.Title
                         </h5>
                     </a>
                     <div class="tags">
                         <ul class="tags-list">
                             @foreach (var item in Model.Breaking.Tags)
                             {
-                                <li><a class="tag">@item.Name</a></li>
+                                <li><a asp-controller="News" asp-action="ByTag" asp-route-id="@item.Id" class="tag">@item.Name</a></li>
                             }
                         </ul>
                     </div>
@@ -46,13 +46,13 @@
                                 <ul class="tags-list">
                                     @foreach (var tag in item.Tags)
                                     {
-                                        <li><a class="tag" href="">@tag.Name</a></li>
+                                        <li><a asp-controller="News" asp-action="ByTag" asp-route-id="@tag.Id" class="tag">@tag.Name</a></li>
                                     }
 
                                 </ul>
                             </div>
                             <div class="actions">
-                                <span class="view-count">12</span><i class="fas fa-eye"></i>
+                                <span class="view-count">@item.News.ViewCount</span><i class="fas fa-eye"></i>
                             </div>
                         </div>
                     </div>
@@ -86,78 +86,32 @@
             </div>
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/news/messi.jpg")');">
-                            <a asp-controller="News" asp-action="Index" >
-                                <h5 class="nc-title">
-                                    Messi uncertain on future: 'After the World Cup I'm going to rethink many things'
-                                </h5>
-                            </a>
-                            <div class="tags">
-                                <ul class="tags-list">
-                                    <li><a class="tag" href="">Argentina</a></li>
-                                    <li><a class="tag" href="">Messi</a></li>
-                                </ul>
-                            </div>
-                            <div class="actions">
-                                <span class="view-count">12</span><i class="fas fa-eye"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/news/messi.jpg")');">
-                            <a asp-controller="News" asp-action="Index">
-                                <h5 class="nc-title">
-                                    Messi uncertain on future: 'After the World Cup I'm going to rethink many things'
-                                </h5>
-                            </a>
-                            <div class="tags">
-                                <ul class="tags-list">
-                                    <li><a class="tag" href="">Argentina</a></li>
-                                    <li><a class="tag" href="">Messi</a></li>
-                                </ul>
-                            </div>
-                            <div class="actions">
-                                <span class="view-count">12</span><i class="fas fa-eye"></i>
+
+                    @foreach (var item in Model.Latest)
+                    {<div class="col-lg-6">
+                            <div class="news-card" style="background-image: url('@Url.Content($"~/assets/img/news/{item.News.Image}")');">
+                                <a asp-controller="News" asp-action="Index">
+                                    <h5 class="nc-title">
+                                        @item.News.Title
+                                    </h5>
+                                </a>
+                                <div class="tags">
+                                    <ul class="tags-list">
+                                        @foreach (var tag in item.Tags)
+                                        {
+                                            <li><a class="tag" asp-controller="News" asp-action="ByTag" asp-route-id="@tag.Id">@tag.Name</a></li>
+                                            <li><a class="tag" asp-controller="News" asp-action="ByTag" asp-route-id="@tag.Id">@tag.Name</a></li>
+                                        }
+
+                                    </ul>
+                                </div>
+                                <div class="actions">
+                                    <span class="view-count">@item.News.ViewCount</span><i class="fas fa-eye"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/news/messi.jpg")');">
-                            <a asp-controller="News" asp-action="Index" >
-                                <h5 class="nc-title">
-                                    Messi uncertain on future: 'After the World Cup I'm going to rethink many things'
-                                </h5>
-                            </a>
-                            <div class="tags">
-                                <ul class="tags-list">
-                                    <li><a class="tag" href="">Argentina</a></li>
-                                    <li><a class="tag" href="">Messi</a></li>
-                                </ul>
-                            </div>
-                            <div class="actions">
-                                <span class="view-count">12</span><i class="fas fa-eye"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="news-card" style="background-image: url('@Url.Content("~/assets/img/news/messi.jpg")');">
-                            <a href="">
-                                <h5 class="nc-title">
-                                    Messi uncertain on future: 'After the World Cup I'm going to rethink many things'
-                                </h5>
-                            </a>
-                            <div class="tags">
-                                <ul class="tags-list">
-                                    <li><a class="tag" href="">Argentina</a></li>
-                                    <li><a class="tag" href="">Messi</a></li>
-                                </ul>
-                            </div>
-                            <div class="actions">
-                                <span class="view-count">12</span><i class="fas fa-eye"></i>
-                            </div>
-                        </div>
-                    </div>
+                    }
+
                 </div>
             </div>
         </div>
@@ -166,15 +120,15 @@
 @await Component.InvokeAsync("Standings")
 
 <section class="newsletter-section py-50">
-    <div class="newsletter" style="background-image: url('@Url.Content("~/assets/img/756471129641055.jpg")');">
+    <div class="newsletter" style="background-image: url('@Url.Content(baccol)');">
         <div class="row">
             <div class="col-lg-6 col-md-12">
                 <p class="site-title">FreeKick</p>
                 <h3 class="subscribe">Subscribe</h3>
                 <form>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Recipient's username" >
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                        <input type="text" name="email" id="email" class="form-control" placeholder="Recipient's username">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Subscribe</button>
                     </div>
                 </form>
             </div>

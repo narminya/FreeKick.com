@@ -1,10 +1,11 @@
 ﻿@model LeagueDto
 
-<div class=" actions-y py-100" style="background-image: url('@Url.Content($"~/assets/img/titleImages/{Model.LeagueTitle}")');">
+
+<div class=" actions-y py-100" style="background-image: url('@Url.Content($"~/assets/img/league/{Model.LeagueTitle}")');">
     <div class="container">
         <div class="row">
             <div class="col-12 d-flex align-items-center">
-                <img src="~/assets/img/league/@Model.LeagueIcon" alt="">
+                <img  style="width:66px" src="~/assets/img/league/@Model.LeagueIcon" alt="">
                 <h2 class="text-light ml-3">@Model.LeagueName</h2>
             </div>
         </div>

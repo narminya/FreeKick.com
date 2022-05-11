@@ -14,6 +14,8 @@ namespace Domain.Entity
         public string Title { get; set; }
         public string Description { get; set; }
         public string CreatedUserId { get; set; }
+        public string InstaPost { get; set; }
+        public int ViewCount { get; set; } = 0;
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public ICollection<NewsTag> Tags { get; set; }
     }

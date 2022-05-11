@@ -2,7 +2,11 @@
 @{
     ViewData["Title"] = "LiveScores";
 }
-
+@section style{
+<style>
+ 
+</style>
+ }
 <section class="team-matches p-50">
     <div class="container">
         <div class="row">
@@ -28,21 +32,21 @@
 
                                 <div class="match-data">
                                     <img src="~/assets/img/teams/@match.Home.TeamImage" />
-                                    <p class="team-home">@match.Home.TeamName</p>
+                                    <p class="team-home"><a  asp-controller="Team" asp-action="Index" asp-route-id="@match.Home.TeamId"> @match.Home.TeamName</a></p>
                                     <div class="goals d-flex ">
                                         <div class="match-result">
                                             <div class="goals-home">
-                                                <a>@match.Home.TeamScore</a>
+                                                <a asp-controller="Match" asp-action="Index" asp-route-id="@match.MatchId">@match.Home.TeamScore</a>
                                             </div>
                                             <span>-</span>
                                             <div class="goals-away">
-                                                <a> @match.Away.TeamScore</a>
+                                                <a  asp-controller="Match" asp-action="Index" asp-route-id="@match.MatchId"> @match.Away.TeamScore</a>
                                             </div>
 
                                         </div>
 
                                     </div>
-                                    <p class="team-away">@match.Away.TeamName</p>
+                                    <p class="team-away"><a   asp-controller="Team" asp-action="Index" asp-route-id="@match.Away.TeamId">@match.Away.TeamName</a></p>
                                     <img src="~/assets/img/teams/@match.Away.TeamImage" />
                                 </div>
                                 </div>

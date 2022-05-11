@@ -390,3 +390,7 @@ C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Ar
 C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Views\Team\Teams.cshtml.g.cs
 C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Views\News\ByTag.cshtml.g.cs
 C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Areas\Admin\Views\Shared\Components\Default.cshtml.g.cs
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Areas\Admin\Views\Player\Create.cshtml.g.cs
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Areas\Admin\Views\Player\Transfer.cshtml.g.cs
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Views\Shared\_LeagueMatches.cshtml.g.cs
+C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\obj\Debug\net5.0\Razor\Views\League\LeagueNews.cshtml.g.cs

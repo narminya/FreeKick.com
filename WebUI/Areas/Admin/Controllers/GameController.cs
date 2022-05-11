@@ -1,4 +1,5 @@
-﻿using Domain.Dto;
+﻿using Domain.Constants;
+using Domain.Dto;
 using Domain.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Repository.DataAccessLayer;
@@ -56,7 +57,7 @@ namespace WebUI.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            ViewBag.Id = id;
+           ViewBag.Id= id;
             var model = _context.GamesTeam.Where(c => c.GameId == id);
             var res = new GameLineUpViewModel()
             {
@@ -91,7 +92,8 @@ namespace WebUI.Areas.Admin.Controllers
 
                 HomePlayers = _context.TeamPlayer.Where(c => c.TeamId == game.FirstOrDefault().HomeTeamId).Select(b => new PlayerDto { Id = b.Id, Num = b.Num, Surname = b.Player.Surname }).ToList(),
                 Positions = _context.GamePositions.ToList(),
-                Status = _context.Status.ToList()
+                Status = _context.Status.ToList(),
+                 Events = _context.Events.ToList()
 
             };
             return View(res);
@@ -170,15 +172,7 @@ namespace WebUI.Areas.Admin.Controllers
 
             var team = _context.TeamPlayer.Where(s => s.PlayerId == score.PlayerId).FirstOrDefault().TeamId;
             var game = _context.Games.Find(score.GameId);
-            if (gameteam.HomeTeamId == team && score.OwnGoal==true)
-            {
-                game.AwayScore++;
-            }
-            else if(gameteam.AwayTeamId == team && score.OwnGoal == true)
-            {
-               game.HomeScore++;
-            }
-            else if(gameteam.HomeTeamId == team && score.OwnGoal == false)
+            if (gameteam.HomeTeamId == team)
             {
                 game.HomeScore++;
             }
@@ -193,13 +187,56 @@ namespace WebUI.Areas.Admin.Controllers
             return Json(new { minute= score.Minute, authorId=score.PlayerId});
            
         }
+
+        public async Task<IActionResult> Event(GamePlayerEvent score)
+        {
+
+            await _context.GamePlayerEvents.AddAsync(score);
+            await _context.SaveChangesAsync();
+            return Json(new { });
+
+        }
         public JsonResult GetTeam(int id, int? skip)
         {
             var res = _context.TeamLeague.Where(c => c.LeagueId == id && c.TeamId != skip)
                 .Select(b => new TeamDto { Id = b.TeamId, Name = b.Team.Name });
             return Json(res);
         }
-       
+        public JsonResult AddToGame(int id)
+        {
+            var gamePlayer = _context.GameLineup.Where(c => c.Id == id).FirstOrDefault();
+            gamePlayer.Status.Id = _context.Status.Where(c => c.Name == StatusConstant.Change).FirstOrDefault().Id;
+            _context.GameLineup.Update(gamePlayer);
+            _context.SaveChanges();
+            return Json(new { });
+        }
+        public JsonResult FinishGame(int id)
+        {
+            var game = _context.Games.Include(c=>c.Teams).Where(c => c.Id == id).FirstOrDefault();
+            var teams = _context.GamesTeam.Where(c => c.GameId == game.Id).FirstOrDefault();
+            game.IsFinished = true;
+            if (game.HomeScore>game.AwayScore)
+            {
+                teams.HomeTeamRes =ResultConstants.Win;
+                teams.AwayTeamRes = ResultConstants.Loss;
+
+            }
+            else if(game.HomeScore == game.AwayScore)
+            {
+                teams.HomeTeamRes = ResultConstants.Draw;
+                teams.AwayTeamRes = ResultConstants.Draw;
+            }
+            else
+            {
+                teams.HomeTeamRes = ResultConstants.Loss;
+                teams.AwayTeamRes = ResultConstants.Win;
+            }
+
+            _context.Update(game);
+            _context.Update(teams);
+            _context.SaveChanges();
+            return Json(new {  });
+                }
         public IActionResult ChangePlayer(int id)
         {
             var gamePlayer = _context.GameLineup.Where(c => c.Id == id).FirstOrDefault();

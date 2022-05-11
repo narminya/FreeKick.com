@@ -39,7 +39,7 @@ namespace WebUI.Controllers
             {
                 return BadRequest();
             }
-            var league = await _context.League.FindAsync(id);
+            var league =  _context.League.Where(c=>c.Id==id).FirstOrDefault();
             var result = new LeagueMatchesViewModel()
             {
 
@@ -63,7 +63,10 @@ namespace WebUI.Controllers
             return View(result);
         }
 
-        
+        public async Task<IActionResult> LeagueNews(int? id)
+        {
+            return View();
+        }
 
         public PartialViewResult LeaguePartial(LeagueDto league)
         {

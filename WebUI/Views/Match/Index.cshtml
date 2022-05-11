@@ -1,7 +1,7 @@
 ﻿@model MatchStatsViewModel
 @{
     ViewData["Title"] = "Index";
-
+    var baccol = "~/assets/img/jan-piatkowski-m61qUssdYSs-unsplash.jpg";
 }
 @section style{
     <style>
@@ -122,15 +122,15 @@
     </div>
 </section>
 <section class="newsletter-section py-50">
-    <div class="newsletter" style="background-image: url(/assets/img/jan-piatkowski-m61qUssdYSs-unsplash.jpg);">
+    <div class="newsletter" style="background-image: url('@Url.Content(baccol)');">
         <div class="row">
             <div class="col-lg-6 col-md-12">
                 <p class="site-title">FreeKick</p>
                 <h3 class="subscribe">Subscribe</h3>
-                <form>
-                    <div class="mb-3">
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                               placeholder="Enter your email here...">
+                <form id="#subscriber">
+                    <div class="input-group mb-3">
+                        <input type="text" name="email" id="email" class="form-control" placeholder="Recipient's username">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Subscribe</button>
                     </div>
                 </form>
             </div>
@@ -141,63 +141,97 @@
 <section class="lineups py-50">
     <div class="container">
         <div class="row">
-            @if (Model.Match.Date < DateTime.Now || User.IsInRole(RoleConstants.Moderator) || User.IsInRole(RoleConstants.Admin))
-            {
-                <h4 class="match-broadcast-title mb-5 text-light">Lineup</h4>
+            <div class="line-buttons d-flex">
+                <button class="ln-btn btn " href="#">
+                    <h4 class="match-broadcast-title text-light">Lineup</h4>
+                </button>
+            </div>
+            <div class="col-12 p-0 mb-5 line line-active">
+                <div class="row justify-content-center">
+                    @if (Model.Match.Date < DateTime.Now || User.IsInRole(RoleConstants.Moderator) || User.IsInRole(RoleConstants.Admin))
+                    {
 
-                <div class="col-lg-12 col-sm-8 p-0 mb-5 d-flex">
-                    <div class="field-border">
-                        <div class="field-main">
-                            @foreach (var item in Model.HomeLineups.Where(c => !c.IsChanged && c.Start != StatusConstant.Bench))
-                            {
-
-                                <div class="player @item.Position  @item.MainPosition.ToLower() g-home">
-                                    @if (item.Start == StatusConstant.Change)
+                        <div class="col-12 my-2 d-flex justify-content-center">
+                            <div class="field-border">
+                                <div class="field-main">
+                                    @foreach (var item in Model.HomeLineups.Where(c => !c.IsChanged && c.Start != StatusConstant.Bench))
                                     {
-                                        <i class="fa fa-rotate-right"></i>
+
+                                        <div class="player @item.Position  @item.MainPosition.ToLower() g-home">
+                                            @if (item.Start == StatusConstant.Change)
+                                            {
+                                                <i class="fa fa-rotate-right"></i>
+                                            }
+                                            <div class="events d-flex">
+                                                @foreach (var events in item.Event)
+                                                {
+                                                    <img class="event" src="~/assets/img/events/@events.Logo" />
+                                                }
+                                            </div>
+
+
+                                            <i class="fas fa-user"></i>
+                                            <p class="p-name">@item.Surname</p>
+                                        </div>
+
+
                                     }
-                                    <div class="events d-flex">
-                                        @foreach (var events in item.Event)
-                                        {
-                                            <img class="event" src="~/assets/img/events/@events.Logo" />
-                                        }
-                                    </div>
-
-
-                                    <i class="fas fa-user"></i>
-                                    <p class="p-name">@item.Surname</p>
-                                </div>
-
-
-                            }
-                            @foreach (var item in Model.AwayLineups.Where(c => !c.IsChanged && c.Start != StatusConstant.Bench))
-                            {
-
-                                <div class="player @item.Position @item.MainPosition.ToLower() g-away">
-                                    @if (item.Start == StatusConstant.Change)
+                                    @foreach (var item in Model.AwayLineups.Where(c => !c.IsChanged && c.Start != StatusConstant.Bench))
                                     {
-                                        <i class="fa fa-rotate-right"></i>
-                                    }
-                                    <i class="fas fa-user"></i>
-                                    <p class="p-name">@item.Surname</p>
-                                </div>
 
-                            }
+                                        <div class="player @item.Position @item.MainPosition.ToLower() g-away">
+                                            @if (item.Start == StatusConstant.Change)
+                                            {
+                                                <i class="fa fa-rotate-right"></i>
+                                            }
+                                            <i class="fas fa-user"></i>
+                                            <p class="p-name">@item.Surname</p>
+                                        </div>
+
+                                    }
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <div class="col-lg-10 col-sm-12 d-flex justify-content-center">
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12 d-flex flex-wrap sub-left">
+                                    @foreach (var item in Model.HomeLineups.Where(c => c.IsChanged))
+                                    {
+                                        <div class="substitut">
+                                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                            <i class="fas fa-user" aria-hidden="true"></i>
+                                            <p class="p-name">@item.Surname</p>
+                                            <span>№@item.Num</span>
+                                        </div>
+                                    }
+
+                                </div>
+                                <div class="col-lg-6 col-sm-12 d-flex flex-wrap  sub-right">
+
+                                    @foreach (var item in Model.AwayLineups.Where(c => c.IsChanged))
+                                    {
+                                        <div class="substitut">
+                                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                            <i class="fas fa-user" aria-hidden="true"></i>
+                                            <p class="p-name">@item.Surname</p>
+                                            <span>№@item.Num</span>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+
                 </div>
-            }
-
-
-
-        </div>
-        <div class="row">
+            </div>
+         
 
         </div>
+
         <div class="row">
             <h4 class="match-broadcast-title mb-5 text-light">Bench</h4>
-            <div class="col-lg-5 col-sm-12">
-                <img class="club-bencher" src="./assets/img/teams/real_madrid.png" alt="">
+            <div class="col-lg-6 col-sm-12 text-center">
+                <img class="club-bencher" src="~/assets/img/teams/@Model.Match.Home.TeamImage" alt="">
                 <ul class="bench">
                     @foreach (var item in Model.HomeLineups.Where(c => c.Start == StatusConstant.Bench))
                     {
@@ -208,8 +242,8 @@
 
                 </ul>
             </div>
-            <div class="col-lg-5 col-sm-12">
-                <img class="club-bencher" src="./assets/img/teams/barcelona.png" alt="">
+            <div class="col-lg-6 col-sm-12 text-center">
+                <img class="club-bencher" src="~/assets/img/teams/@Model.Match.Away.TeamImage" alt="">
                 <ul class="bench away">
                     @foreach (var item in Model.AwayLineups.Where(c => c.Start == StatusConstant.Bench))
                     {
@@ -236,17 +270,17 @@
 
         connection.on("RecieveMessage", function (data) {
             var message = `      <div class="event">
-                                                                <div class="event-match-time">
-                                                                    <div class="event-time">
-                                                                        <span class="event-time-text">${data.minute}'</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="event-picture">
-                                                                </div>
-                                                                <div class="event-description">
-                                                                    ${data.message}
-                                                                </div>
-                                                            </div>`
+                                                                            <div class="event-match-time">
+                                                                                <div class="event-time">
+                                                                                    <span class="event-time-text">${data.minute}'</span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="event-picture">
+                                                                            </div>
+                                                                            <div class="event-description">
+                                                                                ${data.message}
+                                                                            </div>
+                                                                        </div>`
 
             $(".live-broadvast").append(message)
         })
@@ -265,6 +299,7 @@
         window.addEventListener('onunload', function () {
             connection.invoke('leaveGame', id);
         })
+
 
 
 

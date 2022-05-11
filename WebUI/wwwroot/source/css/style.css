@@ -35,6 +35,7 @@ h6 {
     font-weight: 500;
     margin-bottom: 0 !important;
     font-family: 'Anton', sans-serif !important;
+    color:white;
 }
 
 a {
@@ -98,7 +99,13 @@ textarea {
         box-shadow: none;
         border-color: transparent;
     }
-
+a {
+    color: white
+}
+a:hover{
+        color:white
+  
+}
 .m-0 {
     margin: 0 !important;
 }
@@ -280,6 +287,13 @@ textarea {
         font-family: 'Anton', sans-serif !important;
     }
 
+.actions .view-count {
+    color: #ffffff;
+    margin-right: 5px;
+}
+.actions i {
+    color: #ffffff;
+}
     .news-card .actions .view-count {
         color: #ffffff;
         margin-right: 5px;
@@ -682,8 +696,6 @@ textarea {
 
             .field-border .field-main .player > .fa.fa-rotate-right {
                 font-size: 7px;
-                position: absolute;
-                left: 1px;
             }
 
             .field-border .field-main .player .p-name {
@@ -1098,6 +1110,66 @@ textarea {
         }
 }
 
+.sub-right {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+}
+
+.substitut {
+    width: 65px;
+    background-color: #f0f8ff36;
+    height: 80px;
+    margin: 0px 2px 4px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    color: white;
+    position: relative;
+    /* font-size: 12px; */
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+    .substitut .fa.fa-long-arrow-right {
+        font-size: 11px;
+        color: red;
+        position: absolute;
+        right: 7px;
+        top: 2px;
+    }
+
+    .substitut .fas.fa-user {
+        font-size: 20px;
+        margin-bottom: 2px;
+    }
+
+    .substitut .p-name {
+        color: white;
+        font-size: 10px;
+        margin-bottom: 2px;
+    }
+
+    .substitut span {
+        font-size: 10px;
+    }
+
+@media screen and (max-width: 920px) {
+    .sub-left, .sub-right {
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
+}
+
 .team-btn {
     padding: 20px;
     width: 100%;
@@ -1499,7 +1571,7 @@ textarea {
             flex-direction: column;
         }
 
-.match-team-state{
+.match-team-state {
     padding: 20px 0;
 }
 
@@ -1508,60 +1580,60 @@ textarea {
     width: 66px;
 }
 
-            .match-summary .match-summary .match-team h5 {
-                color: #ffffff;
-            }
+.match-summary .match-summary .match-team h5 {
+    color: #ffffff;
+}
 
-        .match-summary .match-summary .match-date {
-            margin-bottom: 10px;
+.match-summary .match-summary .match-date {
+    margin-bottom: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    color: #ffffff;
+}
+
+.match-summary .match-summary .matchboard {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: #858585;
+    border-radius: 4px;
+}
+
+    .match-summary .match-summary .matchboard .matchboard__card {
+        display: inline-block;
+        width: 56px;
+        height: 64px;
+        color: #fff;
+    }
+
+        .match-summary .match-summary .matchboard .matchboard__card .matchboard__card-game {
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            justify-content: center;
-            color: #ffffff;
-        }
-
-        .match-summary .match-summary .matchboard {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
+            height: 100%;
             -webkit-box-align: center;
             -ms-flex-align: center;
             align-items: center;
-            background-color: #858585;
-            border-radius: 4px;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            font-size: 42px;
         }
 
-            .match-summary .match-summary .matchboard .matchboard__card {
-                display: inline-block;
-                width: 56px;
-                height: 64px;
-                color: #fff;
-            }
-
-                .match-summary .match-summary .matchboard .matchboard__card .matchboard__card-game {
-                    display: -webkit-box;
-                    display: -ms-flexbox;
-                    display: flex;
-                    height: 100%;
-                    -webkit-box-align: center;
-                    -ms-flex-align: center;
-                    align-items: center;
-                    -webkit-box-pack: center;
-                    -ms-flex-pack: center;
-                    justify-content: center;
-                    font-size: 42px;
-                }
-
-            .match-summary .match-summary .matchboard .matchboard__hyphen {
-                width: 12px;
-                height: 4px;
-                margin-right: 6px;
-                margin-left: 6px;
-                background-color: #fff;
-            }
+    .match-summary .match-summary .matchboard .matchboard__hyphen {
+        width: 12px;
+        height: 4px;
+        margin-right: 6px;
+        margin-left: 6px;
+        background-color: #fff;
+    }
 
 .match-broadcast {
     display: -webkit-box;
@@ -1580,36 +1652,201 @@ textarea {
 
 .lineups .club-bencher {
     margin-bottom: 10px;
+    width: 30px;
 }
 
-.lineups .bench.away li {
-    border-color: #24244e;
+.lineups .bench {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.lineups .bench li {
-    border-radius: 2px;
-    color: white;
-    padding: 8px;
-    border-left: 3px solid gray;
-    margin-bottom: 5px;
-    font-weight: 300;
-    width: 250px;
-    background-color: #80808059;
-    font-size: 14px;
+
+    .lineups .bench.away li {
+        border-color: #24244e;
+    }
+
+    .lineups .bench li {
+        border-radius: 2px;
+        color: white;
+        padding: 8px;
+        border-left: 3px solid gray;
+        margin-bottom: 5px;
+        font-weight: 300;
+        width: 250px;
+        background-color: #80808059;
+        font-size: 14px;
+    }
+
+        .lineups .bench li .player-img {
+            width: 25px;
+            border-radius: 50%;
+        }
+
+        .lineups .bench li img {
+            width: 10px;
+        }
+
+        .lineups .bench li span {
+            margin-left: 100px;
+        }
+.line.line-active {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
 
-    .lineups .bench li .player-img {
-        width: 25px;
-        border-radius: 50%;
+.line {
+    display: none;
+}
+
+
+.events-line {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+article {
+    position: relative;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+    article.event-container {
+        margin-bottom: 20px;
     }
 
-    .lineups .bench li img {
-        width: 10px;
+    article .eventer {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
     }
 
-    .lineups .bench li span {
-        margin-left: 100px;
+        article .eventer .team-side-home {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-flex: 1;
+            -ms-flex: 1 50%;
+            flex: 1 50%;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: end;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+            text-align: right;
+            height: 46px;
+        }
+
+        article .eventer .team-side-away {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-flex: 1;
+            -ms-flex: 1 50%;
+            flex: 1 50%;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: start;
+            -ms-flex-pack: start;
+            justify-content: flex-start;
+            text-align: right;
+            height: 46px;
+        }
+
+        article .eventer .event-match-time {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        article .eventer .team-color {
+            width: 32px;
+            height: 32px;
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 32px;
+            flex: 0 0 32px;
+            margin: 2px 0;
+            border-radius: 50%;
+            background-color: #ad1457;
+            color: white;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+            article .eventer .team-color span {
+                font-size: 12px;
+            }
+
+        article .eventer h4 {
+            color: darkolivegreen;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+            article .eventer h4 p {
+                display: inline-block;
+                color: dimgrey;
+                font-size: 15px;
+                margin: 0 10px;
+            }
+
+        article .eventer img {
+            width: 20px;
+            margin: 0 5px;
+        }
+
+    article .timeline {
+        width: 4px;
+        height: 35px;
+        min-height: 18px;
+        background-color: #d8d8d8;
+        z-index: 1;
+        position: absolute;
+        left: 50%;
+        top: 38px;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+        position: absolute;
+        left: 50%;
+        top: 38px;
+        transform: translateX(-50%);
     }
+
 
 .actions-y {
     background-color: black;

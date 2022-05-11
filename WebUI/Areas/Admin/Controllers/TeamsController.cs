@@ -81,6 +81,9 @@ namespace WebUI.Areas.Admin.Controllers
 
             return RedirectToAction("Index", "Home", new { area = "" });
         }
+
+
+
         public IActionResult Update(int? id)
         {
             return View();

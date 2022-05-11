@@ -34,7 +34,7 @@ namespace Repository.DataAccessLayer
                 InitNewsTag(db);
                 InitGame(db);
                 InitGameTeams(db);
-               // InitGameLineup(db);
+                // InitGameLineup(db);
                 InitTeamPlayer(db);
                 InitOuter(db);
                 InitGroups(db);
@@ -77,11 +77,11 @@ namespace Repository.DataAccessLayer
             if (!db.Events.Any())
             {
                 db.Events.AddRange(
-                    new Event { Name = EventConstant.Goal, Logo="ball.png"  },
+                    new Event { Name = EventConstant.Goal, Logo = "ball.png" },
                     new Event { Name = EventConstant.Substitution, Logo = "change.png" },
-                    new Event { Name= EventConstant.Yellow, Logo = "yc.png" },
-                    new Event { Name=EventConstant.YellowRed, Logo = "ywc.png"},
-                    new Event { Name =EventConstant.Red, Logo = "rc.png" });
+                    new Event { Name = EventConstant.Yellow, Logo = "yc.png" },
+                    new Event { Name = EventConstant.YellowRed, Logo = "ywc.png" },
+                    new Event { Name = EventConstant.Red, Logo = "rc.png" });
             }
             db.SaveChanges();
         }
@@ -91,12 +91,12 @@ namespace Repository.DataAccessLayer
             if (!db.Status.Any())
             {
                 db.Status.AddRange(
-                    new Status {  Name = StatusConstant.Start},
+                    new Status { Name = StatusConstant.Start },
                     new Status { Name = StatusConstant.Bench },
                     new Status { Name = StatusConstant.Change });
             }
             db.SaveChanges();
-        }     
+        }
         private static void InitHeader(AppDbContext db)
         {
             if (!db.Navigation.Any())
@@ -108,11 +108,25 @@ namespace Repository.DataAccessLayer
                     new Navigation { Name = "European Football", Order = 3 },
                     new Navigation { Name = "Champions League", Order = 4 },
                     new Navigation { Name = "Premier League", Order = 5 },
-                    new Navigation { Name = "Table", Order = 1 },
-                    new Navigation { Name = "Matches", Order = 2 },
-                    new Navigation { Name = "Groups", Order = 1 }
 
+                    new Navigation { Name = "Groups", Order = 1, ParentId = 5, Controller = "OuterLeague", Action = "Index", RouteId = 3 },
 
+                    new Navigation { Name = "Laliga", Order = 1, },
+                     new Navigation { Name = "Seria A", Order = 2, },
+                     new Navigation { Name = "Laliga", Order = 1, },
+                   new Navigation { Name = "Matches", Order = 2, },
+                 new Navigation { Name = "Matches", Order = 2, },
+                   new Navigation { Name = "Matches", Order = 2 },
+                   new Navigation { Name = "Table", Order = 1, },
+                 new Navigation { Name = "Table", Order = 1, },
+                   new Navigation { Name = "Table", Order = 1 },
+                              new Navigation { Name = "FC Barcelona", Order = 1, Controller = "Team", Action = "Index", Image = "/assets/img/teams/barcelona.png" },
+                              new Navigation { Name = "Real Madrid", Order = 2, Controller = "Team", Action = "Index", Image = "/assets/img/teams/real_madrid.png" },
+
+                 new Navigation { Name = "Juventus", Order = 1, Controller = "Team", Action = "Index", Image = "/assets/img/teams/juventus.png" },
+                   new Navigation { Name = "Napoli", Order = 2, Controller = "Team", Action = "Index", Image = "/assets/img/teams/napoli.png" },
+                         new Navigation { Name = "Juventus", Order = 1, Controller = "Team", Action = "Index", Image = "/assets/img/teams/bayern" },
+                   new Navigation { Name = "Napoli", Order = 2, Controller = "Team", Action = "Index", Image = "/assets/img/teams/dortmund.png" }
                     );
 
             }
@@ -194,7 +208,7 @@ namespace Repository.DataAccessLayer
             if (!db.GamePositions.Any())
             {
                 db.GamePositions.AddRange(
-                     new GamePosition { Name = "GoalKeeper", CommonName = "Keeper", ShortName = "GK"  },
+                     new GamePosition { Name = "GoalKeeper", CommonName = "Keeper", ShortName = "GK" },
                      new GamePosition { Name = "Striker", CommonName = "Forward", ShortName = "S" },
                      new GamePosition { Name = "Center Defender", CommonName = "Defender", ShortName = "CD" },
                      new GamePosition { Name = "Right Back", CommonName = "Defender", ShortName = "RB" },
@@ -282,28 +296,28 @@ namespace Repository.DataAccessLayer
             if (!db.GameLineup.Any())
             {
                 db.GameLineup.AddRange(
-                    new GameLineup { GameId = 1, TeamPlayerId = 1, GamePositionId = 4 , StatusId = 2 },
-                    new GameLineup { GameId = 1, TeamPlayerId = 2, GamePositionId = 2 , StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 3, GamePositionId = 1 , StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 4, GamePositionId = 2 , StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 5, GamePositionId = 2 , StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 6, GamePositionId = 3 , StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 7, GamePositionId = 3 , StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 8, GamePositionId = 3 , StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 9, GamePositionId = 3 , StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 10, GamePositionId = 4, StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 11, GamePositionId = 1, StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 12, GamePositionId = 1, StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 13, GamePositionId = 1, StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 14, GamePositionId = 2, StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 15, GamePositionId = 2, StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 16, GamePositionId = 2, StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 17, GamePositionId = 3, StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 18, GamePositionId = 3, StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 19, GamePositionId = 3, StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 20, GamePositionId = 3, StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 21, GamePositionId = 2, StatusId = 2  },
-                    new GameLineup { GameId = 1, TeamPlayerId = 21, GamePositionId = 1, StatusId = 2  }
+                    new GameLineup { GameId = 1, TeamPlayerId = 1, GamePositionId = 4, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 2, GamePositionId = 2, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 3, GamePositionId = 1, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 4, GamePositionId = 2, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 5, GamePositionId = 2, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 6, GamePositionId = 3, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 7, GamePositionId = 3, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 8, GamePositionId = 3, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 9, GamePositionId = 3, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 10, GamePositionId = 4, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 11, GamePositionId = 1, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 12, GamePositionId = 1, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 13, GamePositionId = 1, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 14, GamePositionId = 2, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 15, GamePositionId = 2, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 16, GamePositionId = 2, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 17, GamePositionId = 3, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 18, GamePositionId = 3, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 19, GamePositionId = 3, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 20, GamePositionId = 3, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 21, GamePositionId = 2, StatusId = 2 },
+                    new GameLineup { GameId = 1, TeamPlayerId = 21, GamePositionId = 1, StatusId = 2 }
                     );
             }
 
@@ -391,7 +405,7 @@ namespace Repository.DataAccessLayer
             if (!db.Teams.Any())
             {
                 db.Teams.AddRange(
-                         new Team { Name = "Manchester City", CountryId = 1, Coach = "Pep Guardiola", Logo = "mancity.png", Stadium = "Etihad",  TitleImage="mctitle.jpg"},
+                         new Team { Name = "Manchester City", CountryId = 1, Coach = "Pep Guardiola", Logo = "mancity.png", Stadium = "Etihad", TitleImage = "mctitle.jpg" },
                          new Team { Name = "Manchester United", CountryId = 1, Coach = "Ralph Rangnik", Logo = "mu.png", Stadium = "Old Trafford", TitleImage = "mutitle.jpg" },
                          new Team { Name = "Liverpool", CountryId = 1, Coach = "Yurgen Klopp", Logo = "liverpool.png", Stadium = "Amfield", TitleImage = "liverpooltitle.jpg" },
                          new Team { Name = "Chelsea", CountryId = 1, Coach = "Tomas Tuchel", Logo = "chelsea.png", Stadium = "Stamford Bridge", TitleImage = "chelseatitle.jpg" },
@@ -400,7 +414,7 @@ namespace Repository.DataAccessLayer
                          new Team { Name = "Borussia Dortmund", CountryId = 4, Coach = "Marco Rose", Logo = "dortmund.png", Stadium = "Signal Iduna Park", TitleImage = "dortmundtitle.jpg" },
                          new Team { Name = "Barcelona", CountryId = 6, Coach = "Xavi Hernandes", Logo = "barcelona.png", Stadium = "Camp Nou", TitleImage = "barcatitle.jpg" },
                          new Team { Name = "Real Madrid", CountryId = 6, Coach = "Ancelotti", Logo = "real_madrid.png", Stadium = "Santiago Bernabeu", TitleImage = "realtitle.jpg" },
-                         new Team { Name = "Napoli", CountryId = 1, Coach = "Pep Guardiola", Logo = "napoli.png", Stadium = "Etihad", TitleImage="napolititle.jpg" },
+                         new Team { Name = "Napoli", CountryId = 1, Coach = "Pep Guardiola", Logo = "napoli.png", Stadium = "Etihad", TitleImage = "napolititle.jpg" },
                          new Team { Name = "Juventus", CountryId = 1, Coach = "Massimiliano Allegri", Logo = "juventus.png", Stadium = "Allianz Stadium", TitleImage = "juventustitle.jpg" }
 
                     );

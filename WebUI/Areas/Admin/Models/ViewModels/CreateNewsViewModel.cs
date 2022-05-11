@@ -13,6 +13,7 @@ namespace WebUI.Areas.Admin.Models.ViewModels
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string InstaPost { get; set; }
         public string Image { get; set; }
         public List<Tag> Tags { get; set; }
         public int[] Tagsx { get; set; }

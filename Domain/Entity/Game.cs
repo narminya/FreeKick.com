@@ -15,12 +15,14 @@ namespace Domain.Entity
         public Season Season { get; set; }
         public int? LeagueId { get; set; }
         public League League { get; set; }
-        public int? GroupId { get; set; }
-        public Group Group { get; set; }
+        public int? OuterId { get; set; }
+        public OuterLeague Outer { get; set; }
         public DateTime Date { get; set; }
         public int HomeScore { get; set; }
         public int AwayScore { get; set; }
         public bool IsFinished { get; set; }
+        public int? GameResultId { get; set; }
+        public GameResult GameResult { get; set; }
         public ICollection<GameScore> Goals { get; set; }
         public ICollection<GameLineup> Lineups { get; set; }
         public ICollection<GameComment> Comments { get; set; }

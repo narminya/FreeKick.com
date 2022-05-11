@@ -1,5 +1,6 @@
 ﻿using Domain.Dto;
 using Domain.Entity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repository.DataAccessLayer;
@@ -15,8 +16,10 @@ namespace WebUI.Controllers
     public class NewsController : Controller
     {
         private readonly AppDbContext _context;
-        public NewsController(AppDbContext context)
+        private readonly UserManager<User> _userManager;
+        public NewsController(AppDbContext context, UserManager<User> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
         public async Task<IActionResult> Index(int? id)
@@ -25,19 +28,24 @@ namespace WebUI.Controllers
             {
                 return BadRequest();
             }
-
+          
             var news = await _context.News.FindAsync(id);
             if (news == null)
             {
                 return NotFound();
             }
+            
+            news.ViewCount++;
+            _context.Entry(news).State = EntityState.Modified;
+            _context.SaveChanges();
             var model = new NewsViewModel()
             {
                 News = news,
                 Tags = await _context.NewsTag.Where(t => t.NewsId == news.Id).Select(x =>
                 new Tag
                 {
-                    Name = x.Tag.Name
+                    Name = x.Tag.Name,
+                    
                 }).ToListAsync(),
                 Time = news.CreatedDate.ToRelativeDate()
             };
@@ -63,6 +71,22 @@ namespace WebUI.Controllers
 
             return View(news);
         }
+
+        //public async Task<PartialViewResult> Comment(string content)
+        //{
+        //    var user = await _userManager.GetUserAsync(HttpContext.User);
+        //    var comment = new Comment()
+        //    {
+        //        Content = content,
+        //        HotelId = Convert.ToInt32(TempData["Id"]),
+        //        User = user
+        //    };
+
+        //    await _dt.Comment.AddAsync(comment);
+        //    await _dt.SaveChangesAsync();
+        //    return PartialView("_CommentPartial", comment);
+        //}
+
 
     }
 }

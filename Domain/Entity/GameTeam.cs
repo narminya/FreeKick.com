@@ -15,6 +15,8 @@ namespace Domain.Entity
         public int? HomeTeamId { get; set; }
         public Team HomeTeam { get; set; }
         public string HomePattern { get; set; }
+        public string HomeTeamRes { get; set; }
+        public string AwayTeamRes { get; set; }
         [ForeignKey("Team")]
         public int? AwayTeamId { get; set; }
         public Team AwayTeam { get; set; }

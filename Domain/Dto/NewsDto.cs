@@ -12,6 +12,7 @@ namespace Domain.Dto
         public string Title { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
+        public int ViewCount { get; set; }
         public DateTime Date { get; set; }
 
     }

@@ -92,7 +92,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("GroupId")
+                    b.Property<int?>("GameResultId")
                         .HasColumnType("int");
 
                     b.Property<int>("HomeScore")
@@ -104,6 +104,9 @@ namespace Repository.Migrations
                     b.Property<int?>("LeagueId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("OuterId")
+                        .HasColumnType("int");
+
                     b.Property<int>("SeasonId")
                         .HasColumnType("int");
 
@@ -112,9 +115,11 @@ namespace Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupId");
+                    b.HasIndex("GameResultId");
 
                     b.HasIndex("LeagueId");
+
+                    b.HasIndex("OuterId");
 
                     b.HasIndex("SeasonId");
 
@@ -295,6 +300,9 @@ namespace Repository.Migrations
                     b.Property<int?>("AwayTeamId")
                         .HasColumnType("int");
 
+                    b.Property<string>("AwayTeamRes")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("GameId")
                         .HasColumnType("int");
 
@@ -303,6 +311,9 @@ namespace Repository.Migrations
 
                     b.Property<int?>("HomeTeamId")
                         .HasColumnType("int");
+
+                    b.Property<string>("HomeTeamRes")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -448,8 +459,14 @@ namespace Repository.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("InstaPost")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ViewCount")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -602,6 +619,21 @@ namespace Repository.Migrations
                     b.ToTable("Status");
                 });
 
+            modelBuilder.Entity("Domain.Entity.Subscriber", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subscribers");
+                });
+
             modelBuilder.Entity("Domain.Entity.Tag", b =>
                 {
                     b.Property<int>("Id")
@@ -696,6 +728,9 @@ namespace Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Current")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Num")
                         .HasColumnType("int");
@@ -921,13 +956,17 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Domain.Entity.Game", b =>
                 {
-                    b.HasOne("Domain.Entity.Group", "Group")
+                    b.HasOne("Domain.Entity.GameResult", "GameResult")
                         .WithMany()
-                        .HasForeignKey("GroupId");
+                        .HasForeignKey("GameResultId");
 
                     b.HasOne("Domain.Entity.League", "League")
                         .WithMany("Games")
                         .HasForeignKey("LeagueId");
+
+                    b.HasOne("Domain.Entity.OuterLeague", "Outer")
+                        .WithMany()
+                        .HasForeignKey("OuterId");
 
                     b.HasOne("Domain.Entity.Season", "Season")
                         .WithMany()
@@ -939,9 +978,11 @@ namespace Repository.Migrations
                         .WithMany("Games")
                         .HasForeignKey("TeamId");
 
-                    b.Navigation("Group");
+                    b.Navigation("GameResult");
 
                     b.Navigation("League");
+
+                    b.Navigation("Outer");
 
                     b.Navigation("Season");
                 });
@@ -1009,7 +1050,7 @@ namespace Repository.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.Entity.GameLineup", "GamePlayer")
-                        .WithMany()
+                        .WithMany("Events")
                         .HasForeignKey("GamePlayerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1280,6 +1321,11 @@ namespace Repository.Migrations
                     b.Navigation("Lineups");
 
                     b.Navigation("Teams");
+                });
+
+            modelBuilder.Entity("Domain.Entity.GameLineup", b =>
+                {
+                    b.Navigation("Events");
                 });
 
             modelBuilder.Entity("Domain.Entity.Group", b =>

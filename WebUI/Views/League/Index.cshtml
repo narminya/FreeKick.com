@@ -2,25 +2,7 @@
 @{ 
     int i = 1;
 }
-<div class=" actions-y py-100">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 d-flex align-items-center">
-                <img alt="">
-                <h2 class="text-light ml-3">@Model.League.LeagueName</h2>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="buttons p-30">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-sm-12"><a href="" class="team-btn active">News</a></div>
-            <div class="col-lg-4 col-sm-12"><a href="" class="team-btn">Matches</a></div>
-            <div class="col-lg-4 col-sm-12"><a href="" class="team-btn">Standings</a></div>
-        </div>
-    </div>
-</div>
+<partial name="_LeaguePartial" model="@Model.League" />
 <div class="league-standing-table p-50">
     <div class="container">
         <div class="row">

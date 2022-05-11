@@ -32,10 +32,10 @@ namespace WebUI.Controllers
             }
 
             var news = await _context.NewsTag.Where(c => c.TagId == team.TagId)
-                .Select(n => new NewsDto { Id = n.Id, Title = n.News.Title, Description = n.News.Description }).ToListAsync();
+                .Select(n => new NewsDto { Id = n.Id, Title = n.News.Title, Description = n.News.Description,  ViewCount = n.News.ViewCount }).ToListAsync();
             var result = new TeamNewsViewModel()
             {
-                Team = new TeamDto { Id = team.Id, Logo = team.Logo, Name = team.Name, TitleImage=team.TitleImage },
+                Team = new TeamDto { Id = team.Id, Logo = team.Logo, Name = team.Name, TitleImage=team.TitleImage},
                 News = news
             };
 

@@ -3,11 +3,12 @@
     ViewData["Title"] = "FreeKick";
 }
 
-<div class=" actions-y" style="background-image: url(/assets/img/jan-piatkowski-pjhmfJnkNvo-unsplash.jpg);">
+
+<div class=" actions-y" style="background-image: url('@Url.Content($"~/assets/img/jan.jpg")');">
     <div class="container">
         <div class="row">
             <div class="col-12 d-flex align-items-center">
-                <h2 class="text-light ml-3"></h2>
+                <h2 class="text-light ml-3">BREAKING</h2>
             </div>
         </div>
     </div>
@@ -21,9 +22,7 @@
                     @Model.News.Title
 
                 </h1>
-                <div class="news-actions">
 
-                </div>
                 <img src="/assets/img/news/@Model.News.Image" alt="">
                 <div class="tags py-3">
                     <ul class="tags-list">
@@ -31,15 +30,17 @@
                         {
                             <li><a class="tag" href="">@item.Name</a></li>
                         }
-                    </ul>
+                    </ul>   <div class="actions">
+                        <span class="view-count">@Model.News.ViewCount</span><i class="fas fa-eye"></i>
+                    </div>
                 </div>
 
-                <p class="news-article">
+                <p class="news-article" style="color:white">
                     @Html.Raw(Model.News.Description)
                 </p>
-                
-            </div>
 
+            </div>
         </div>
     </div>
 </section>
+

@@ -8,7 +8,9 @@
 <div class="content">
     <div class="well well-large">
         <h4><span class="semi-bold">@Model.Match.Home.TeamName</span>  <span>@Model.Match.Home.TeamScore</span>  <span>@Model.Match.Away.TeamScore</span>  <span class="semi-bold">@Model.Match.Away.TeamName</span> <i></i></h4>
+    
     </div>
+    <button class="btn btn-primary" id="finish">Finish the game</button>
 
     <div class="row">
         <div class="col-md-12">
@@ -32,7 +34,7 @@
                         <h3>
                             <span class="semi-bold">Add @Model.Match.Home.TeamName lineup</span>
                         </h3>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
 
                             <div class="grid simple form-grid">
 
@@ -73,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
 
                             <div class="grid simple form-grid">
 
@@ -91,23 +93,29 @@
                                         <tbody class="homeList">
                                             @foreach (var item in Model.HomeLineUp)
                                             {
-                                                <tr>
-                                                    <td>@item.Surname</td>
-                                                    <td>@item.Position</td>
+                                            <tr>
+                                                <td>@item.Surname</td>
+                                                <td>@item.Position</td>
 
-                                                    <td>
-                                                        <a class="btn deletePlayer" data-id="@item.Id" id=""><i class="fa fa-trash-o"></i></a>
-                                                        <a class="btn replacePlayer" data-id="@item.Id" id=""><i class="fa fa-undo"></i></a>
-                                                    </td>
-                                                    @if (item.IsChanged == false)
-                                                    {
-                                                        <td>In game</td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td>Replaced</td>
-                                                    }
-                                                </tr>
+                                                <td>
+                                                    <a class="btn deletePlayer" data-id="@item.Id"><i class="fa fa-trash-o"></i></a>
+                                                    <a class="btn replacePlayer" data-id="@item.Id"><i class="fa fa-undo"></i></a>
+                                                    <a class="btn gameIn" data-id="@item.Id"><i class="fa fa-arrow-circle-o-up"></i></a>
+
+                                                </td>
+                                                @if (item.IsChanged == false)
+                                                {
+                                                    <td>In game</td>
+                                                }
+                                                else if (item.Start == StatusConstant.Bench)
+                                                {
+                                                    <td>Bench</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>Replaced</td>
+                                                }
+                                            </tr>
                                             }
                                         </tbody>
                                     </table>
@@ -121,7 +129,7 @@
                         <h3>
                             <span class="semi-bold">Add @Model.Match.Away.TeamName lineup</span>
                         </h3>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="grid simple form-grid">
 
                                 <div class="grid-body">
@@ -161,29 +169,48 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <div class="grid simple form-grid">
 
                                 <div class="grid-body">
                                     <table class="table table-striped table-flip-scroll cf">
                                         <thead class="cf">
                                             <tr>
+                                            <tr>
                                                 <th>Surname</th>
                                                 <th>Positions</th>
+                                                <th>Actions</th>
+                                                <th>In game</th>
+
+                                            </tr>
                                             </tr>
                                         </thead>
                                         <tbody class="awayList">
                                             @foreach (var item in Model.AwayLineUp)
                                             {
-                                                <tr>
-                                                    <td>@item.Surname</td>
-                                                    <td>@item.Position</td>
+                                            <tr>
+                                                <td>@item.Surname</td>
+                                                <td>@item.Position</td>
 
-                                                    <td>
-                                                        <a class="btn deletePlayer" data-id="@item.Id" id=""><i class="fa fa-trash-o"></i></a>
-                                                        <a class="btn" data-id="@item.Id" id="replacePlayer"><i class="fa fa-undo"></i></a>
-                                                    </td>
-                                                </tr>
+                                                <td>
+                                                    <a class="btn deletePlayer" data-id="@item.Id"><i class="fa fa-trash-o"></i></a>
+                                                    <a class="btn replacePlayer" data-id="@item.Id"><i class="fa fa-undo"></i></a>
+                                                    <a class="btn gameIn" data-id="@item.Id"><i class="fa fa-arrow-circle-o-up"></i></a>
+
+                                                </td>
+                                                @if (item.IsChanged == false)
+                                                {
+                                                    <td>In game</td>
+                                                }
+                                                else if (item.Start == StatusConstant.Bench)
+                                                {
+                                                    <td>Bench</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>Replaced</td>
+                                                }
+                                            </tr>
                                             }
                                         </tbody>
                                     </table>
@@ -203,7 +230,7 @@
                                     </label>
                                     <div class=" right">
                                         <i class=""></i>
-                                        <select class="form-control select2" name="PlayerId" asp-items='new SelectList(Model.HomePlayers, "Id", "Surname")' data-init-plugin="select2" required>
+                                        <select class="form-control select2" name="GamePlayerId" asp-items='new SelectList(Model.HomeLineUp, "Id", "Surname")' data-init-plugin="select2" required>
                                         </select>
                                     </div>
                                 </div>
@@ -217,13 +244,50 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">
-                                        Own goal
+                                        Author
                                     </label>
                                     <div class=" right">
-                                        <input name="OwnGoal" type="checkbox" value="" />
+                                        <i class=""></i>
+                                        <select class="form-control select2" name="EventId" asp-items='new SelectList(Model.Events, "Id", "Name")' data-init-plugin="select2" required>
+                                        </select>
                                     </div>
                                 </div>
-                                <button class="btn btn-success btn-cons" type="button" id="addHomeGoal"><i class="icon-ok"></i> Save</button>
+                                <button class="btn btn-success btn-cons" type="button" id="addHomeEvent"><i class="icon-ok"></i> Save</button>
+
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <form id="awayPlayerEvent">
+                                <input type="hidden" name="GameId" value="@ViewBag.Id" />
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        Author
+                                    </label>
+                                    <div class=" right">
+                                        <i class=""></i>
+                                        <select class="form-control select2" name="PlayerId" asp-items='new SelectList(Model.AwayLineUp, "Id", "Surname")' data-init-plugin="select2" required>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        Minute
+                                    </label>
+                                    <div class=" right">
+                                        <input name="Minute" type="text" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        Author
+                                    </label>
+                                    <div class=" right">
+                                        <i class=""></i>
+                                        <select class="form-control select2" name="EventId" asp-items='new SelectList(Model.Events, "Id", "Name")' data-init-plugin="select2" required>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success btn-cons" type="button" id="addAwayEvent"><i class="icon-ok"></i> Save</button>
 
                             </form>
                         </div>
@@ -334,12 +398,12 @@
             var id = $(this).attr("data-id");
 
 
-           
+
             $.ajax({
                 type: "Post",
                 url: "/Admin/Game/DeletePlayer/" + id,
                 success: function (res) {
-                    Command: toastr["success"](" ", "Player was removed from lineup!")
+                    Command: toastr["success"](" ", "Player was removed from lineup! Please reload page to see difference")
                     $('.homeList').remove($(this).parents('tr'))
                 }
             })
@@ -385,6 +449,19 @@
             })
         });
 
+
+        $('#addHomeEvent').on('click', function () {
+            var str = $("#homePlayerEvent").serialize();
+            $.ajax({
+                type: "Get",
+                url: "/Admin/Game/Event?" + str,
+                success: function (res) {
+                    console.log(res)
+                    Command: toastr["info"](" ", "Event was added! Please reload page to see difference")
+
+                }
+            })
+        });
         $('#addAwayGoal').on('click', function () {
             var str = $("#awayGoal").serialize();
             $.ajax({
@@ -421,5 +498,25 @@
             })
         })
 
+        $(document).on("click", "#finish", function (e) {
+            $.ajax({
+                type: "Get",
+                url: "/Admin/Game/FinishGame/"+ @ViewBag.Id,
+                success: function (res) {
+                    console.log(res)
+                    Command: toastr["info"](" ", "Game has been finished")
+                }
+            })
+        })
+              $(document).on("click", "#finish", function (e) {
+            $.ajax({
+                type: "Get",
+                url: "/Admin/Game/FinishGame/"+ @ViewBag.Id,
+                success: function (res) {
+                    console.log(res)
+                    Command: toastr["info"](" ", "Game has been finished")
+                }
+            })
+        })
     </script>
 }

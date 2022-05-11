@@ -40,8 +40,15 @@ using Domain.Entity;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Users\afsana.mammadova\Downloads\FreeKick.com\WebUI\Areas\Admin\Views\_ViewImports.cshtml"
+using Domain.Constants;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5e521f9d68f45980911a6871e5a8e06a64f422e9", @"/Areas/Admin/Views/Shared/_LineupPartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b2040db0585aaee2133c44237c47de31fa657713", @"/Areas/Admin/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"15c6fa1e8bc9509628d05e16c33159f423181340", @"/Areas/Admin/Views/_ViewImports.cshtml")]
     public class Areas_Admin_Views_Shared__LineupPartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<PlayerViewModel>
     {
         #pragma warning disable 1998

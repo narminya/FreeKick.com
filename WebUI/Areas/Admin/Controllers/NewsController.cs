@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Repository.DataAccessLayer;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Areas.Admin.Models.ViewModels;
@@ -19,6 +20,12 @@ namespace WebUI.Areas.Admin.Controllers
         public NewsController(AppDbContext context)
         {
             _context = context;
+        }
+
+        public IActionResult Index()
+        {
+            var news = _context.News.Include(c => c.Tags).ToList();
+            return View();
         }
         public IActionResult Create()
         {
@@ -60,7 +67,7 @@ namespace WebUI.Areas.Admin.Controllers
            await _context.AddAsync(result);
            await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index", "News", new { Id=result.Id});
+            return RedirectToAction("Index", "News", new {area="", Id=result.Id});
         }
     }
 }

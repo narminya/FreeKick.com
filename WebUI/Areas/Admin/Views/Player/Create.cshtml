@@ -1,0 +1,68 @@
+﻿@model PlayerCreateViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="content">
+    <ul class="breadcrumb">
+        <li>
+            <p>YOU ARE HERE</p>
+        </li>
+        <li><a href="#" class="active">Create</a> </li>
+    </ul>
+    <div class="page-title">
+        <i class="icon-custom-left"></i>
+        <h3>Create <span class="semi-bold">Player</span></h3>
+    </div>
+    <!-- BEGIN BASIC FORM ELEMENTS-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="grid simple">
+                <div class="grid-body no-border" style="padding-top:0px">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 col-xs-8">
+                            <form method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label class="form-label">Club name</label>
+                                    <div class="controls">
+                                        <input asp-for="Name" class="form-control">
+                                    </div>
+                                    <span class="help text-danger" asp-validation-for="Name"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Stadium name</label>
+                                    <div class="controls">
+                                        <input asp-for="Surname" class="form-control">
+                                    </div>
+                                    <span class="help text-danger" asp-validation-for="Surname"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" value="" style="width:300px" id="e12" tabindex="-1" class="select2-offscreen">
+                                    <select id="remote" asp-for="PositionId" asp-items='new SelectList(Model.Position, "Id", "Name")' style="width:100%">
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" value="" style="width:300px" id="e12" tabindex="-1" class="select2-offscreen">
+                                    <select id="remote" asp-for="TagId" asp-items='new SelectList(Model.Tags, "Id", "Name")' style="width:100%">
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="fallback">
+                                        <input asp-for="Picture" type="file" accept="image/*" />
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="pull-right">
+                                        <button class="btn btn-success btn-cons" type="submit"><i class="icon-ok"></i> Save</button>
+                                        <button class="btn btn-white btn-cons" type="button">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

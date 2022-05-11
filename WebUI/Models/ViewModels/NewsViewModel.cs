@@ -12,5 +12,7 @@ namespace WebUI.Models.ViewModels
         public News News { get; set; }
         public List<Tag> Tags { get; set; }
         public string Time { get; set; }
+        public string InstaPost { get; set; }
+        
     }
 }

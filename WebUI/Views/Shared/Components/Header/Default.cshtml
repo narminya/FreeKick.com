@@ -6,7 +6,7 @@
 <header>
     <nav class="navigation">
         <div class="logo">
-            <a href=""><img src="~/assets/img/Untitled-2.png" alt=""></a>
+            <a asp-controller="Home" asp-action="Index"><img src="~/assets/img/Untitled-2.png" alt=""></a>
         </div>
         <ul class="nav-links">
             @foreach (var item in Model.Parents)
@@ -14,7 +14,7 @@
                 <li>
                     @if (item.Controller != null)
                     {
-                        <a class="dropmenu" asp-controller="@{@item.Controller}" asp-action="@{@item.Action}">@item.Name</a>
+                        <a class="dropmenu" asp-controller="@{@item.Controller}" asp-action="@{@item.Action}" asp-route-id="@item.RouteId">@item.Name</a>
                     }
                     else
                     {
@@ -32,10 +32,14 @@
                                             {<ul class="sub-menu">
                                                     @foreach (var gran in child.Children)
                                                     {
-                                                        <li><a>@gran.Name</a></li>
-                                                    }
+                                                        <li>
+                                                            <img style=" width: 20px; margin-right: 5px;" src="@gran.Image" />
+                                                            <a asp-action="@gran.Action" asp-controller="@gran.Controller" asp-route-id="@gran.RouteId" style="display: inline;">@gran.Name</a>
+                                                        </li>
+}
                                                 </ul>
                                             }
+
                                         </div>
                                     }
                                 </div>
